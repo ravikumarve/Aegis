@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Task Queue Manager
+Aegis - Task Queue Manager
 Priority-based task processing with dead letter queue
 """
 

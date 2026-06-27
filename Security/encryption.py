@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Encryption Engine
+Aegis - Encryption Engine
 AES-256 encryption for all stored data
 """
 

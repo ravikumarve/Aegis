@@ -1,6 +1,6 @@
 # AppSumo Listing
 
-## Product Name: AI Office Pilot
+## Product Name: Aegis
 
 ## One-Liner:
 Your personal AI office assistant that learns your style, 
@@ -10,7 +10,7 @@ automates your workflow, and never sends data to the cloud.
 
 ### Stop wasting 3+ hours daily on office busywork
 
-AI Office Pilot is a self-learning AI assistant that handles 
+Aegis is a self-learning AI assistant that handles 
 your emails, organizes your files, and extracts invoice data — 
 all while running 100% on your computer with military-grade encryption.
 

@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Tamper-Proof Audit Logger
+Aegis - Tamper-Proof Audit Logger
 Hash-chain logging for compliance
 """
 

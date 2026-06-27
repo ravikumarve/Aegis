@@ -1,4 +1,4 @@
-"""Integration tests for AI Office Pilot"""
+"""Integration tests for Aegis"""
 
 import pytest
 from unittest.mock import MagicMock, patch

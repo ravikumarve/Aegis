@@ -1,4 +1,4 @@
-"""AI Office Pilot - Learning Module"""
+"""Aegis - Learning Module"""
 
 from learning.memory import MemoryEngine
 

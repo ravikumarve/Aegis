@@ -1,5 +1,5 @@
 #!/bin/bash
-# GhostOffice Screenshot Capture Script
+# Aegis Screenshot Capture Script
 # Captures screenshots of all major pages for Gumroad listing
 
 SCREENSHOT_DIR="/media/matrix/DATA/opencode_projects/officeghost/screenshots"
@@ -8,7 +8,7 @@ BASE_URL="http://localhost:5000"
 # Create screenshots directory
 mkdir -p "$SCREENSHOT_DIR"
 
-echo "📸 Capturing GhostOffice screenshots..."
+echo "📸 Capturing Aegis screenshots..."
 
 # Function to capture screenshot
 capture_screenshot() {

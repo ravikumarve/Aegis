@@ -1,8 +1,8 @@
-# GhostOffice - Deployment Guide
+# Aegis - Deployment Guide
 
 ## Overview
 
-GhostOffice can be deployed in multiple ways:
+Aegis can be deployed in multiple ways:
 1. **Local Development** - Direct Python execution
 2. **Docker Container** - Isolated containerized deployment
 3. **Production Server** - Systemd service with reverse proxy
@@ -22,7 +22,7 @@ GhostOffice can be deployed in multiple ways:
 ```bash
 # Clone repository
 git clone https://github.com/ravikumarve/OfficeGhost.git
-cd OfficeGhost
+cd Aegis
 
 # Create virtual environment
 python3 -m venv venv
@@ -97,7 +97,7 @@ docker-compose down
 1. Create service file `/etc/systemd/system/ai-office-pilot.service`:
    ```ini
    [Unit]
-   Description=GhostOffice
+   Description=Aegis
    After=network.target
 
    [Service]

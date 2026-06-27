@@ -1,130 +1,196 @@
 {% extends "base.html" %}
-{% block title %}Security — GhostOffice{% endblock %}
+{% block title %}Security — Aegis{% endblock %}
 
 {% block content %}
+<!-- Page Header -->
 <div class="page-header">
     <div>
-        <h1>🔒 Security Center</h1>
+        <h1>Security Center</h1>
         <p class="subtitle">Military-grade protection for your data</p>
     </div>
-    <div class="header-actions">
-        <button class="btn-secondary" onclick="createBackup()">💾 Backup Now</button>
-        <button class="btn-secondary" onclick="generateReport()">📋 Compliance Report</button>
+    <div class="flex gap-2">
+        <button class="btn-secondary btn" onclick="createBackup()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
+            Backup Now
+        </button>
+        <button class="btn-secondary btn" onclick="generateReport()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            Compliance Report
+        </button>
     </div>
 </div>
 
-<!-- Security Status -->
-<div class="card security-overview">
-    <div class="security-grid">
-        <div class="security-item">
-            <span class="sec-icon">🔐</span>
-            <h4>Encryption</h4>
-            {% if encryption.setup and encryption.unlocked %}
-            <p class="sec-status good">🟢 FULLY SECURE</p>
-            {% else %}
-            <p class="sec-status warn">🟡 ENCRYPTION DISABLED</p>
-            {% endif %}
+<!-- Security Status Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8" id="securityOverview">
+    <div class="card text-center py-6">
+        <div class="text-3xl mb-3">&#x1F510;</div>
+        <h4 class="text-sm font-medium text-white mb-1">Encryption</h4>
+        <div class="flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-gray-600 animate-pulse" id="encryptDot"></span>
+            <span class="text-xs font-mono text-gray-500" id="encryptStatus">Loading...</span>
         </div>
-        <div class="security-item">
-            <span class="sec-icon">🌐</span>
-            <h4>Network</h4>
-            {% if security.network_isolated %}
-            <p class="sec-status good">🟢 ISOLATED</p>
-            {% else %}
-            <p class="sec-status good">🟢 STANDARD MODE</p>
-            {% endif %}
+    </div>
+    <div class="card text-center py-6">
+        <div class="text-3xl mb-3">&#x1F310;</div>
+        <h4 class="text-sm font-medium text-white mb-1">Network</h4>
+        <div class="flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-gray-600" id="networkDot"></span>
+            <span class="text-xs font-mono text-gray-500" id="networkStatus">Loading...</span>
         </div>
-        <div class="security-item">
-            <span class="sec-icon">📋</span>
-            <h4>Audit Log</h4>
-            <p class="sec-status good">Verified ✓</p>
+    </div>
+    <div class="card text-center py-6">
+        <div class="text-3xl mb-3">&#x1F4CB;</div>
+        <h4 class="text-sm font-medium text-white mb-1">Audit Log</h4>
+        <div class="flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-gray-600" id="auditDot"></span>
+            <span class="text-xs font-mono text-gray-500" id="auditStatus">Loading...</span>
         </div>
-        <div class="security-item">
-            <span class="sec-icon">🏠</span>
-            <h4>Data Location</h4>
-            <p class="sec-status good">100% LOCAL</p>
+    </div>
+    <div class="card text-center py-6">
+        <div class="text-3xl mb-3">&#x1F3E0;</div>
+        <h4 class="text-sm font-medium text-white mb-1">Data Location</h4>
+        <div class="flex items-center justify-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+            <span class="text-xs font-mono text-gray-500">100% LOCAL</span>
         </div>
     </div>
 </div>
 
-<!-- Compliance -->
-<div class="card">
-    <h3>✅ Compliance Status</h3>
-    <table class="data-table">
-        <thead>
-            <tr>
-                <th>Check</th>
-                <th>Status</th>
-                <th>Detail</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for check in compliance.checks %}
-            <tr>
-                <td>{{ check.name }}</td>
-                <td>
-                    <span class="badge {{ 'badge-pass' if check.status == 'PASS' else 'badge-fail' }}">
-                        {{ check.status }}
-                    </span>
-                </td>
-                <td>{{ check.detail }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+<!-- Main content: two columns -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <!-- Compliance Status -->
+    <div class="card">
+        <h2 class="font-display font-bold text-lg tracking-tight mb-4">&#x2705; Compliance Status</h2>
+        <div id="complianceList">
+            <div class="text-center py-8">
+                <div class="loading-dot mx-auto"></div>
+                <p class="text-gray-600 text-sm mt-2 font-mono">Loading compliance data...</p>
+            </div>
+        </div>
+    </div>
 
-<!-- Data Flow -->
-<div class="card">
-    <h3>📊 Data Flow Guarantee</h3>
-    <div class="data-flow-visual">
-        <div class="flow-box local">
-            <h4>YOUR COMPUTER</h4>
-            <p>📧 Emails processed here</p>
-            <p>📁 Files organized here</p>
-            <p>📊 Data extracted here</p>
-            <p>🧠 Learning stored here</p>
-            <p class="flow-emphasis">NOTHING LEAVES</p>
-        </div>
-        <div class="flow-arrow blocked">
-            <span>⛔ BLOCKED</span>
-        </div>
-        <div class="flow-box external">
-            <h4>INTERNET</h4>
-            <p>❌ No cloud APIs</p>
-            <p>❌ No data uploads</p>
-            <p>❌ No tracking</p>
-            <p>❌ No telemetry</p>
-            <p class="flow-emphasis">ZERO TRANSMISSION</p>
+    <!-- Data Flow -->
+    <div class="card">
+        <h2 class="font-display font-bold text-lg tracking-tight mb-4">&#x1F4CA; Data Flow Guarantee</h2>
+        <div class="space-y-4">
+            <div class="p-4 rounded-lg border border-green-500/20 bg-green-500/5">
+                <h4 class="text-sm font-medium text-white mb-3">Your Computer</h4>
+                <div class="space-y-1.5 text-sm">
+                    <div class="flex items-center gap-2 text-green-400"><span>&#x2713;</span> <span class="text-gray-400">Emails processed here</span></div>
+                    <div class="flex items-center gap-2 text-green-400"><span>&#x2713;</span> <span class="text-gray-400">Files organized here</span></div>
+                    <div class="flex items-center gap-2 text-green-400"><span>&#x2713;</span> <span class="text-gray-400">Data extracted here</span></div>
+                    <div class="flex items-center gap-2 text-green-400"><span>&#x2713;</span> <span class="text-gray-400">Learning stored here</span></div>
+                    <div class="mt-3 text-xs font-mono text-green-500 font-bold tracking-widest">NOTHING LEAVES</div>
+                </div>
+            </div>
+            <div class="flex items-center justify-center">
+                <div class="w-8 h-8 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 text-sm">&#x26D4;</div>
+                <div class="h-px w-full bg-gradient-to-r from-red-500/30 via-red-500/10 to-red-500/30"></div>
+                <div class="w-8 h-8 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 text-sm">&#x26D4;</div>
+            </div>
+            <div class="p-4 rounded-lg border border-red-500/20 bg-red-500/5">
+                <h4 class="text-sm font-medium text-white mb-3">Internet</h4>
+                <div class="space-y-1.5 text-sm">
+                    <div class="flex items-center gap-2 text-red-400"><span>&times;</span> <span class="text-gray-500">No cloud APIs</span></div>
+                    <div class="flex items-center gap-2 text-red-400"><span>&times;</span> <span class="text-gray-500">No data uploads</span></div>
+                    <div class="flex items-center gap-2 text-red-400"><span>&times;</span> <span class="text-gray-500">No tracking</span></div>
+                    <div class="flex items-center gap-2 text-red-400"><span>&times;</span> <span class="text-gray-500">No telemetry</span></div>
+                    <div class="mt-3 text-xs font-mono text-red-500 font-bold tracking-widest">ZERO TRANSMISSION</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Audit Log -->
-<div class="card">
-    <h3>📋 Recent Security Events</h3>
-    <div class="audit-log">
-        {% for entry in audit %}
-        <div class="audit-entry {{ entry.sensitivity }}">
-            <span class="audit-time">{{ entry.timestamp[:19] }}</span>
-            <span class="audit-action">{{ entry.action }}</span>
-            <span class="audit-detail">{{ entry.detail }}</span>
+<div class="card" id="auditSection">
+    <h2 class="font-display font-bold text-lg tracking-tight mb-4">&#x1F4CB; Recent Security Events</h2>
+    <div id="auditLog">
+        <div class="text-center py-8">
+            <div class="loading-dot mx-auto"></div>
+            <p class="text-gray-600 text-sm mt-2 font-mono">Loading audit log...</p>
         </div>
-        {% endfor %}
-        {% if not audit %}
-        <p class="empty-state">No security events yet</p>
-        {% endif %}
     </div>
 </div>
 
 <script>
+async function loadSecurityData() {
+    try {
+        const res = await fetch('/api/security');
+        const data = await res.json();
+
+        // Encryption status
+        const enc = data.encryption || {};
+        const encryptDot = document.getElementById('encryptDot');
+        const encryptStatus = document.getElementById('encryptStatus');
+        if (enc.setup && enc.unlocked) {
+            encryptDot.className = 'w-2 h-2 rounded-full bg-green-500';
+            encryptStatus.textContent = 'FULLY SECURE';
+            encryptStatus.className = 'text-xs font-mono text-green-500';
+        } else {
+            encryptDot.className = 'w-2 h-2 rounded-full bg-yellow-500';
+            encryptStatus.textContent = enc.setup ? 'LOCKED' : 'DISABLED';
+            encryptStatus.className = 'text-xs font-mono text-yellow-500';
+        }
+
+        // Network / Security status
+        const sec = data.security || {};
+        const networkDot = document.getElementById('networkDot');
+        const networkStatus = document.getElementById('networkStatus');
+        if (sec.network_isolated) {
+            networkDot.className = 'w-2 h-2 rounded-full bg-green-500';
+            networkStatus.textContent = 'ISOLATED';
+        } else {
+            networkDot.className = 'w-2 h-2 rounded-full bg-green-500';
+            networkStatus.textContent = 'STANDARD MODE';
+        }
+
+        // Audit integrity
+        const auditIntegrity = data.audit_integrity;
+        const auditDot = document.getElementById('auditDot');
+        const auditStatus = document.getElementById('auditStatus');
+        if (auditIntegrity) {
+            auditDot.className = 'w-2 h-2 rounded-full bg-green-500';
+            auditStatus.textContent = 'Verified';
+            auditStatus.className = 'text-xs font-mono text-green-500';
+        } else {
+            auditDot.className = 'w-2 h-2 rounded-full bg-red-500';
+            auditStatus.textContent = 'Tampered!';
+            auditStatus.className = 'text-xs font-mono text-red-500';
+        }
+
+        // Compliance checks
+        const compliance = data.compliance || {};
+        const checks = compliance.checks || [];
+        const complianceList = document.getElementById('complianceList');
+        if (checks.length > 0) {
+            complianceList.innerHTML = '<div class="space-y-2">' + checks.map(c => `
+                <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-[#1a1a1e]">
+                    <span class="text-sm text-gray-300">${c.name || c.check || 'Unknown'}</span>
+                    <span class="badge ${(c.status === 'PASS' || c.passed) ? 'bg-green-500/15 text-green-400 border-green-500/30' : 'bg-red-500/15 text-red-400 border-red-500/30'}">
+                        ${c.status || (c.passed ? 'PASS' : 'FAIL')}
+                    </span>
+                </div>
+            `).join('') + '</div>';
+        } else {
+            complianceList.innerHTML = '<p class="text-gray-600 text-sm text-center py-4 font-mono">No compliance checks available</p>';
+        }
+
+    } catch (e) {
+        console.error('Failed to load security data:', e);
+        ['encryptStatus', 'networkStatus', 'auditStatus'].forEach(id => {
+            document.getElementById(id).textContent = 'Error loading';
+        });
+    }
+}
+
 async function createBackup() {
     const res = await fetch('/backup', { method: 'POST' });
     const data = await res.json();
     if (data.status === 'success') {
-        alert('✅ Backup created: ' + data.path);
+        alert('Backup created: ' + data.path);
     } else {
-        alert('❌ Backup failed: ' + data.message);
+        alert('Backup failed: ' + data.message);
     }
 }
 
@@ -132,10 +198,13 @@ async function generateReport() {
     const res = await fetch('/compliance-report', { method: 'POST' });
     const data = await res.json();
     if (data.status === 'success') {
-        alert('✅ Report generated: ' + data.report.audit_report);
+        alert('Report generated: ' + (data.report?.audit_report || data.report?.path || ''));
     } else {
-        alert('❌ Report failed: ' + data.message);
+        alert('Report failed: ' + data.message);
     }
 }
+
+// Load data on page load
+document.addEventListener('DOMContentLoaded', loadSecurityData);
 </script>
 {% endblock %}

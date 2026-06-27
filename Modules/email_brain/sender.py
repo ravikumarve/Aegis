@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Email Sender
+Aegis - Email Sender
 SMTP with rate limiting
 """
 

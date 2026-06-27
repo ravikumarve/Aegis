@@ -10,7 +10,7 @@ def minimal_ask(question: str) -> str:
     brain = OllamaBrain()
 
     system_prompt = (
-        """You are GhostOffice Assistant. Answer questions about the system concisely."""
+        """You are Aegis Assistant. Answer questions about the system concisely."""
     )
 
     return brain.query(question, system=system_prompt)
@@ -18,5 +18,5 @@ def minimal_ask(question: str) -> str:
 
 if __name__ == "__main__":
     # Test
-    response = minimal_ask("What is GhostOffice?")
+    response = minimal_ask("What is Aegis?")
     print("Response:", response)

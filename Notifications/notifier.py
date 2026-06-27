@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Desktop Notifications
+Aegis - Desktop Notifications
 """
 
 import time
@@ -39,9 +39,9 @@ class Notifier:
             from plyer import notification
 
             notification.notify(
-                title=f"AI Office Pilot: {title}",
+                title=f"Aegis: {title}",
                 message=message,
-                app_name="AI Office Pilot",
+                app_name="Aegis",
                 timeout=self.URGENT_TIMEOUT if urgency == "urgent" else self.NORMAL_TIMEOUT,
             )
         except Exception:

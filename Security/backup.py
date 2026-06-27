@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Encrypted Backup System
+Aegis - Encrypted Backup System
 """
 
 import os

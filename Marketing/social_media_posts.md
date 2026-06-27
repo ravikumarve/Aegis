@@ -117,7 +117,7 @@ Sitting on someone else's server.
 
 So I built something different.
 
-AI Office Pilot runs 100% on your computer:
+Aegis runs 100% on your computer:
 → AES-256 encryption
 → Zero cloud connections  
 → GDPR & HIPAA compliant

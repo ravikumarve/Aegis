@@ -1,239 +1,328 @@
 {% extends "base.html" %}
-{% block title %}DASHBOARD — GHOSTOFFICE{% endblock %}
+{% block title %}Dashboard — Aegis{% endblock %}
 
 {% block content %}
-<div class="content-grid">
-    <!-- HEADER SECTION -->
-    <div class="grid-item">
-        <h1 class="display-text">GHOSTOFFICE</h1>
-        <p class="body-text">YOUR PRIVATE AI ASSISTANT FOR EMAIL, FILES & DATA</p>
+<!-- Page Header -->
+<div class="page-header">
+    <div>
+        <h1>Dashboard</h1>
+        <p class="subtitle">System overview and quick actions</p>
     </div>
-
-    <div class="grid-item">
-        <div class="stat">
-            <span class="stat-num">{{ status.cycles_completed }}</span>
-            <span class="stat-label">COMPLETED CYCLES</span>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <div class="stat">
-            <span class="stat-num">{{ status.learning.learning_score|default(0) }}</span>
-            <span class="stat-label">AI INTELLIGENCE SCORE</span>
-        </div>
-    </div>
-</div>
-
-<!-- QUICK ACTIONS -->
-<div class="content-grid">
-    <div class="grid-item">
-        <button class="btn" onclick="runCycle()">
-            RUN CYCLE
-        </button>
-    </div>
-    <div class="grid-item">
-        <button class="btn" onclick="scanEmails()">
-            SCAN EMAILS
-        </button>
-    </div>
-    <div class="grid-item">
-        <button class="btn" onclick="sortFiles()">
-            SORT FILES
+    <div class="flex gap-2">
+        <button class="btn-primary btn" onclick="runCycle()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            Run Cycle
         </button>
     </div>
 </div>
 
-<!-- SYSTEM STATUS -->
-<div class="content-grid">
-    <div class="grid-item">
-        <h2 class="heading-text">SYSTEM HEALTH</h2>
-        <div class="stat">
-            <span class="stat-num">{{ status.health.overall }}</span>
-            <span class="stat-label">OVERALL STATUS</span>
+<!-- Status Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+    <div class="card">
+        <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono uppercase tracking-widest text-gray-600">Completed Cycles</span>
+            <span class="text-lg">&#x26A1;</span>
         </div>
-        <p class="body-text">RAM: {{ status.health.ram.percent }}% | DISK: {{ status.health.disk.free_gb }}GB FREE</p>
+        <div class="stat-value text-amber">{{ status.cycles_completed if status else 0 }}</div>
     </div>
 
-    <div class="grid-item">
-        <h2 class="heading-text">SECURITY STATUS</h2>
-        <div class="stat">
-            <span class="stat-num">{{ security_status.overall }}</span>
-            <span class="stat-label">PROTECTION LEVEL</span>
+    <div class="card">
+        <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono uppercase tracking-widest text-gray-600">AI Intelligence</span>
+            <span class="text-lg">&#x1F9E0;</span>
         </div>
-        <p class="body-text">{{ security_status.detail }}</p>
+        <div class="stat-value text-white">{{ status.learning.learning_score|default(0) if status else 0 }}</div>
     </div>
 
-    <div class="grid-item">
-        <h2 class="heading-text">PROCESSING</h2>
-        <div class="stat">
-            <span class="stat-num">{{ status.queue.completed }}</span>
-            <span class="stat-label">TASKS COMPLETED</span>
+    <div class="card">
+        <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono uppercase tracking-widest text-gray-600">Security</span>
+            <span class="text-lg">{{ security_status.icon|default('&#x1F512;') }}</span>
         </div>
-        <p class="body-text">{{ status.queue.pending }} TASKS PENDING</p>
-    </div>
-</div>
-
-<!-- MODULE STATUS -->
-<div class="content-grid">
-    <div class="grid-item">
-        <h2 class="subheading-text">EMAIL BRAIN</h2>
-        <div class="stat">
-            <span class="stat-num">
-                {% if status.learning.accuracy and 'email_reply' in status.learning.accuracy %}
-                    {{ status.learning.accuracy.email_reply.accuracy }}
-                {% else %}
-                    0
-                {% endif %}
-            </span>
-            <span class="stat-label">ACCURACY %</span>
+        <div class="stat-value text-sm font-display font-bold" style="color: {{ 'white' if security_status.color == 'green' else '#F59E0B' }};">
+            {{ security_status.overall|default('SECURE') }}
         </div>
-        <p class="body-text">{{ status.learning.contacts_learned|default(0) }} CONTACTS KNOWN</p>
+        <div class="text-xs text-gray-500 mt-1 font-mono">{{ security_status.detail|default('') }}</div>
     </div>
 
-    <div class="grid-item">
-        <h2 class="subheading-text">FILE COMMANDER</h2>
-        <div class="stat">
-            <span class="stat-num">
-                {% if status.learning.accuracy and 'file_categorize' in status.learning.accuracy %}
-                    {{ status.learning.accuracy.file_categorize.accuracy }}
-                {% else %}
-                    0
-                {% endif %}
-            </span>
-            <span class="stat-label">ACCURACY %</span>
+    <div class="card">
+        <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono uppercase tracking-widest text-gray-600">System Health</span>
+            <span class="text-lg">&#x1F3AF;</span>
         </div>
-        <p class="body-text">{{ status.learning.categories_learned|default(0) }} CATEGORIES</p>
-    </div>
-
-    <div class="grid-item">
-        <h2 class="subheading-text">DATA ENGINE</h2>
-        <div class="stat">
-            <span class="stat-num">
-                {% if status.learning.accuracy and 'data_extract' in status.learning.accuracy %}
-                    {{ status.learning.accuracy.data_extract.accuracy }}
-                {% else %}
-                    0
-                {% endif %}
-            </span>
-            <span class="stat-label">ACCURACY %</span>
-        </div>
-        <p class="body-text">{{ status.learning.categories_learned|default(0) }} VENDORS MAPPED</p>
-    </div>
-</div>
-
-<!-- DATA FLOW MONITOR -->
-<div class="content-grid">
-    <div class="grid-item">
-        <h2 class="heading-text">DATA FLOW MONITOR</h2>
-        <div class="content-box">
-            <h3 class="subheading-text">YOUR MACHINE</h3>
-            <ul class="body-text">
-                <li>✅ EMAILS PROCESSED LOCALLY</li>
-                <li>✅ FILES ANALYZED ON-DEVICE</li>
-                <li>✅ AI INFERENCE VIA OLLAMA</li>
-                <li>✅ DATA ENCRYPTED AT REST</li>
-                <li>✅ ZERO EXTERNAL DATA TRANSFER</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="grid-item">
-        <h2 class="heading-text">INTERNET</h2>
-        <div class="content-box">
-            <h3 class="subheading-text">BLOCKED</h3>
-            <ul class="body-text">
-                <li>❌ CLOUD API CALLS</li>
-                <li>❌ EXTERNAL DATA UPLOADS</li>
-                <li>❌ THIRD-PARTY SHARING</li>
-                <li>❌ TELEMETRY / ANALYTICS</li>
-                <li>❌ REMOTE MODEL HOSTING</li>
-            </ul>
+        <div class="stat-value text-white">{{ status.health.overall|default('NOMINAL') if status else 'NOMINAL' }}</div>
+        <div class="text-xs text-gray-500 mt-1 font-mono">
+            RAM: {{ status.health.ram.percent|default(0) if status else 0 }}% &middot; DISK: {{ status.health.disk.free_gb|default(0) if status else 0 }}GB FREE
         </div>
     </div>
 </div>
 
-<!-- RECENT ACTIVITY -->
-<div class="content-grid">
-    <div class="grid-item">
-        <h2 class="heading-text">RECENT ACTIVITY</h2>
-        {% if activity %}
+<!-- Quick Actions -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+    <button class="card text-left hover:border-amber/30 transition-all duration-300 group cursor-pointer" onclick="runCycle()">
+        <div class="flex items-center justify-between">
+            <div>
+                <div class="text-sm font-medium text-white group-hover:text-amber transition-colors">Run Full Cycle</div>
+                <div class="text-xs text-gray-500 mt-1 font-mono">Process emails, files &amp; data</div>
+            </div>
+            <span class="text-xl group-hover:scale-110 transition-transform">&#x26A1;</span>
+        </div>
+    </button>
+
+    <button class="card text-left hover:border-amber/30 transition-all duration-300 group cursor-pointer" onclick="scanEmails()">
+        <div class="flex items-center justify-between">
+            <div>
+                <div class="text-sm font-medium text-white group-hover:text-amber transition-colors">Scan Emails</div>
+                <div class="text-xs text-gray-500 mt-1 font-mono">Classify &amp; draft replies</div>
+            </div>
+            <span class="text-xl group-hover:scale-110 transition-transform">&#x1F4E8;</span>
+        </div>
+    </button>
+
+    <button class="card text-left hover:border-amber/30 transition-all duration-300 group cursor-pointer" onclick="sortFiles()">
+        <div class="flex items-center justify-between">
+            <div>
+                <div class="text-sm font-medium text-white group-hover:text-amber transition-colors">Sort Files</div>
+                <div class="text-xs text-gray-500 mt-1 font-mono">Organize documents &amp; invoices</div>
+            </div>
+            <span class="text-xl group-hover:scale-110 transition-transform">&#x1F4C1;</span>
+        </div>
+    </button>
+</div>
+
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <!-- Module Status -->
+    <div class="card">
+        <h2 class="font-display font-bold text-lg tracking-tight mb-4">Module Status</h2>
+        <div class="space-y-4">
+            <!-- Email Brain -->
+            <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-[#1a1a1e]">
+                <div class="flex items-center gap-3">
+                    <span class="text-lg">&#x1F4E7;</span>
+                    <div>
+                        <div class="text-sm font-medium text-white">Email Brain</div>
+                        <div class="text-xs text-gray-500 font-mono">
+                            {% if status and status.learning %}
+                            {{ status.learning.contacts_learned|default(0) }} contacts known
+                            {% else %}No data{% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-lg font-display font-bold text-amber">
+                        {% if status and status.learning.accuracy and 'email_reply' in status.learning.accuracy %}
+                            {{ status.learning.accuracy.email_reply.accuracy }}
+                        {% else %}0{% endif %}%
+                    </div>
+                    <div class="text-[10px] font-mono text-gray-600">Accuracy</div>
+                </div>
+            </div>
+
+            <!-- File Commander -->
+            <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-[#1a1a1e]">
+                <div class="flex items-center gap-3">
+                    <span class="text-lg">&#x1F4C1;</span>
+                    <div>
+                        <div class="text-sm font-medium text-white">File Commander</div>
+                        <div class="text-xs text-gray-500 font-mono">
+                            {% if status and status.learning %}
+                            {{ status.learning.categories_learned|default(0) }} categories
+                            {% else %}No data{% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-lg font-display font-bold text-amber">
+                        {% if status and status.learning.accuracy and 'file_categorize' in status.learning.accuracy %}
+                            {{ status.learning.accuracy.file_categorize.accuracy }}
+                        {% else %}0{% endif %}%
+                    </div>
+                    <div class="text-[10px] font-mono text-gray-600">Accuracy</div>
+                </div>
+            </div>
+
+            <!-- Data Engine -->
+            <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-[#1a1a1e]">
+                <div class="flex items-center gap-3">
+                    <span class="text-lg">&#x1F4CA;</span>
+                    <div>
+                        <div class="text-sm font-medium text-white">Data Engine</div>
+                        <div class="text-xs text-gray-500 font-mono">
+                            {% if status and status.learning %}
+                            {{ status.learning.categories_learned|default(0) }} vendors mapped
+                            {% else %}No data{% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-lg font-display font-bold text-amber">
+                        {% if status and status.learning.accuracy and 'data_extract' in status.learning.accuracy %}
+                            {{ status.learning.accuracy.data_extract.accuracy }}
+                        {% else %}0{% endif %}%
+                    </div>
+                    <div class="text-[10px] font-mono text-gray-600">Accuracy</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processing Queue -->
+    <div class="card">
+        <h2 class="font-display font-bold text-lg tracking-tight mb-4">Processing Queue</h2>
+        <div class="space-y-4">
+            <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-[#1a1a1e]">
+                <div class="text-sm text-gray-400 font-mono">Tasks Completed</div>
+                <div class="text-lg font-display font-bold text-white">{{ status.queue.completed|default(0) if status else 0 }}</div>
+            </div>
+            <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-[#1a1a1e]">
+                <div class="text-sm text-gray-400 font-mono">Tasks Pending</div>
+                <div class="text-lg font-display font-bold text-amber">{{ status.queue.pending|default(0) if status else 0 }}</div>
+            </div>
+            <div class="progress-bar mt-2">
+                <div class="progress-fill bg-amber" style="width: {% if status and status.queue.completed + status.queue.pending > 0 %}{{ (status.queue.completed / (status.queue.completed + status.queue.pending) * 100)|int }}{% else %}0{% endif %}%"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Data Flow Monitor -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+    <div class="card">
+        <h2 class="font-display font-bold text-lg tracking-tight mb-4">Your Machine</h2>
+        <div class="space-y-2">
+            <div class="flex items-center gap-3 text-sm">
+                <span class="w-5 h-5 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-xs">&#x2713;</span>
+                <span class="text-gray-400">Emails processed locally</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+                <span class="w-5 h-5 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-xs">&#x2713;</span>
+                <span class="text-gray-400">Files analyzed on-device</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+                <span class="w-5 h-5 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-xs">&#x2713;</span>
+                <span class="text-gray-400">AI inference via Ollama</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+                <span class="w-5 h-5 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-xs">&#x2713;</span>
+                <span class="text-gray-400">Data encrypted at rest</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+                <span class="w-5 h-5 rounded-full bg-green-500/20 text-green-400 flex items-center justify-center text-xs">&#x2713;</span>
+                <span class="text-gray-400">Zero external data transfer</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 class="font-display font-bold text-lg tracking-tight mb-4">Internet</h2>
+        <div class="space-y-2">
+            <div class="flex items-center gap-3 text-sm">
+                <span class="w-5 h-5 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center text-xs font-bold">&times;</span>
+                <span class="text-gray-500">Cloud API calls</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+                <span class="w-5 h-5 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center text-xs font-bold">&times;</span>
+                <span class="text-gray-500">External data uploads</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+                <span class="w-5 h-5 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center text-xs font-bold">&times;</span>
+                <span class="text-gray-500">Third-party sharing</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+                <span class="w-5 h-5 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center text-xs font-bold">&times;</span>
+                <span class="text-gray-500">Telemetry / Analytics</span>
+            </div>
+            <div class="flex items-center gap-3 text-sm">
+                <span class="w-5 h-5 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center text-xs font-bold">&times;</span>
+                <span class="text-gray-500">Remote model hosting</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activity -->
+<div class="card">
+    <h2 class="font-display font-bold text-lg tracking-tight mb-4">Recent Activity</h2>
+    {% if activity %}
+    <div class="space-y-1">
         {% for entry in activity %}
-        <div class="content-box">
-            <span class="accent-text">{{ entry.timestamp[:19]|replace('T', ' ') }}</span>
-            <p class="body-text">{{ entry.detail }}</p>
+        <div class="flex items-start gap-3 py-2.5 border-b border-[#1a1a1e] last:border-0">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber/50 mt-2 flex-shrink-0"></span>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm text-gray-300">{{ entry.detail }}</p>
+            </div>
+            <span class="text-[10px] font-mono text-gray-700 whitespace-nowrap">
+                {% if entry.timestamp %}{{ entry.timestamp[:19]|replace('T', ' ') }}{% endif %}
+            </span>
         </div>
         {% endfor %}
-        {% else %}
-        <div class="content-box">
-            <p class="body-text">NO ACTIVITY YET — RUN YOUR FIRST CYCLE</p>
-        </div>
-        {% endif %}
     </div>
+    {% else %}
+    <div class="text-center py-12">
+        <div class="text-4xl mb-4">&#x1F4AD;</div>
+        <p class="text-gray-500 text-sm font-mono">No activity yet — run your first cycle</p>
+    </div>
+    {% endif %}
 </div>
 
 <script>
 async function runCycle() {
-    const btn = document.querySelector('button:contains("RUN CYCLE")');
-    btn.disabled = true;
-    btn.textContent = 'RUNNING...';
+    const btns = document.querySelectorAll('.card.cursor-pointer');
+    btns.forEach(b => { b.style.opacity = '0.5'; b.style.pointerEvents = 'none'; });
 
     try {
         const res = await fetch('/run-cycle', { method: 'POST' });
         const data = await res.json();
 
         if (data.error) {
-            alert('ERROR: ' + data.error);
+            alert('Error: ' + data.error);
             if (data.needs_auth) window.location = '/login';
             return;
         }
 
-        // Refresh page data
-        setTimeout(() => location.reload(), 2000);
-
+        setTimeout(() => location.reload(), 1500);
     } catch (err) {
-        alert('ERROR: ' + err.message);
+        alert('Error: ' + err.message);
     } finally {
-        btn.disabled = false;
-        btn.textContent = 'RUN CYCLE';
+        btns.forEach(b => { b.style.opacity = '1'; b.style.pointerEvents = 'auto'; });
     }
 }
 
 async function scanEmails() {
     {% if demo_mode %}
-    alert('DEMO MODE — CONFIGURE .ENV FOR LIVE PROCESSING');
+    alert('DEMO MODE — Configure .env for live processing');
     {% else %}
     try {
         const res = await fetch('/run-cycle', { method: 'POST' });
         const data = await res.json();
         if (data.error) {
-            alert('ERROR: ' + data.error);
-            if (data.needs_auth) window.location = '/login';
+            alert('Error: ' + data.error);
             return;
         }
-        alert('SCANNED ' + (data.emails_processed || 0) + ' EMAILS');
+        alert('Scanned ' + (data.emails_processed || 0) + ' emails');
         setTimeout(() => location.reload(), 1500);
     } catch (err) {
-        alert('ERROR: ' + err.message);
+        alert('Error: ' + err.message);
     }
     {% endif %}
 }
 
 async function sortFiles() {
     {% if demo_mode %}
-    alert('DEMO MODE — CONFIGURE .ENV FOR LIVE PROCESSING');
+    alert('DEMO MODE — Configure .env for live processing');
     {% else %}
     try {
         const res = await fetch('/run-cycle', { method: 'POST' });
         const data = await res.json();
         if (data.error) {
-            alert('ERROR: ' + data.error);
-            if (data.needs_auth) window.location = '/login';
+            alert('Error: ' + data.error);
             return;
         }
-        alert('SORTED ' + (data.files_organized || 0) + ' FILES');
+        alert('Sorted ' + (data.files_organized || 0) + ' files');
         setTimeout(() => location.reload(), 1500);
     } catch (err) {
-        alert('ERROR: ' + err.message);
+        alert('Error: ' + err.message);
     }
     {% endif %}
 }

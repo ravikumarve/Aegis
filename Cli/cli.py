@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Rich CLI Interface
+Aegis - Rich CLI Interface
 Interactive command-line tool with rich formatting
 """
 
@@ -8,14 +8,14 @@ import time
 import json
 from typing import Optional
 
-from core.pilot import AIOfficePilot
+from core.pilot import AegisEngine
 from core.config import Config
 
 
 class CLI:
-    """Rich CLI interface for AI Office Pilot"""
+    """Rich CLI interface for Aegis"""
 
-    def __init__(self, pilot: Optional[AIOfficePilot] = None) -> None:
+    def __init__(self, pilot: Optional[AegisEngine] = None) -> None:
         self.pilot = pilot
         self.rich_available = self._check_rich()
 
@@ -36,7 +36,7 @@ class CLI:
             print("Error: Not logged in. Please run main.py first.")
             return
 
-        print("AI Office Pilot CLI v3.0")
+        print("Aegis CLI v3.0")
         print("Type 'help' for available commands.\n")
 
         while True:
@@ -260,7 +260,7 @@ def run_cli() -> None:
         cli = CLI()
         console = Console()
 
-        console.print("[bold blue]AI Office Pilot CLI v3.0[/bold blue]")
+        console.print("[bold blue]Aegis CLI v3.0[/bold blue]")
         console.print("Type 'help' for available commands.\n")
 
         while True:

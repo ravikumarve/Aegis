@@ -1,8 +1,8 @@
-# GhostOffice Quick Start Guide
+# Aegis Quick Start Guide
 
 ## 🚀 Get Started in 5 Minutes
 
-### Step 1: Install GhostOffice
+### Step 1: Install Aegis
 
 **Linux:**
 ```bash
@@ -18,13 +18,13 @@ chmod +x install.sh
 ./install.sh
 ```
 
-### Step 2: Start GhostOffice
+### Step 2: Start Aegis
 
 ```bash
 # Activate the virtual environment
 source venv/bin/activate
 
-# Start GhostOffice
+# Start Aegis
 python3 main.py
 ```
 
@@ -39,24 +39,24 @@ Open your browser and go to: **http://localhost:5000**
 3. **Select your watch folders** (optional)
 4. **Choose your AI model** (phi3:mini is recommended)
 
-### Step 5: Start Using GhostOffice
+### Step 5: Start Using Aegis
 
 Once setup is complete, you can:
 
 - **📧 Scan Emails**: Automatically classify and draft replies
 - **📁 Sort Files**: Organize documents into smart categories
 - **📊 Extract Data**: Parse invoices and receipts
-- **🧠 Learn**: GhostOffice learns from your corrections
+- **🧠 Learn**: Aegis learns from your corrections
 
 ---
 
 ## 🎯 Demo Mode
 
-Want to see GhostOffice in action without setting up email accounts?
+Want to see Aegis in action without setting up email accounts?
 
 1. Open `.env` file in a text editor
 2. Change `DEMO_MODE=false` to `DEMO_MODE=true`
-3. Restart GhostOffice
+3. Restart Aegis
 4. Access the dashboard with pre-populated sample data
 
 ---
@@ -72,7 +72,7 @@ Want to see GhostOffice in action without setting up email accounts?
 
 ## 📧 Email Setup (Optional)
 
-GhostOffice works with any email provider that supports IMAP/SMTP:
+Aegis works with any email provider that supports IMAP/SMTP:
 
 - Gmail
 - Outlook
@@ -92,17 +92,17 @@ To set up email:
 
 ## 📁 File Watching (Optional)
 
-GhostOffice can automatically organize your files:
+Aegis can automatically organize your files:
 
 1. Go to Settings in the dashboard
 2. Add watch folders (e.g., Downloads, Desktop)
-3. GhostOffice will automatically sort new files
+3. Aegis will automatically sort new files
 
 ---
 
 ## 🧠 AI Models
 
-GhostOffice uses Ollama for local AI processing:
+Aegis uses Ollama for local AI processing:
 
 **Recommended Models:**
 - **phi3:mini** (default) - Fast and lightweight
@@ -119,7 +119,7 @@ To change models:
 
 ## 🛠️ Troubleshooting
 
-### GhostOffice won't start
+### Aegis won't start
 
 **Check if Ollama is running:**
 ```bash
@@ -166,7 +166,7 @@ DASHBOARD_PORT=5001
 
 ## 🎉 You're All Set!
 
-GhostOffice is now running and ready to help you:
+Aegis is now running and ready to help you:
 
 - ✅ Automatically classify emails
 - ✅ Draft smart replies
@@ -174,13 +174,13 @@ GhostOffice is now running and ready to help you:
 - ✅ Extract data from documents
 - ✅ Learn your preferences
 
-**Remember**: GhostOffice runs 100% locally. Your data never leaves your machine.
+**Remember**: Aegis runs 100% locally. Your data never leaves your machine.
 
 ---
 
 ## 🔄 Updates
 
-To update GhostOffice:
+To update Aegis:
 
 ```bash
 # Pull latest changes
@@ -190,7 +190,7 @@ git pull origin main
 source venv/bin/activate
 pip install --upgrade -r requirements.txt
 
-# Restart GhostOffice
+# Restart Aegis
 python3 main.py
 ```
 
@@ -206,4 +206,4 @@ If you encounter any issues:
 
 ---
 
-**👻 Welcome to GhostOffice - Your Private AI Assistant!**
+**👻 Welcome to Aegis - Your Private AI Assistant!**

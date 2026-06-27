@@ -1,5 +1,5 @@
 """
-AI Office Pilot - File Analyzer
+Aegis - File Analyzer
 Read and understand file contents
 """
 

@@ -1,5 +1,5 @@
 """
-Pytest configuration and fixtures for AI Office Pilot tests
+Pytest configuration and fixtures for Aegis tests
 """
 
 import os

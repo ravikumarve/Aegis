@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AI Office Pilot - Entry Point
+Aegis - Entry Point
 """
 
 import sys
@@ -8,14 +8,14 @@ import getpass
 import argparse
 from pathlib import Path
 
-from core.pilot import AIOfficePilot
+from core.pilot import AegisEngine
 from core.config import Config
 from security.auth import AccessControl
 
 
 def parse_args():
     """Parse command line arguments"""
-    parser = argparse.ArgumentParser(description="AI Office Pilot v3.0 - Your AI Office Assistant")
+    parser = argparse.ArgumentParser(description="Aegis Engine v3.1.0 - Private AI Assistant")
     parser.add_argument(
         "--dry-run", action="store_true", help="Run without sending emails or making changes"
     )
@@ -33,7 +33,7 @@ def parse_args():
 def print_banner():
     print("""
 ╔══════════════════════════════════════════════════════════════╗
-║              🤖 AI OFFICE PILOT v3.0                        ║
+║                    AEGIS ENGINE v3.1.0                       ║
 ║     Email + Files + Data • Self-Learning • Encrypted       ║
 ╚══════════════════════════════════════════════════════════════╝
     """)
@@ -70,7 +70,7 @@ def first_time_setup(pilot):
         break
 
     pilot.first_time_setup(password)
-    print("\n✅ Setup complete! Your AI Office Pilot is ready.\n")
+    print("\n✅ Setup complete! Your Aegis is ready.\n")
 
     return password
 
@@ -95,7 +95,7 @@ def main():
 
     # Handle --status flag
     if args.status:
-        pilot = AIOfficePilot()
+        pilot = AegisEngine()
         if pilot.crypto.is_setup:
             password = getpass.getpass("Master password: ")
             try:
@@ -111,7 +111,7 @@ def main():
 
     # Handle test modes
     if args.test_email or args.test_files:
-        pilot = AIOfficePilot()
+        pilot = AegisEngine()
         if pilot.crypto.is_setup:
             password = getpass.getpass("Master password: ")
             pilot.login(password)
@@ -133,7 +133,7 @@ def main():
         sys.exit(0)
 
     # Create pilot
-    pilot = AIOfficePilot()
+    pilot = AegisEngine()
 
     # Check if first time
     if not pilot.crypto.is_setup:

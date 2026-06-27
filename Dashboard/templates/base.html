@@ -1,108 +1,577 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}GHOSTOFFICE{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='brutalist.css') }}">
+    <title>{% block title %}Aegis{% endblock %}</title>
+    <meta name="description" content="Aegis Dashboard — Private AI Assistant">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        dark: '#0A0A0B',
+                        light: '#f5f5f5',
+                        surface: '#111113',
+                        'surface-hover': '#1a1a1e',
+                        amber: '#F59E0B',
+                        'amber-dim': '#F59E0B15',
+                        'amber-glow': '#F59E0B20',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0A0A0B;
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0A0A0B; }
+        ::-webkit-scrollbar-thumb { background: #2a2a2e; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3a3a3e; }
+
+        /* Sidebar transition */
+        .sidebar-transition {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.3s ease;
+        }
+
+        /* Nav link styling */
+        .nav-link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+            transition: all 0.2s ease;
+        }
+        .nav-link:hover {
+            color: #f5f5f5;
+            background-color: #1a1a1e;
+        }
+        .nav-link.active {
+            color: #F59E0B;
+            background-color: #F59E0B10;
+        }
+        .nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 20px;
+            background-color: #F59E0B;
+            border-radius: 0 3px 3px 0;
+        }
+
+        /* Notification dropdown */
+        .notification-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 380px;
+            max-height: 480px;
+            overflow-y: auto;
+            background: #111113;
+            border: 1px solid #1f1f23;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            z-index: 50;
+            display: none;
+        }
+        .notification-dropdown.open { display: block; }
+
+        /* Flash messages */
+        .flash-message {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            animation: flashIn 0.3s ease;
+        }
+        .flash-message.success {
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+        }
+        .flash-message.error {
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+        }
+        .flash-message.warning {
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #fbbf24;
+        }
+        .flash-message.info {
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+        }
+
+        @keyframes flashIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Card style for dashboard */
+        .card {
+            background: #111113;
+            border: 1px solid #1f1f23;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+        .card:hover {
+            border-color: #2a2a2e;
+        }
+
+        /* Stat card */
+        .stat-value {
+            font-family: 'Syne', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.625rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .badge-urgent {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .badge-routine {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+        .badge-spam {
+            background: rgba(107, 114, 128, 0.15);
+            color: #9ca3af;
+            border: 1px solid rgba(107, 114, 128, 0.3);
+        }
+        .badge-meeting {
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        /* Form inputs */
+        .form-input {
+            width: 100%;
+            padding: 0.625rem 1rem;
+            background: #0A0A0B;
+            border: 1px solid #1f1f23;
+            border-radius: 0.5rem;
+            color: #f5f5f5;
+            font-size: 0.875rem;
+            transition: border-color 0.2s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #F59E0B;
+            box-shadow: 0 0 0 2px #F59E0B20;
+        }
+        .form-input::placeholder {
+            color: #4b5563;
+        }
+        .form-select {
+            width: 100%;
+            padding: 0.625rem 1rem;
+            background: #0A0A0B;
+            border: 1px solid #1f1f23;
+            border-radius: 0.5rem;
+            color: #f5f5f5;
+            font-size: 0.875rem;
+            transition: border-color 0.2s ease;
+            cursor: pointer;
+        }
+        .form-select:focus {
+            outline: none;
+            border-color: #F59E0B;
+            box-shadow: 0 0 0 2px #F59E0B20;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.25rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: #F59E0B;
+            color: #0A0A0B;
+        }
+        .btn-primary:hover {
+            background: #d97706;
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #9ca3af;
+            border: 1px solid #1f1f23;
+        }
+        .btn-secondary:hover {
+            border-color: #3a3a3e;
+            color: #f5f5f5;
+        }
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .btn-danger:hover {
+            background: rgba(239, 68, 68, 0.25);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: #6b7280;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+        .btn-ghost:hover {
+            background: #1a1a1e;
+            color: #f5f5f5;
+        }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        .data-table th {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            color: #6b7280;
+            font-weight: 500;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid #1f1f23;
+        }
+        .data-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #1a1a1e;
+            color: #d1d5db;
+        }
+        .data-table tr:hover td {
+            background: #141416;
+        }
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Loading animation */
+        .loading-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #F59E0B;
+            animation: pulse-dot 1.4s infinite;
+        }
+        .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes pulse-dot {
+            0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); }
+            30% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-content {
+            background: #111113;
+            border: 1px solid #1f1f23;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 560px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalIn 0.3s ease;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Responsive sidebar */
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .sidebar-overlay { display: none !important; }
+            .sidebar-overlay.open { display: block !important; }
+            .notification-dropdown {
+                width: calc(100vw - 2rem);
+                right: -4rem;
+            }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Status pulse */
+        .status-pulse {
+            animation: statusPulse 2s infinite;
+        }
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            height: 4px;
+            border-radius: 2px;
+            background: #1f1f23;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+
+        /* Password strength */
+        .strength-bar {
+            height: 4px;
+            border-radius: 2px;
+            background: #1f1f23;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+        .strength-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Page header consistency */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .page-header h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .page-header .subtitle {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
 </head>
-<body>
-    {% if session.authenticated %}
-    <!-- Mobile Menu Toggle -->
-    <button class="btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
-        MENU
-    </button>
-    
-    <!-- Mobile Overlay -->
-    <div class="overlay" onclick="closeMobileMenu()"></div>
-    
-    <nav class="nav-box" role="navigation" aria-label="Main navigation">
-        <div class="logo-box">
-            GHOSTOFFICE
-            <div class="accent-text">V3.0</div>
-        </div>
+<body class="antialiased min-h-screen">
 
-        <div class="meta-box">
-            <p class="accent-text">EST. 2024</p>
-            <p class="accent-text">100% LOCAL</p>
-            <p class="accent-text">NO SHADOWS</p>
-            <p class="accent-text">NO GRADIENTS</p>
-        </div>
+    <!-- Sidebar Overlay (mobile only) -->
+    <div class="sidebar-overlay fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-        <div class="nav-links">
-            <a href="{{ url_for('dashboard') }}" class="{{ 'active' if request.endpoint == 'dashboard' else '' }}">
-                DASHBOARD
-            </a>
-            <a href="{{ url_for('email_brain') }}" class="{{ 'active' if request.endpoint == 'email_brain' else '' }}">
-                EMAIL BRAIN
-            </a>
-            <a href="{{ url_for('learning_page') }}" class="{{ 'active' if request.endpoint == 'learning_page' else '' }}">
-                LEARNING
-            </a>
-            <a href="/api/security" class="{{ 'active' if request.endpoint == 'api_security' else '' }}">
-                SECURITY
-            </a>
-            <a href="/assistant" class="{{ 'active' if request.endpoint == 'assistant_page' else '' }}">
-                ASSISTANT
-            </a>
-            <a href="{{ url_for('settings') }}" class="{{ 'active' if request.endpoint == 'settings' else '' }}">
-                SETTINGS
+    <!-- Sidebar -->
+    <aside class="sidebar fixed top-0 left-0 h-full w-64 bg-dark border-r border-[#1a1a1e] z-50 sidebar-transition flex flex-col" id="sidebar">
+        <!-- Brand -->
+        <div class="p-6 border-b border-[#1a1a1e]">
+            <a href="{{ url_for('dashboard') }}" class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-amber flex items-center justify-center">
+                    <span class="font-display font-bold text-dark text-sm">A</span>
+                </div>
+                <div>
+                    <span class="font-display font-bold text-lg tracking-tighter text-white">AEGIS</span>
+                    <span class="font-mono text-[10px] text-gray-600 block leading-tight">CONTROL CENTER</span>
+                </div>
             </a>
         </div>
 
-        <div class="security-badge">
-            <span class="tag">ENCRYPTED</span>
-            <a href="{{ url_for('logout') }}" class="btn btn-danger">
-                LOCK & LOGOUT
+        <!-- Nav Links -->
+        <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+            <a href="{{ url_for('dashboard') }}" class="nav-link {{ 'active' if request.endpoint == 'dashboard' else '' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                Dashboard
             </a>
-        </div>
-    </nav>
+            <a href="{{ url_for('email_brain') }}" class="nav-link {{ 'active' if request.endpoint == 'email_brain' else '' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                Email Brain
+            </a>
+            <a href="{{ url_for('learning_page') }}" class="nav-link {{ 'active' if request.endpoint == 'learning_page' else '' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                Learning
+            </a>
+            <a href="{{ url_for('security') }}" class="nav-link {{ 'active' if request.endpoint == 'security' else '' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                Security
+            </a>
+            <a href="{{ url_for('assistant_page') }}" class="nav-link {{ 'active' if request.endpoint == 'assistant_page' else '' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+                Assistant
+            </a>
+            <a href="{{ url_for('settings') }}" class="nav-link {{ 'active' if request.endpoint == 'settings' else '' }}">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                Settings
+            </a>
+        </nav>
 
-    <!-- Notification Bell -->
-    <div class="notification-bell" id="notificationBell">
-        <button class="btn" onclick="toggleNotifications()" aria-label="Notifications" aria-haspopup="true" aria-expanded="false">
-            NOTIFICATIONS
-            <span class="bell-badge" id="bellBadge" style="display: none;" aria-live="polite">0</span>
-        </button>
-        <div class="notification-dropdown" id="notificationDropdown" role="dialog" aria-modal="true" aria-label="Notifications" hidden>
-            <div class="dropdown-header">
-                <span class="heading-text">NOTIFICATIONS</span>
-                <button class="btn btn-danger" onclick="markAllRead(event)" aria-label="Mark all notifications as read">MARK ALL READ</button>
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t border-[#1a1a1e]">
+            <div class="flex items-center gap-2 mb-3 px-2">
+                <span class="w-1.5 h-1.5 bg-amber rounded-full status-pulse"></span>
+                <span class="font-mono text-[10px] uppercase tracking-widest text-gray-600">All Systems Nominal</span>
             </div>
-            <div class="notification-list" id="notificationList" role="list">
-                <div class="notification-loading" role="status" aria-live="polite">LOADING NOTIFICATIONS...</div>
+            <a href="{{ url_for('logout') }}" class="nav-link text-gray-600 hover:text-red-400 hover:bg-red-500/10">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                Lock &amp; Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="md:ml-64 min-h-screen flex flex-col">
+        <!-- Top Bar -->
+        <header class="sticky top-0 z-30 bg-dark/80 backdrop-blur-md border-b border-[#1a1a1e]">
+            <div class="flex items-center justify-between px-4 md:px-8 h-16">
+                <!-- Mobile menu button -->
+                <button class="btn-ghost md:hidden" onclick="toggleSidebar()" aria-label="Toggle navigation">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+
+                <!-- Spacer on desktop -->
+                <div class="hidden md:block"></div>
+
+                <!-- Right side actions -->
+                <div class="flex items-center gap-3">
+                    <!-- Notification Bell -->
+                    <div class="relative" id="notificationBell">
+                        <button class="btn-ghost relative" onclick="toggleNotifications()" aria-label="Notifications" aria-haspopup="true" aria-expanded="false">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                            <span class="bell-badge absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white text-[9px] font-bold rounded-full flex items-center justify-center hidden" id="bellBadge">0</span>
+                        </button>
+
+                        <!-- Notification Dropdown -->
+                        <div class="notification-dropdown" id="notificationDropdown" role="dialog" aria-modal="true" aria-label="Notifications">
+                            <div class="sticky top-0 bg-surface border-b border-[#1f1f23] p-4 flex items-center justify-between">
+                                <span class="font-display font-bold text-sm tracking-tight">Notifications</span>
+                                <button class="text-xs font-mono uppercase tracking-widest text-amber hover:text-white transition-colors" onclick="markAllRead(event)">Mark All Read</button>
+                            </div>
+                            <div class="notification-list" id="notificationList">
+                                <div class="p-8 text-center text-gray-600 text-sm font-mono">Loading notifications...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Docs link -->
+                    <a href="{{ url_for('docs') }}" class="btn-ghost hidden sm:flex" title="Documentation">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Demo Mode Banner -->
+        {% if demo_mode %}
+        <div class="bg-amber/10 border-b border-amber/20 px-4 md:px-8 py-2">
+            <div class="flex items-center gap-2 text-amber text-xs font-mono uppercase tracking-widest">
+                <span class="w-1.5 h-1.5 bg-amber rounded-full status-pulse"></span>
+                Demo Mode — Sample Data Shown — Configure .env for Live Processing
             </div>
         </div>
-    </div>
-    {% endif %}
+        {% endif %}
 
-    <!-- Demo Mode Banner -->
-    {% if demo_mode %}
-    <div class="marquee">
-        <div class="marquee-content">
-            DEMO MODE — SAMPLE DATA SHOWN — CONFIGURE .ENV FOR LIVE PROCESSING — DEMO MODE — SAMPLE DATA SHOWN — 
-        </div>
-    </div>
-    {% endif %}
-
-    <main class="container">
+        <!-- Flash Messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-        <div class="content-box">
+        <div class="px-4 md:px-8 pt-4 space-y-2">
             {% for category, message in messages %}
-            <div class="flash {{ category }}">
-                <strong>{{ category|upper }}:</strong> {{ message }}
-                <button class="btn btn-danger" onclick="this.parentElement.remove()">DISMISS</button>
+            <div class="flash-message {{ category if category in ['success','error','warning','info'] else 'info' }}">
+                <span>{{ message }}</span>
+                <button class="text-current/60 hover:text-current transition-colors" onclick="this.parentElement.remove()">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
             </div>
             {% endfor %}
         </div>
         {% endif %}
         {% endwith %}
 
-        {% block content %}{% endblock %}
-    </main>
+        <!-- Page Content -->
+        <main class="flex-1 p-4 md:p-8">
+            {% block content %}{% endblock %}
+        </main>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <!-- Footer -->
+        <footer class="border-t border-[#1a1a1e] px-4 md:px-8 py-4">
+            <div class="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-gray-700">
+                <span>&copy; 2026 Aegis Core</span>
+                <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 bg-amber rounded-full status-pulse"></span>
+                    <span>Encrypted · Local · Private</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Notification Script -->
     <script>
     let notificationDropdownOpen = false;
 
@@ -110,32 +579,32 @@
         try {
             const res = await fetch('/api/notifications');
             const data = await res.json();
-            
+
             const badge = document.getElementById('bellBadge');
             const list = document.getElementById('notificationList');
-            
+
             if (data.unread_count > 0) {
                 badge.textContent = data.unread_count > 99 ? '99+' : data.unread_count;
-                badge.style.display = 'inline-block';
+                badge.style.display = 'flex';
             } else {
                 badge.style.display = 'none';
             }
-            
+
             if (data.notifications && data.notifications.length > 0) {
                 list.innerHTML = data.notifications.map(n => `
-                    <div class="content-box ${n.read ? 'read' : 'unread'}">
-                        <div class="stat">
-                            <span class="stat-num">${getCategoryIcon(n.category)}</span>
-                            <div>
-                                <div class="heading-text">${escapeHtml(n.title)}</div>
-                                <div class="body-text">${escapeHtml(n.message)}</div>
-                                <div class="accent-text">${formatTime(n.created_at)}</div>
+                    <div class="p-4 border-b border-[#1a1a1e] ${n.read ? '' : 'bg-amber-dim'}">
+                        <div class="flex gap-3">
+                            <span class="text-lg">${getCategoryIcon(n.category)}</span>
+                            <div class="flex-1 min-w-0">
+                                <div class="text-sm text-white font-medium truncate">${escapeHtml(n.title)}</div>
+                                <div class="text-xs text-gray-500 mt-0.5 line-clamp-2">${escapeHtml(n.message)}</div>
+                                <div class="text-[10px] font-mono text-gray-700 mt-1">${formatTime(n.created_at)}</div>
                             </div>
                         </div>
                     </div>
                 `).join('');
             } else {
-                list.innerHTML = '<div class="content-box">NO NOTIFICATIONS YET</div>';
+                list.innerHTML = '<div class="p-8 text-center text-gray-600 text-sm">No notifications yet</div>';
             }
         } catch (e) {
             console.error('Failed to load notifications:', e);
@@ -144,13 +613,13 @@
 
     function getCategoryIcon(category) {
         const icons = {
-            error: '❌',
-            success: '✅',
-            security: '🔒',
-            task: '⚡',
-            warning: '⚠️'
+            error: '\u274C',
+            success: '\u2705',
+            security: '\uD83D\uDD12',
+            task: '\u26A1',
+            warning: '\u26A0\uFE0F'
         };
-        return icons[category] || '📢';
+        return icons[category] || '\uD83D\uDCE2';
     }
 
     function escapeHtml(text) {
@@ -163,23 +632,22 @@
         const date = new Date(isoString);
         const now = new Date();
         const diff = (now - date) / 1000;
-        
-        if (diff < 60) return 'JUST NOW';
-        if (diff < 3600) return Math.floor(diff / 60) + 'M AGO';
-        if (diff < 86400) return Math.floor(diff / 3600) + 'H AGO';
-        return date.toLocaleDateString().toUpperCase();
+
+        if (diff < 60) return 'Just now';
+        if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+        if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+        return date.toLocaleDateString();
     }
 
-    async function toggleNotifications() {
-        event.stopPropagation();
+    function toggleNotifications() {
         const dropdown = document.getElementById('notificationDropdown');
         notificationDropdownOpen = !notificationDropdownOpen;
-        
+
         if (notificationDropdownOpen) {
-            dropdown.style.display = 'block';
-            await loadNotifications();
+            dropdown.classList.add('open');
+            loadNotifications();
         } else {
-            dropdown.style.display = 'none';
+            dropdown.classList.remove('open');
         }
     }
 
@@ -198,14 +666,22 @@
         const bell = document.getElementById('notificationBell');
         const dropdown = document.getElementById('notificationDropdown');
         if (notificationDropdownOpen && bell && !bell.contains(e.target)) {
-            dropdown.style.display = 'none';
+            dropdown.classList.remove('open');
             notificationDropdownOpen = false;
         }
     });
 
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('open');
+    }
+
     loadNotifications();
     setInterval(loadNotifications, 30000);
     </script>
+
     {% block scripts %}{% endblock %}
 </body>
 </html>

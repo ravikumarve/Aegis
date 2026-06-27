@@ -1,5 +1,5 @@
 """
-AI Office Pilot - File Sorter
+Aegis - File Sorter
 Move files to organized folders
 """
 

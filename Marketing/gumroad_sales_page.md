@@ -1,4 +1,4 @@
-# 🤖 AI Office Pilot — Your AI Office Assistant That Actually Learns You
+# 🤖 Aegis — Your AI Office Assistant That Actually Learns You
 
 ## Stop Doing Office Work. Start Doing YOUR Work.
 
@@ -29,7 +29,7 @@ All sitting on someone else's server. Being used to train their AI.
 
 ## The Solution
 
-**AI Office Pilot** is the first AI assistant that:
+**Aegis** is the first AI assistant that:
 
 ✅ **Handles your emails, files, and data entry — automatically**
 ✅ **LEARNS your preferences** — gets smarter every day
@@ -96,7 +96,7 @@ All sitting on someone else's server. Being used to train their AI.
 
 ## 🔒 Security That Actually Matters
 
-| Feature | AI Office Pilot | ChatGPT | Other AI Tools |
+| Feature | Aegis | ChatGPT | Other AI Tools |
 |---------|:-:|:-:|:-:|
 | Runs 100% locally | ✅ | ❌ | ❌ |
 | Zero cloud data | ✅ | ❌ | ❌ |

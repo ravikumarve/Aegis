@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Security Module
+Aegis - Security Module
 7-layer security architecture
 """
 

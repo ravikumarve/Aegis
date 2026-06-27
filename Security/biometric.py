@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Biometric Authentication
+Aegis - Biometric Authentication
 Platform-specific biometric unlock (fingerprint, face, etc.)
 """
 
@@ -57,7 +57,7 @@ class BiometricAuth:
             return "PAM"
         return "None"
 
-    def authenticate(self, reason: str = "Unlock AI Office Pilot") -> bool:
+    def authenticate(self, reason: str = "Unlock Aegis") -> bool:
         """
         Attempt biometric authentication
         Returns True if successful, False if failed/cancelled

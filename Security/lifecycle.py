@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Data Lifecycle Management
+Aegis - Data Lifecycle Management
 Auto-purge, export, delete
 """
 
@@ -53,7 +53,7 @@ class DataLifecycle:
         output_path = Path(output_path)
         export = {
             "export_date": datetime.now().isoformat(),
-            "product": "AI Office Pilot v3.0",
+            "product": "Aegis v3.1.0",
             "data": {},
         }
 

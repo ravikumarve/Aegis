@@ -1,5 +1,5 @@
 """
-GhostOffice - Demo Data
+Aegis - Demo Data
 Sample data for dashboard evaluation and screenshots
 """
 

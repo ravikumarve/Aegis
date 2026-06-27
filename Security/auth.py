@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Authentication & Access Control
+Aegis - Authentication & Access Control
 """
 
 import os
@@ -65,7 +65,7 @@ class AccessControl:
 
         secret = pyotp.random_base32()
         qr_url = pyotp.totp.TOTP(secret).provisioning_uri(
-            name="AI Office Pilot", issuer_name="AI Office Pilot"
+            name="Aegis", issuer_name="Aegis"
         )
         return secret, qr_url
 

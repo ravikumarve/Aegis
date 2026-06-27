@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Threat Detection
+Aegis - Threat Detection
 Real-time security monitoring
 """
 

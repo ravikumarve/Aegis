@@ -1,7 +1,7 @@
 {
   "dashboard": {
     "id": null,
-    "title": "GhostOffice System Metrics",
+    "title": "Aegis System Metrics",
     "tags": ["ghostoffice", "system", "monitoring"],
     "timezone": "browser",
     "panels": [

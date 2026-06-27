@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Configuration Manager
+Aegis - Configuration Manager
 Loads settings from .env file and provides defaults
 """
 
@@ -9,11 +9,12 @@ from dotenv import load_dotenv
 
 
 # Load .env file
-load_dotenv()
+_env_path = Path(__file__).parent.parent / ".env"
+load_dotenv(dotenv_path=_env_path, override=False)
 
 
 class Config:
-    """Central configuration for AI Office Pilot"""
+    """Central configuration for Aegis"""
 
     # ─── Paths ───
     BASE_DIR = Path(__file__).parent.parent
@@ -84,7 +85,8 @@ class Config:
     @classmethod
     def reload(cls):
         """Reload environment variables from .env file"""
-        load_dotenv(override=True)
+        env_path = cls.BASE_DIR / ".env"
+        load_dotenv(dotenv_path=env_path, override=True)
         cls.DEMO_MODE = os.getenv("DEMO_MODE", "false").lower() == "true"
         cls.SETUP_COMPLETE = os.getenv("SETUP_COMPLETE", "false").lower() == "true"
 

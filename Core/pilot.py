@@ -1,5 +1,5 @@
 """
-GhostOffice - Main Orchestrator
+Aegis Engine - Main Orchestrator
 The brain that connects everything
 """
 
@@ -39,11 +39,11 @@ from modules.data_engine.sheet_writer import SheetWriter
 from notifications.notifier import Notifier
 
 
-class AIOfficePilot:
+class AegisEngine:
     """
-    AI Office Pilot v3.0
+    Aegis Engine v3.1.0
 
-    The complete AI office assistant that:
+    The complete private AI assistant that:
     ✅ Handles emails, files, and data
     ✅ Learns your preferences over time
     ✅ Keeps everything encrypted and local
@@ -590,7 +590,7 @@ class AIOfficePilot:
         interval = Config.CYCLE_INTERVAL_MINUTES
 
         logger.info(f"Starting continuous mode - cycle every {interval} minutes")
-        logger.info("🤖 GhostOffice running continuously")
+        logger.info("🤖 Aegis running continuously")
         logger.info(f"Cycle every {interval} minutes")
         logger.info("Press Ctrl+C to stop")
 
@@ -664,8 +664,8 @@ class AIOfficePilot:
         # Lock encryption
         self.auth.logout()
 
-        logger.info("GhostOffice shutdown complete")
-        logger.info("GhostOffice shut down securely")
+        logger.info("Aegis shutdown complete")
+        logger.info("Aegis shut down securely")
 
     # ═══════════════════════════════════════
     # STATUS & REPORTS

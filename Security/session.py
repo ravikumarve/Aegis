@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Session Management
+Aegis - Session Management
 Token-based authentication with refresh tokens
 """
 

@@ -1,4 +1,4 @@
-# GhostOffice - API Documentation
+# Aegis - API Documentation
 
 ## Base URL
 

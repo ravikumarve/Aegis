@@ -20,17 +20,17 @@ class SimpleOfficeAssistant:
             "email accounts": "Let me check your configured email accounts...",
             "learning progress": "I'll check how much the AI has learned...",
             "security status": "Let me check your security settings...",
-            "how does it work": "GhostOffice automatically processes emails, organizes files, and extracts data using local AI.",
-            "what is ghostoffice": "GhostOffice is your private AI assistant that handles emails, files, and data processing locally.",
+            "how does it work": "Aegis automatically processes emails, organizes files, and extracts data using local AI.",
+            "what is ghostoffice": "Aegis is your private AI assistant that handles emails, files, and data processing locally.",
             "help": "I can help you with: system status, file processing, email accounts, learning progress, and security questions.",
         }
 
     def get_system_status(self) -> str:
         """Get current system status"""
         try:
-            from core.pilot import AIOfficePilot
+            from core.pilot import AegisEngine
 
-            pilot = AIOfficePilot()
+            pilot = AegisEngine()
             status = pilot.get_status()
 
             return (
@@ -106,7 +106,7 @@ class SimpleOfficeAssistant:
 
         else:
             return (
-                "I'm your GhostOffice Assistant! I can help you with:\n"
+                "I'm your Aegis Assistant! I can help you with:\n"
                 "• Checking system health\n"
                 "• Viewing files waiting processing\n"
                 "• Email account status\n"

@@ -1,109 +1,296 @@
-{% extends "base.html" %}
-{% block title %}Login — GhostOffice{% endblock %}
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if setup %}Setup{% else %}Login{% endif %} — Aegis</title>
+    <meta name="description" content="Aegis — Private AI Assistant Login">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        dark: '#0A0A0B',
+                        light: '#f5f5f5',
+                        surface: '#111113',
+                        amber: '#F59E0B',
+                        'amber-dim': '#F59E0B15',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0A0A0B;
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
 
-{% block content %}
-<div class="login-container">
-    <div class="login-card">
-        <div class="login-header">
-            <span class="login-logo">🤖</span>
-            <h1>GhostOffice</h1>
-            <p class="login-subtitle">
-                {% if setup %}
-                    Welcome! Let's secure your data.
-                {% else %}
-                    Enter your master password to unlock.
-                {% endif %}
-            </p>
+        /* Film Grain Noise */
+        .noise {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Ambient Glow */
+        .ambient-orb {
+            position: fixed;
+            top: 50%; left: 50%;
+            width: 60vw; height: 60vw;
+            background: radial-gradient(circle, rgba(245,158,11,0.03) 0%, rgba(245,158,11,0) 60%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(80px);
+            z-index: -1;
+            animation: float 25s ease-in-out infinite alternate;
+        }
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            100% { transform: translate(-40%, -60%) scale(1.2); }
+        }
+
+        /* Form styles */
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: #0A0A0B;
+            border: 1px solid #1f1f23;
+            border-radius: 0.5rem;
+            color: #f5f5f5;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #F59E0B;
+            box-shadow: 0 0 0 3px #F59E0B20;
+        }
+        .form-input::placeholder {
+            color: #4b5563;
+        }
+
+        /* Button */
+        .btn-submit {
+            width: 100%;
+            padding: 0.75rem;
+            background: #F59E0B;
+            color: #0A0A0B;
+            font-weight: 600;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+        .btn-submit:hover {
+            background: #d97706;
+        }
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Strength bar */
+        .strength-bar {
+            height: 3px;
+            border-radius: 2px;
+            background: #1f1f23;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+        .strength-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Flash messages */
+        .flash-msg {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .flash-msg.error {
+            background: rgba(239,68,68,0.12);
+            border: 1px solid rgba(239,68,68,0.3);
+            color: #f87171;
+        }
+        .flash-msg.success {
+            background: rgba(34,197,94,0.12);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #4ade80;
+        }
+
+        /* Badges */
+        .sec-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.25rem 0.625rem;
+            border-radius: 9999px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            border: 1px solid #1f1f23;
+            color: #6b7280;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .ambient-orb { animation: none; }
+            *, *::before, *::after { transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="noise"></div>
+    <div class="ambient-orb"></div>
+
+    <!-- Brand -->
+    <div class="mb-10 text-center relative z-10">
+        <div class="w-12 h-12 rounded-xl bg-amber flex items-center justify-center mx-auto mb-4">
+            <span class="font-display font-bold text-dark text-xl">A</span>
         </div>
+        <h1 class="font-display font-bold text-2xl tracking-tighter text-white">Aegis</h1>
+        <p class="font-sans text-gray-500 text-sm mt-1">
+            {% if setup %}
+                Welcome! Let's secure your data.
+            {% else %}
+                Enter your master password to unlock.
+            {% endif %}
+        </p>
+    </div>
 
-        <form method="POST" class="login-form">
+    <!-- Card -->
+    <div class="w-full max-w-md bg-surface border border-[#1f1f23] rounded-2xl p-8 relative z-10">
+        <!-- Flash messages from Flask -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="flash-msg {{ category if category in ['error','success'] else 'error' }}">
+                <span>{{ message }}</span>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% if require_2fa %}
+        <!-- 2FA Step -->
+        <form method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            {% if setup %}
-            <div class="setup-notice">
-                <span class="icon">🔐</span>
+            <div class="space-y-4">
+                <p class="text-sm text-gray-400">Two-factor authentication required.</p>
                 <div>
-                    <strong>First-Time Setup</strong>
-                    <p>Create a master password. This encrypts ALL your data
-                    with military-grade AES-256 encryption. This password is
-                    NEVER stored anywhere.</p>
+                    <label for="totp_token" class="block text-xs font-mono uppercase tracking-widest text-gray-600 mb-2">Authentication Code</label>
+                    <input type="text" id="totp_token" name="totp_token" class="form-input" placeholder="000000" required autocomplete="one-time-code" inputmode="numeric" pattern="[0-9]*" maxlength="6">
                 </div>
+                <button type="submit" class="btn-submit">Verify</button>
             </div>
-            {% endif %}
-
-            <div class="form-group">
-                <label for="password">
-                    {% if setup %}Create Master Password{% else %}Master Password{% endif %}
-                </label>
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="{% if setup %}Minimum 12 characters{% else %}Enter password{% endif %}"
-                    required
-                    minlength="{% if setup %}12{% else %}1{% endif %}"
-                    autocomplete="{% if setup %}new-password{% else %}current-password{% endif %}"
-                >
-                {% if setup %}
-                <div id="password-strength" class="password-strength"></div>
-                {% endif %}
-            </div>
-
-            {% if setup %}
-            <div class="form-group">
-                <label for="confirm_password">Confirm Password</label>
-                <input
-                    type="password"
-                    id="confirm_password"
-                    name="confirm_password"
-                    placeholder="Type password again"
-                    required
-                    minlength="12"
-                    autocomplete="new-password"
-                >
-            </div>
-            {% endif %}
-
-            <button type="submit" class="btn-primary btn-full">
-                {% if setup %}
-                    🔐 Setup & Encrypt
-                {% else %}
-                    🔓 Unlock
-                {% endif %}
-            </button>
         </form>
 
-        <div class="login-footer">
-            <div class="security-badges">
-                <span class="badge">🔒 AES-256</span>
-                <span class="badge">🏠 100% Local</span>
-                <span class="badge">☁️ Zero Cloud</span>
+        {% elif setup %}
+        <!-- Setup: Create Master Password -->
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="space-y-4">
+                <!-- Setup info -->
+                <div class="p-4 rounded-lg bg-amber/5 border border-amber/10 text-sm text-gray-400">
+                    <div class="flex gap-3">
+                        <span class="text-amber text-lg">&#x1F512;</span>
+                        <div>
+                            <strong class="text-white block mb-1">First-Time Setup</strong>
+                            <p>Create a master password. This encrypts ALL your data with military-grade AES-256 encryption. This password is NEVER stored anywhere.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-xs font-mono uppercase tracking-widest text-gray-600 mb-2">Create Master Password</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="Minimum 12 characters" required minlength="12" autocomplete="new-password">
+                    <div id="password-strength" class="strength-bar">
+                        <div class="strength-fill" style="width:0%;background:#6b7280"></div>
+                    </div>
+                    <div id="strength-label" class="text-xs font-mono text-gray-600">Very Weak</div>
+                </div>
+
+                <div>
+                    <label for="confirm_password" class="block text-xs font-mono uppercase tracking-widest text-gray-600 mb-2">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" class="form-input" placeholder="Type password again" required minlength="12" autocomplete="new-password">
+                </div>
+
+                <button type="submit" class="btn-submit">&#x1F510; Setup &amp; Encrypt</button>
             </div>
+        </form>
+
+        {% else %}
+        <!-- Login: Unlock -->
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="space-y-4">
+                <div>
+                    <label for="password" class="block text-xs font-mono uppercase tracking-widest text-gray-600 mb-2">Master Password</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="Enter password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn-submit">&#x1F513; Unlock</button>
+            </div>
+        </form>
+        {% endif %}
+
+        <!-- Security badges -->
+        <div class="flex flex-wrap gap-2 justify-center mt-6 pt-6 border-t border-[#1f1f23]">
+            <span class="sec-badge">&#x1F512; AES-256</span>
+            <span class="sec-badge">&#x1F3E0; 100% Local</span>
+            <span class="sec-badge">&#x2601;&#xFE0F; Zero Cloud</span>
         </div>
     </div>
-</div>
 
-{% if setup %}
-<script>
-document.getElementById('password').addEventListener('input', function(e) {
-    const pw = e.target.value;
-    let score = 0;
-    if (pw.length >= 12) score++;
-    if (pw.length >= 16) score++;
-    if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
-    if (/\d/.test(pw)) score++;
-    if (/[!@#$%^&*()_+\-=]/.test(pw)) score++;
+    <!-- Back to landing link -->
+    <a href="{{ url_for('index') }}" class="mt-8 text-xs font-mono uppercase tracking-widest text-gray-700 hover:text-gray-400 transition-colors relative z-10">
+        &larr; Back to Home
+    </a>
 
-    const labels = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong', 'Very Strong'];
-    const colors = ['#ef4444', '#f97316', '#eab308', '#84cc16', '#22c55e', '#10b981'];
+    {% if setup %}
+    <script>
+    document.getElementById('password').addEventListener('input', function(e) {
+        const pw = e.target.value;
+        let score = 0;
+        if (pw.length >= 12) score++;
+        if (pw.length >= 16) score++;
+        if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
+        if (/\d/.test(pw)) score++;
+        if (/[!@#$%^&*()_+\-=]/.test(pw)) score++;
 
-    const el = document.getElementById('password-strength');
-    el.innerHTML = `
-        <div class="strength-bar">
-            <div class="strength-fill" style="width:${score*20}%;background:${colors[score]}"></div>
-        </div>
-        <span style="color:${colors[score]}">${labels[score]}</span>
-    `;
-});
-</script>
-{% endif %}
-{% endblock %}
+        const labels = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong', 'Very Strong'];
+        const colors = ['#ef4444', '#f97316', '#eab308', '#84cc16', '#22c55e', '#10b981'];
+
+        const fill = document.querySelector('#password-strength .strength-fill');
+        const label = document.getElementById('strength-label');
+        fill.style.width = (score * 20) + '%';
+        fill.style.background = colors[score];
+        label.textContent = labels[score];
+        label.style.color = colors[score];
+    });
+    </script>
+    {% endif %}
+</body>
+</html>

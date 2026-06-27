@@ -1,5 +1,5 @@
 #!/bin/bash
-# GhostOffice CLI completion for Bash
+# Aegis CLI completion for Bash
 
 _ghostoffice_completions() {
     local cur prev opts

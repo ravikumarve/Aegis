@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Ollama AI Brain
+Aegis - Ollama AI Brain
 Local LLM interface — ZERO cloud
 """
 

@@ -11,7 +11,7 @@ I was spending 3+ hours daily on emails, file organization, and
 entering invoice data into spreadsheets. Every AI tool I tried 
 wanted to send my data to OpenAI's servers.
 
-So I built AI Office Pilot:
+So I built Aegis:
 
 - 📧 Auto-classifies and replies to emails (in YOUR writing style)
 - 📁 Watches folders, renames, and organizes files automatically
@@ -37,7 +37,7 @@ Happy to answer any questions about the architecture!
 **Title:** Built an AI product for $0 that could make 
 $10K+/month — here's the exact playbook
 
-I built AI Office Pilot — an AI assistant that automates emails, 
+I built Aegis — an AI assistant that automates emails, 
 files, and data entry while running 100% on the user's computer.
 
 **Why it sells:**
@@ -108,7 +108,7 @@ files, and invoices without EVER connecting to the internet
 
 Tired of AI tools sending your data to OpenAI/Google/whoever.
 
-Built AI Office Pilot:
+Built Aegis:
 - Runs 100% locally (Ollama)
 - AES-256 encryption at rest (PBKDF2, 600K iterations)
 - Zero network connections (verified by built-in monitor)

@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Email Templates
+Aegis - Email Templates
 Customizable email reply templates
 """
 

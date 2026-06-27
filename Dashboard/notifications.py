@@ -1,5 +1,5 @@
 """
-GhostOffice - Notification System
+Aegis - Notification System
 SQLite-backed notification storage
 """
 

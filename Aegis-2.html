@@ -206,10 +206,7 @@
     <!-- Minimal Nav -->
     <nav class="fixed top-0 w-full p-8 z-50 mix-blend-difference text-white flex justify-between items-center reveal active">
         <div class="font-display font-bold text-2xl tracking-tighter interactive" data-cursor="hover">AEGIS</div>
-        <div class="flex items-center gap-6">
-            <a href="{{ url_for('login') }}" class="font-sans text-sm tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Login</a>
-            <a href="https://gumroad.com" class="font-sans text-sm tracking-widest uppercase interactive text-amber hover:text-white" data-cursor="hover">Deploy Engine</a>
-        </div>
+        <a href="https://gumroad.com" class="font-sans text-sm tracking-widest uppercase interactive text-amber hover:text-white" data-cursor="hover">Deploy Engine</a>
     </nav>
 
     <!-- Hero Section -->
@@ -461,13 +458,13 @@
             <p class="font-sans text-gray-400 text-lg max-w-xl mx-auto mb-12">One-time purchase. Lifetime updates. Your data never leaves your machine.</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="https://gumroad.com" class="bg-amber text-black font-sans font-medium px-8 py-4 text-sm tracking-widest uppercase hover:bg-amber/80 transition-all">Deploy Aegis Now</a>
-                <a href="{{ url_for('login') }}" class="border border-gray-700 text-gray-300 font-sans font-medium px-8 py-4 text-sm tracking-widest uppercase hover:border-white hover:text-white transition-all">Launch Dashboard</a>
+                <a href="https://github.com/ravikumarve/Aegis" class="border border-gray-700 text-gray-300 font-sans font-medium px-8 py-4 text-sm tracking-widest uppercase hover:border-white hover:text-white transition-all">View Source</a>
             </div>
         </div>
     </section>
 
     <!-- Deep Footer -->
-    <footer class="pt-24 pb-0 px-4 sm:px-12 lg:px-24 bg-dark">
+    <footer class="pt-24 pb-0 px-4 sm:px-12 lg:px-24 bg-dark reveal">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
             <!-- Brand Column -->
             <div class="footer-brand">
@@ -497,8 +494,8 @@
             <div class="footer-col">
                 <h5 class="font-mono text-[11px] uppercase tracking-widest text-gray-500 mb-6">Development</h5>
                 <ul class="space-y-3">
-                    <li><a href="https://github.com/ravikumarve/OfficeGhost" class="font-sans text-sm text-gray-600 hover:text-white transition-colors interactive">GitHub Repository</a></li>
-                    <li><a href="{{ url_for('docs') }}" class="font-sans text-sm text-gray-600 hover:text-white transition-colors interactive">Documentation</a></li>
+                    <li><a href="https://github.com/ravikumarve/Aegis" class="font-sans text-sm text-gray-600 hover:text-white transition-colors interactive">GitHub Repository</a></li>
+                    <li><a href="#" class="font-sans text-sm text-gray-600 hover:text-white transition-colors interactive">Documentation</a></li>
                     <li><a href="#" class="font-sans text-sm text-gray-600 hover:text-white transition-colors interactive">REST API</a></li>
                     <li><a href="#" class="font-sans text-sm text-gray-600 hover:text-white transition-colors interactive">Contribution Guide</a></li>
                 </ul>

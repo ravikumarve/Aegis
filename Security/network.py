@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Security Configuration
+Aegis - Security Configuration
 IP allowlisting, network isolation, and VPN settings
 """
 

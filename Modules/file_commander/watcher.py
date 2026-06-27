@@ -1,5 +1,5 @@
 """
-AI Office Pilot - File Watcher
+Aegis - File Watcher
 Monitor folders for new files
 """
 

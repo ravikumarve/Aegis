@@ -1,147 +1,156 @@
 {% extends "base.html" %}
-{% block title %}Learning — GhostOffice{% endblock %}
+{% block title %}Learning — Aegis{% endblock %}
 
 {% block content %}
+<!-- Page Header -->
 <div class="page-header">
     <div>
-        <h1>🧠 Learning Progress</h1>
+        <h1>Learning Progress</h1>
         <p class="subtitle">Watch your AI get smarter every day</p>
     </div>
 </div>
 
-<!-- Learning Score -->
-<div class="card learning-score-card">
-    <div class="score-display">
-        <div class="score-circle">
-            <svg viewBox="0 0 120 120">
-                <circle cx="60" cy="60" r="54" fill="none" stroke="#1e293b" stroke-width="8"/>
-                <circle cx="60" cy="60" r="54" fill="none" stroke="#22c55e"
+<!-- Learning Score & Chart -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    <!-- Score Circle -->
+    <div class="card flex flex-col items-center justify-center py-8">
+        <div class="relative mb-4">
+            <svg width="140" height="140" viewBox="0 0 140 140">
+                <circle cx="70" cy="70" r="60" fill="none" stroke="#1f1f23" stroke-width="8"/>
+                <circle cx="70" cy="70" r="60" fill="none" stroke="#F59E0B"
                     stroke-width="8" stroke-linecap="round"
-                    stroke-dasharray="{{ (report.learning_score|default(0)) * 3.39 }} 339"
-                    transform="rotate(-90 60 60)"/>
+                    stroke-dasharray="{{ (learning_score|default(0) / 100 * 377)|round }} 377"
+                    transform="rotate(-90 70 70)"/>
             </svg>
-            <span class="score-number">{{ report.learning_score|default(0) }}</span>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <span class="font-display font-bold text-4xl text-white">{{ learning_score|default(0) }}</span>
+            </div>
         </div>
-        <div class="score-label">
-            <h2>Learning Score</h2>
-            <p>Out of 100</p>
-        </div>
+        <p class="text-xs font-mono uppercase tracking-widest text-gray-600">Learning Score</p>
+        <p class="text-[10px] text-gray-700 mt-1">Out of 100</p>
     </div>
 
-    <div class="score-timeline">
-        <h4>Score Projection</h4>
-        <div class="chart-container">
+    <!-- Chart -->
+    <div class="card lg:col-span-2">
+        <h3 class="font-display font-bold text-lg tracking-tight mb-4">Score Projection</h3>
+        <div class="h-64">
             <canvas id="scoreChart"></canvas>
         </div>
     </div>
 </div>
 
 <!-- Module Accuracy -->
-<div class="card-grid-3">
-    <div class="card accuracy-card">
-        <h3>📧 Email Accuracy</h3>
-        <div class="accuracy-display">
-            {% if report.accuracy and 'email_reply' in report.accuracy %}
-                {% set acc = report.accuracy.email_reply %}
-                <div class="accuracy-circle" style="--percent: {{ acc.accuracy }}">
-                    <span>{{ acc.accuracy }}%</span>
-                </div>
-                <p>{{ acc.correct }}/{{ acc.total }} correct</p>
-            {% else %}
-                <div class="accuracy-circle" style="--percent: 0">
-                    <span>—</span>
-                </div>
-                <p>No data yet. Process some emails!</p>
-            {% endif %}
-        </div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+    <div class="card text-center py-6">
+        <h4 class="text-xs font-mono uppercase tracking-widest text-gray-600 mb-4">&#x1F4E7; Email Accuracy</h4>
+        {% if accuracy and 'email_reply' in accuracy %}
+            {% set acc = accuracy.email_reply %}
+            <div class="font-display font-bold text-4xl text-amber mb-2">{{ acc.accuracy }}%</div>
+            <p class="text-xs text-gray-500 font-mono">{{ acc.correct }}/{{ acc.total }} correct</p>
+            <div class="w-full h-1.5 rounded-full bg-[#1f1f23] mt-3 overflow-hidden">
+                <div class="h-full rounded-full bg-amber" style="width: {{ acc.accuracy }}%"></div>
+            </div>
+        {% else %}
+            <div class="font-display font-bold text-4xl text-gray-600 mb-2">—</div>
+            <p class="text-xs text-gray-700 font-mono">No data yet. Process some emails!</p>
+        {% endif %}
     </div>
 
-    <div class="card accuracy-card">
-        <h3>📁 File Accuracy</h3>
-        <div class="accuracy-display">
-            {% if report.accuracy and 'file_categorize' in report.accuracy %}
-                {% set acc = report.accuracy.file_categorize %}
-                <div class="accuracy-circle" style="--percent: {{ acc.accuracy }}">
-                    <span>{{ acc.accuracy }}%</span>
-                </div>
-                <p>{{ acc.correct }}/{{ acc.total }} correct</p>
-            {% else %}
-                <div class="accuracy-circle" style="--percent: 0">
-                    <span>—</span>
-                </div>
-                <p>No data yet. Organize some files!</p>
-            {% endif %}
-        </div>
+    <div class="card text-center py-6">
+        <h4 class="text-xs font-mono uppercase tracking-widest text-gray-600 mb-4">&#x1F4C1; File Accuracy</h4>
+        {% if accuracy and 'file_categorize' in accuracy %}
+            {% set acc = accuracy.file_categorize %}
+            <div class="font-display font-bold text-4xl text-amber mb-2">{{ acc.accuracy }}%</div>
+            <p class="text-xs text-gray-500 font-mono">{{ acc.correct }}/{{ acc.total }} correct</p>
+            <div class="w-full h-1.5 rounded-full bg-[#1f1f23] mt-3 overflow-hidden">
+                <div class="h-full rounded-full bg-amber" style="width: {{ acc.accuracy }}%"></div>
+            </div>
+        {% else %}
+            <div class="font-display font-bold text-4xl text-gray-600 mb-2">—</div>
+            <p class="text-xs text-gray-700 font-mono">No data yet. Organize some files!</p>
+        {% endif %}
     </div>
 
-    <div class="card accuracy-card">
-        <h3>📊 Data Accuracy</h3>
-        <div class="accuracy-display">
-            {% if report.accuracy and 'data_extract' in report.accuracy %}
-                {% set acc = report.accuracy.data_extract %}
-                <div class="accuracy-circle" style="--percent: {{ acc.accuracy }}">
-                    <span>{{ acc.accuracy }}%</span>
-                </div>
-                <p>{{ acc.correct }}/{{ acc.total }} correct</p>
-            {% else %}
-                <div class="accuracy-circle" style="--percent: 0">
-                    <span>—</span>
-                </div>
-                <p>No data yet. Process some invoices!</p>
-            {% endif %}
-        </div>
+    <div class="card text-center py-6">
+        <h4 class="text-xs font-mono uppercase tracking-widest text-gray-600 mb-4">&#x1F4CA; Data Accuracy</h4>
+        {% if accuracy and 'data_extract' in accuracy %}
+            {% set acc = accuracy.data_extract %}
+            <div class="font-display font-bold text-4xl text-amber mb-2">{{ acc.accuracy }}%</div>
+            <p class="text-xs text-gray-500 font-mono">{{ acc.correct }}/{{ acc.total }} correct</p>
+            <div class="w-full h-1.5 rounded-full bg-[#1f1f23] mt-3 overflow-hidden">
+                <div class="h-full rounded-full bg-amber" style="width: {{ acc.accuracy }}%"></div>
+            </div>
+        {% else %}
+            <div class="font-display font-bold text-4xl text-gray-600 mb-2">—</div>
+            <p class="text-xs text-gray-700 font-mono">No data yet. Process some invoices!</p>
+        {% endif %}
     </div>
 </div>
 
-<!-- Learning Stats -->
-<div class="card-grid">
-    <div class="card stat-card">
-        <h4>📝 Total Feedback</h4>
-        <p class="big-number">{{ report.total_feedback|default(0) }}</p>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <div class="card">
+        <div class="text-2xl mb-2">&#x1F9E0;</div>
+        <div class="stat-value text-white">{{ total_actions|default(0) }}</div>
+        <div class="text-[10px] font-mono uppercase tracking-widest text-gray-600">Total Actions</div>
     </div>
-    <div class="card stat-card">
-        <h4>🧬 Style Traits</h4>
-        <p class="big-number">{{ report.style_traits|default(0) }}</p>
+    <div class="card">
+        <div class="text-2xl mb-2">&#x1F3AF;</div>
+        <div class="stat-value text-white">{{ patterns_found|default(0) }}</div>
+        <div class="text-[10px] font-mono uppercase tracking-widest text-gray-600">Patterns Found</div>
     </div>
-    <div class="card stat-card">
-        <h4>🔄 Patterns Found</h4>
-        <p class="big-number">{{ report.patterns_found|default(0) }}</p>
+    <div class="card">
+        <div class="text-2xl mb-2">&#x1F465;</div>
+        <div class="stat-value text-white">{{ contacts_learned|default(0) }}</div>
+        <div class="text-[10px] font-mono uppercase tracking-widest text-gray-600">Contacts</div>
     </div>
-    <div class="card stat-card">
-        <h4>👤 Contacts Learned</h4>
-        <p class="big-number">{{ report.contacts_learned|default(0) }}</p>
+    <div class="card">
+        <div class="text-2xl mb-2">&#x1F4C1;</div>
+        <div class="stat-value text-white">{{ categories_learned|default(0) }}</div>
+        <div class="text-[10px] font-mono uppercase tracking-widest text-gray-600">Categories</div>
     </div>
 </div>
 
-<!-- Discovered Patterns -->
-{% if report.patterns %}
-<div class="card">
-    <h3>🔮 Discovered Patterns</h3>
-    <table class="data-table">
-        <thead>
-            <tr>
-                <th>Type</th>
-                <th>Pattern</th>
-                <th>Confidence</th>
-                <th>Observed</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for p in report.patterns %}
-            <tr>
-                <td><span class="badge badge-{{ p.type }}">{{ p.type }}</span></td>
-                <td>{{ p.description }}</td>
-                <td>
-                    <div class="mini-bar">
-                        <div class="mini-fill" style="width: {{ (p.confidence * 100)|int }}%"></div>
-                    </div>
-                    {{ (p.confidence * 100)|int }}%
-                </td>
-                <td>{{ p.observed }}x</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<!-- Discovered Patterns Table -->
+{% if patterns %}
+<div class="card overflow-hidden !p-0">
+    <div class="p-4 border-b border-[#1f1f23]">
+        <h2 class="font-display font-bold text-lg tracking-tight">&#x1F52E; Discovered Patterns</h2>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Pattern</th>
+                    <th>Confidence</th>
+                    <th>Observed</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in patterns %}
+                <tr>
+                    <td><span class="badge badge-{{ p.type if p.type in ['urgent','routine','spam','meeting'] else 'routine' }}">{{ p.type }}</span></td>
+                    <td>{{ p.description }}</td>
+                    <td>
+                        <div class="flex items-center gap-2">
+                            <div class="w-20 h-1.5 rounded-full bg-[#1f1f23] overflow-hidden">
+                                <div class="h-full rounded-full bg-amber" style="width: {{ (p.confidence * 100)|int if p.confidence else 0 }}%"></div>
+                            </div>
+                            <span class="text-xs text-gray-500">{{ (p.confidence * 100)|int if p.confidence else 0 }}%</span>
+                        </div>
+                    </td>
+                    <td class="text-xs font-mono text-gray-600">{{ p.observed }}x</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% else %}
+<div class="card text-center py-12">
+    <div class="text-4xl mb-4">&#x1F52E;</div>
+    <p class="text-gray-500 text-sm font-mono">No patterns discovered yet. Run some cycles to see patterns form.</p>
 </div>
 {% endif %}
 
@@ -149,106 +158,50 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('scoreChart').getContext('2d');
-    
-    const currentScore = {{ report.learning_score|default(0) }};
-    
-    // Historical data from learning system
-    const historicalData = {{ report.history|default([]) }};
-    
-    // Projection data
+    const currentScore = {{ learning_score|default(0) }};
+
     const labels = ['Now', 'Day 1', 'Week 1', 'Month 1', 'Month 6'];
-    const projectionData = [currentScore, 12, 34, 71, 99];
-    
-    // Create historical line if data exists
-    let historicalLabels = [];
-    let historicalScores = [];
-    if (historicalData && historicalData.length > 0) {
-        historicalData.forEach(h => {
-            historicalLabels.push(h.date);
-            historicalScores.push(h.score);
-        });
-        // Add current point to historical
-        historicalLabels.push('Now');
-        historicalScores.push(currentScore);
-    }
-    
-    const datasets = [{
-        label: 'Projected Score',
-        data: projectionData,
-        borderColor: '#a855f7',
-        backgroundColor: 'rgba(168, 85, 247, 0.2)',
-        fill: true,
-        tension: 0.3,
-        pointBackgroundColor: '#a855f7',
-        pointBorderColor: '#fff',
-        pointRadius: 6,
-        pointHoverRadius: 8,
-        borderWidth: 3
-    }];
-    
-    if (historicalScores.length > 1) {
-        // Pad historical data to match projection length
-        const paddedHistorical = [...historicalScores];
-        while (paddedHistorical.length < labels.length) {
-            paddedHistorical.push(null);
-        }
-        datasets.push({
-            label: 'Historical Score',
-            data: paddedHistorical.slice(0, labels.length),
-            borderColor: '#22c55e',
-            backgroundColor: 'transparent',
-            fill: false,
-            tension: 0.2,
-            pointBackgroundColor: '#22c55e',
-            pointBorderColor: '#fff',
-            pointRadius: 5,
-            pointHoverRadius: 7,
-            borderWidth: 2,
-            borderDash: [5, 5]
-        });
-    }
-    
+    const projectionData = [Math.max(currentScore, 5), 12, 34, 71, 99];
+
     new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
-            datasets: datasets
+            datasets: [{
+                label: 'Projected Score',
+                data: projectionData,
+                borderColor: '#F59E0B',
+                backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                fill: true,
+                tension: 0.3,
+                pointBackgroundColor: '#F59E0B',
+                pointBorderColor: '#0A0A0B',
+                pointRadius: 5,
+                pointHoverRadius: 7,
+                borderWidth: 2
+            }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: true,
-                    position: 'top',
-                    labels: {
-                        color: '#94a3b8',
-                        usePointStyle: true,
-                        padding: 20
-                    }
+                    display: false
                 }
             },
             scales: {
                 y: {
                     beginAtZero: true,
                     max: 100,
-                    grid: {
-                        color: 'rgba(148, 163, 184, 0.1)'
-                    },
+                    grid: { color: 'rgba(148, 163, 184, 0.06)' },
                     ticks: {
-                        color: '#64748b',
-                        callback: function(value) {
-                            return value + '%';
-                        }
+                        color: '#6b7280',
+                        callback: function(value) { return value + '%'; }
                     }
                 },
                 x: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        color: '#64748b'
-                    }
+                    grid: { display: false },
+                    ticks: { color: '#6b7280' }
                 }
             }
         }

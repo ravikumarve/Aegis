@@ -1,9 +1,9 @@
-# GhostOffice Design System
-# Drop this file in the root of the OfficeGhost repo.
+# Aegis Design System
+# Drop this file in the root of the Aegis repo.
 # OpenCode reads project files — every UI task will inherit this identity.
 
 ## Identity
-GhostOffice is a **privacy-first local AI productivity tool** for professionals.
+Aegis is a **privacy-first local AI productivity tool** for professionals.
 Aesthetic direction: **dark premium** — the feel of Linear, Vercel, or Raycast.
 Not a startup toy. Not a hackathon project. A serious tool that respects the user.
 
@@ -26,7 +26,7 @@ Use these EXACT values as CSS variables. Never deviate.
   --border-strong:  #3A3A45;    /* focused, active borders */
   --border-glow:    #F59E0B40;  /* amber glow border on focus/hover */
 
-  /* Amber Accent — the soul of GhostOffice */
+  /* Amber Accent — the soul of Aegis */
   --accent:         #F59E0B;    /* primary amber */
   --accent-hover:   #FBBF24;    /* lighter on hover */
   --accent-dim:     #F59E0B20;  /* subtle amber tint backgrounds */
@@ -253,7 +253,7 @@ Rules:
 
 ---
 
-## BANNED — Never Use These in GhostOffice
+## BANNED — Never Use These in Aegis
 
 ```
 Fonts:    Inter, Roboto, Arial, Space Grotesk, Nunito, Poppins, system-ui
@@ -270,7 +270,7 @@ Layouts:  centered hero with gradient blob behind title
 
 ---
 
-## GhostOffice UI Checklist
+## Aegis UI Checklist
 
 Before finishing any UI component, verify every item:
 

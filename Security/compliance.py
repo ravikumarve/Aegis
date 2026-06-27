@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Compliance Engine
+Aegis - Compliance Engine
 GDPR, HIPAA, SOC 2 auto-compliance
 """
 

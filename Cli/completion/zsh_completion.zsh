@@ -1,4 +1,4 @@
-# GhostOffice CLI completion for Zsh
+# Aegis CLI completion for Zsh
 # Save this to ~/.zsh/completions/_ghostoffice
 
 _ghostoffice() {

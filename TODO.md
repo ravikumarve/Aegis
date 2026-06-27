@@ -1,4 +1,4 @@
-# TODO.md - GhostOffice v3.0 Improvements
+# TODO.md - Aegis v3.0 Improvements
 
 ## Phase 1: Testing + Error Handling
 

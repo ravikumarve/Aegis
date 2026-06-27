@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Spreadsheet Writer
+Aegis - Spreadsheet Writer
 Write data to local Excel or Google Sheets
 """
 

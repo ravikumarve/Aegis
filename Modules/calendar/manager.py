@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Calendar Integration
+Aegis - Calendar Integration
 Local .ics file parsing and meeting management
 """
 
@@ -357,7 +357,7 @@ class CalendarManager:
         lines = [
             "BEGIN:VCALENDAR",
             "VERSION:2.0",
-            "PRODID:-//AI Office Pilot//Calendar//EN",
+            "PRODID:-//Aegis//Calendar//EN",
             "BEGIN:VEVENT",
             f"UID:{event.uid}",
             f"SUMMARY:{event.summary}",

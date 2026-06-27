@@ -1,1 +1,1 @@
-"""AI Office Pilot Module"""
+"""Aegis Module"""

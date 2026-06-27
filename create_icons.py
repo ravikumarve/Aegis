@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-GhostOffice Icon Generator
+Aegis Icon Generator
 Creates professional PWA icons with ghost motif and amber branding
 """
 
@@ -9,7 +9,7 @@ import math
 
 def create_ghost_icon(size, output_path):
     """
-    Create a GhostOffice icon with ghost motif and amber accent
+    Create a Aegis icon with ghost motif and amber accent
 
     Args:
         size: Icon size (192 or 512)
@@ -122,7 +122,7 @@ def create_ghost_icon(size, output_path):
 
 def main():
     """Create all required icons"""
-    print("🎨 Creating GhostOffice icons...")
+    print("🎨 Creating Aegis icons...")
 
     # Create icons directory if it doesn't exist
     import os

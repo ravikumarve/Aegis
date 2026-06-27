@@ -1,7 +1,7 @@
-# GhostOffice Upgradation Plan
+# Aegis Upgradation Plan
 
 ## Overview
-This document outlines the comprehensive upgradation strategy for GhostOffice, covering database migrations, configuration updates, and version management.
+This document outlines the comprehensive upgradation strategy for Aegis, covering database migrations, configuration updates, and version management.
 
 ## Current Version
 - **Database Schema Version**: 2
@@ -134,7 +134,7 @@ This document outlines the comprehensive upgradation strategy for GhostOffice, c
 ## Emergency Procedures
 
 ### Rollback Process
-1. Stop GhostOffice service
+1. Stop Aegis service
 2. Restore database from backup
 3. Revert configuration files
 4. Verify system integrity
@@ -182,7 +182,7 @@ python -c "from migrations import get_schema_version; print(f'Schema version: {g
 curl http://localhost:5000/api/health
 
 # Functionality test
-python -c "from core.pilot import AIOfficePilot; pilot = AIOfficePilot(); print(pilot.get_status())"
+python -c "from core.pilot import AegisEngine; pilot = AegisEngine(); print(pilot.get_status())"
 ```
 
 ## Monitoring & Alerts
@@ -229,9 +229,9 @@ python -c "from core.pilot import AIOfficePilot; pilot = AIOfficePilot(); print(
 - Health Monitor: `core/health_monitor.py`
 
 ### Contact
-- GitHub Issues: https://github.com/ravikumarve/OfficeGhost/issues
+- GitHub Issues: https://github.com/ravikumarve/Aegis/issues
 - Documentation: Project README files
 
 ---
 *Last Updated: $(date +%Y-%m-%d)*
-*GhostOffice v3.0.0 - The Enterprise Edition*
+*Aegis v3.0.0 - The Enterprise Edition*

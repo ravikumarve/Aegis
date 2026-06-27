@@ -1,354 +1,100 @@
 {% extends "base.html" %}
-{% block title %}Assistant — GhostOffice{% endblock %}
+{% block title %}Assistant — Aegis{% endblock %}
 
 {% block content %}
+<!-- Page Header -->
 <div class="page-header">
     <div>
-        <h1>🤖 Office Assistant</h1>
-        <p class="subtitle">Ask questions about your GhostOffice system</p>
+        <h1>Assistant</h1>
+        <p class="subtitle">Ask questions about your Aegis system</p>
     </div>
 </div>
 
-<!-- Chat Interface -->
-<div class="chat-container">
+<!-- Chat Container -->
+<div class="max-w-3xl mx-auto">
     <!-- Chat Header -->
-    <div class="chat-header">
-        <div class="chat-avatar">🤖</div>
-        <div class="chat-info">
-            <h3>GhostOffice Assistant</h3>
-            <p>Your AI companion for system insights and help</p>
-            <div class="chat-status">
-                <span class="status-dot"></span>
-                <span>Online • Ready to help</span>
+    <div class="card flex items-center gap-4 mb-6">
+        <div class="w-12 h-12 rounded-full bg-amber/20 border border-amber/30 flex items-center justify-center text-xl">&#x1F916;</div>
+        <div class="flex-1">
+            <h3 class="font-display font-bold text-white">Aegis Assistant</h3>
+            <p class="text-xs text-gray-500">Your AI companion for system insights and help</p>
+            <div class="flex items-center gap-2 mt-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500 status-pulse"></span>
+                <span class="text-[10px] font-mono text-green-500 uppercase tracking-widest">Online</span>
             </div>
         </div>
     </div>
 
     <!-- Chat Messages -->
-    <div class="chat-messages" id="chatMessages">
-        <div class="message assistant">
-            <div class="message-avatar">🤖</div>
-            <div class="message-content">
-                <p>Hello! I'm your GhostOffice Assistant. I can help you with:</p>
-                <ul>
-                    <li>📁 File processing status and questions</li>
-                    <li>📧 Email account configuration and operations</li>
-                    <li>🧠 System health and learning progress</li>
-                    <li>🔒 Security features and status</li>
-                    <li>⚙️ General GhostOffice operations</li>
-                </ul>
-                <p>What would you like to know?</p>
-                <div class="message-time">Just now</div>
+    <div class="card mb-6 !p-0">
+        <div class="h-[400px] overflow-y-auto p-4 space-y-4" id="chatMessages">
+            <!-- Welcome message -->
+            <div class="flex gap-3 max-w-[85%]">
+                <div class="w-8 h-8 rounded-full bg-surface border border-[#1f1f23] flex items-center justify-center shrink-0 text-sm">&#x1F916;</div>
+                <div class="p-3 rounded-2xl rounded-bl-md bg-surface border border-[#1f1f23]">
+                    <p class="text-sm text-gray-300 leading-relaxed">Hello! I'm your Aegis Assistant. I can help you with:</p>
+                    <ul class="text-sm text-gray-400 mt-2 space-y-1">
+                        <li>&#x1F4C1; File processing status and questions</li>
+                        <li>&#x1F4E7; Email account configuration and operations</li>
+                        <li>&#x1F9E0; System health and learning progress</li>
+                        <li>&#x1F512; Security features and status</li>
+                        <li>&#x2699;&#xFE0F; General Aegis operations</li>
+                    </ul>
+                    <p class="text-sm text-gray-300 mt-2">What would you like to know?</p>
+                    <div class="text-[10px] font-mono text-gray-700 mt-2">Just now</div>
+                </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Chat Input -->
-    <div class="chat-input">
-        <input type="text" id="questionInput" placeholder="Ask me anything about GhostOffice..." />
-        <button onclick="askQuestion()">Send</button>
+    <div class="flex gap-3 mb-6">
+        <input type="text" id="questionInput" class="form-input rounded-full" placeholder="Ask me anything about Aegis..." />
+        <button class="btn-primary btn rounded-full px-6 shrink-0" onclick="askQuestion()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+            Send
+        </button>
     </div>
-    
+
     <!-- Quick Questions -->
-    <div class="quick-questions">
-        <h3>Quick Questions</h3>
-        <div class="question-grid">
-            <button class="btn-outline" onclick="askQuickQuestion('What files are waiting to be processed?')">
-                📁 Files Waiting
+    <div>
+        <h4 class="text-xs font-mono uppercase tracking-widest text-gray-600 mb-3">Quick Questions</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <button class="btn-secondary btn text-left text-sm justify-start" onclick="askQuickQuestion('What files are waiting to be processed?')">
+                &#x1F4C1; Files Waiting
             </button>
-            <button class="btn-outline" onclick="askQuickQuestion('How is my system health?')">
-                💻 System Health
+            <button class="btn-secondary btn text-left text-sm justify-start" onclick="askQuickQuestion('How is my system health?')">
+                &#x1F4BB; System Health
             </button>
-            <button class="btn-outline" onclick="askQuickQuestion('What email accounts are configured?')">
-                📧 Email Accounts
+            <button class="btn-secondary btn text-left text-sm justify-start" onclick="askQuickQuestion('What email accounts are configured?')">
+                &#x1F4E7; Email Accounts
             </button>
-            <button class="btn-outline" onclick="askQuickQuestion('How much has the AI learned?')">
-                🧠 Learning Progress
+            <button class="btn-secondary btn text-left text-sm justify-start" onclick="askQuickQuestion('How much has the AI learned?')">
+                &#x1F9E0; Learning Progress
             </button>
         </div>
     </div>
 </div>
 
-<style>
-.chat-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.chat-header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-12);
-    margin-bottom: var(--space-24);
-    padding: var(--space-16);
-    background: var(--bg-surface);
-    border-radius: 12px;
-    border: 1px solid var(--border-default);
-}
-
-.chat-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-}
-
-.chat-info h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin: 0;
-}
-
-.chat-info p {
-    color: var(--text-secondary);
-    margin: var(--space-4) 0 0 0;
-    font-size: 0.9rem;
-}
-
-.chat-status {
-    display: flex;
-    align-items: center;
-    gap: var(--space-8);
-    font-size: 0.8rem;
-    color: var(--success);
-    font-family: 'JetBrains Mono', monospace;
-}
-
-.status-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--success);
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-
-.chat-messages {
-    height: 400px;
-    overflow-y: auto;
-    border: 1px solid var(--border-default);
-    border-radius: 12px;
-    padding: var(--space-16);
-    margin-bottom: var(--space-24);
-    background: var(--bg-surface);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-12);
-}
-
-.message {
-    display: flex;
-    gap: var(--space-12);
-    max-width: 85%;
-}
-
-.message.user {
-    align-self: flex-end;
-    flex-direction: row-reverse;
-}
-
-.message.assistant {
-    align-self: flex-start;
-}
-
-.message-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-}
-
-.message.user .message-avatar {
-    background: var(--accent);
-    color: #0A0A0B;
-}
-
-.message.assistant .message-avatar {
-    background: var(--bg-elevated);
-    color: var(--text-primary);
-    border: 1px solid var(--border-default);
-}
-
-.message-content {
-    padding: var(--space-12) var(--space-16);
-    border-radius: 18px;
-    line-height: 1.5;
-    position: relative;
-}
-
-.message.user .message-content {
-    background: var(--accent);
-    color: #0A0A0B;
-    border-bottom-right-radius: 4px;
-}
-
-.message.assistant .message-content {
-    background: var(--bg-elevated);
-    color: var(--text-primary);
-    border: 1px solid var(--border-default);
-    border-bottom-left-radius: 4px;
-}
-
-.message-time {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-top: var(--space-4);
-    font-family: 'JetBrains Mono', monospace;
-}
-
-.typing-indicator {
-    display: flex;
-    gap: 4px;
-    padding: var(--space-12) var(--space-16);
-    background: var(--bg-elevated);
-    border: 1px solid var(--border-default);
-    border-radius: 18px;
-    border-bottom-left-radius: 4px;
-    align-self: flex-start;
-}
-
-.typing-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--text-secondary);
-    animation: typing 1.4s infinite;
-}
-
-.typing-dot:nth-child(2) { animation-delay: 0.2s; }
-.typing-dot:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes typing {
-    0%, 60%, 100% { transform: translateY(0); }
-    30% { transform: translateY(-4px); }
-}
-
-.chat-input {
-    display: flex;
-    gap: var(--space-12);
-    margin-bottom: var(--space-24);
-}
-
-.chat-input input {
-    flex: 1;
-    padding: var(--space-12) var(--space-16);
-    border: 1px solid var(--border-default);
-    border-radius: 24px;
-    font-size: 0.95rem;
-    background: var(--bg-surface);
-    color: var(--text-primary);
-    transition: border-color 200ms ease;
-}
-
-.chat-input input:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px var(--accent-dim);
-}
-
-.chat-input button {
-    padding: var(--space-12) var(--space-24);
-    background: var(--accent);
-    color: #0A0A0B;
-    border: none;
-    border-radius: 24px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 200ms ease;
-    min-width: 80px;
-}
-
-.chat-input button:hover {
-    background: var(--accent-hover);
-    transform: translateY(-1px);
-}
-
-.quick-questions {
-    margin-top: var(--space-24);
-}
-
-.quick-questions h3 {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: var(--space-12);
-}
-
-.question-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-12);
-    margin-top: var(--space-12);
-}
-
-@media (max-width: 768px) {
-    .chat-messages {
-        height: 300px;
-        padding: var(--space-12);
-    }
-    
-    .message {
-        max-width: 90%;
-    }
-    
-    .chat-input {
-        flex-direction: column;
-    }
-    
-    .chat-input button {
-        border-radius: 12px;
-    }
-    
-    .question-grid {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
-
 <script>
 async function askQuestion() {
     const input = document.getElementById('questionInput');
     const question = input.value.trim();
-    
     if (!question) return;
-    
-    // Add user message
+
     addMessage(question, 'user');
     input.value = '';
-    
-    // Show typing indicator
     showTypingIndicator();
-    
+
     try {
         const response = await fetch('/api/assistant/ask', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ question: question })
         });
-        
         const data = await response.json();
-        
-        // Remove typing indicator and add actual response
         removeTypingIndicator();
-        addMessage(data.answer, 'assistant');
-        
+        addMessage(data.answer || 'Sorry, I could not process that.', 'assistant');
     } catch (error) {
         removeTypingIndicator();
         addMessage('Sorry, I encountered an error. Please try again.', 'assistant');
@@ -361,64 +107,50 @@ function askQuickQuestion(question) {
 }
 
 function addMessage(content, type) {
-    const messagesDiv = document.getElementById('chatMessages');
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${type}`;
-    
-    const avatar = type === 'user' ? '👤' : '🤖';
+    const container = document.getElementById('chatMessages');
+    const div = document.createElement('div');
+    div.className = `flex gap-3 max-w-[85%] ${type === 'user' ? 'ml-auto flex-row-reverse' : ''}`;
+
+    const avatar = type === 'user' ? '&#x1F464;' : '&#x1F916;';
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    
-    messageDiv.innerHTML = `
-        <div class="message-avatar">${avatar}</div>
-        <div class="message-content">
-            <p>${content}</p>
-            <div class="message-time">${time}</div>
+
+    div.innerHTML = `
+        <div class="w-8 h-8 rounded-full ${type === 'user' ? 'bg-amber text-dark' : 'bg-surface border border-[#1f1f23]'} flex items-center justify-center shrink-0 text-sm">${avatar}</div>
+        <div class="p-3 rounded-2xl ${type === 'user' ? 'rounded-br-md bg-amber/20 border border-amber/30' : 'rounded-bl-md bg-surface border border-[#1f1f23]'}">
+            <div class="text-sm text-gray-300 leading-relaxed whitespace-pre-wrap">${content}</div>
+            <div class="text-[10px] font-mono text-gray-700 mt-2">${time}</div>
         </div>
     `;
-    
-    messagesDiv.appendChild(messageDiv);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
 }
 
 function showTypingIndicator() {
-    const messagesDiv = document.getElementById('chatMessages');
-    const typingDiv = document.createElement('div');
-    typingDiv.className = 'message assistant';
-    typingDiv.id = 'typing-indicator';
-    
-    typingDiv.innerHTML = `
-        <div class="message-avatar">🤖</div>
-        <div class="typing-indicator">
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
+    const container = document.getElementById('chatMessages');
+    const div = document.createElement('div');
+    div.className = 'flex gap-3 max-w-[85%]';
+    div.id = 'typing-indicator';
+    div.innerHTML = `
+        <div class="w-8 h-8 rounded-full bg-surface border border-[#1f1f23] flex items-center justify-center shrink-0 text-sm">&#x1F916;</div>
+        <div class="p-4 rounded-2xl rounded-bl-md bg-surface border border-[#1f1f23] flex gap-1.5">
+            <div class="w-2 h-2 rounded-full bg-gray-600 loading-dot"></div>
+            <div class="w-2 h-2 rounded-full bg-gray-600 loading-dot" style="animation-delay:0.2s"></div>
+            <div class="w-2 h-2 rounded-full bg-gray-600 loading-dot" style="animation-delay:0.4s"></div>
         </div>
     `;
-    
-    messagesDiv.appendChild(typingDiv);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-}
-
-function removeLastMessage() {
-    const messagesDiv = document.getElementById('chatMessages');
-    const lastMessage = messagesDiv.lastElementChild;
-    if (lastMessage) {
-        messagesDiv.removeChild(lastMessage);
-    }
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
 }
 
 function removeTypingIndicator() {
-    const typingIndicator = document.getElementById('typing-indicator');
-    if (typingIndicator) {
-        typingIndicator.remove();
-    }
+    const el = document.getElementById('typing-indicator');
+    if (el) el.remove();
 }
 
-// Enter key support
+// Enter key
 document.getElementById('questionInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        askQuestion();
-    }
+    if (e.key === 'Enter') askQuestion();
 });
 </script>
 {% endblock %}

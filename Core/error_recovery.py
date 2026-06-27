@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Error Recovery
+Aegis - Error Recovery
 Transaction-safe operations with rollback
 """
 

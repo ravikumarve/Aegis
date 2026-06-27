@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Logging Configuration
+Aegis - Logging Configuration
 Centralized logging with structured output
 """
 
@@ -14,7 +14,7 @@ from core.config import Config
 
 
 class Logger:
-    """Structured logger for AI Office Pilot"""
+    """Structured logger for Aegis"""
 
     _instance: Optional["Logger"] = None
     _configured = False
@@ -54,7 +54,7 @@ class Logger:
 
         # File handler with rotation (DEBUG+)
         # Rotate daily, keep 7 days of logs
-        log_file = log_dir / "ai_office_pilot.log"
+        log_file = log_dir / "aegis.log"
         file_handler = TimedRotatingFileHandler(
             log_file,
             when="midnight",

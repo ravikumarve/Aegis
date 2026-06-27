@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Data Extractor
+Aegis - Data Extractor
 Extract structured data from documents
 """
 

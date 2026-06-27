@@ -1,11 +1,11 @@
 version: '3.8'
 
-# GhostOffice Docker Compose
+# Aegis Docker Compose
 # Use: docker-compose up -d (production)
 # Use: docker-compose -f docker-compose.dev.yml up -d (development)
 
 services:
-  # GhostOffice Application
+  # Aegis Application
   ghostoffice:
     build: 
       context: .

@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Email Reader
+Aegis - Email Reader
 IMAP email fetching
 """
 

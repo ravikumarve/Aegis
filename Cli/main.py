@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-GhostOffice CLI Entry Point
+Aegis CLI Entry Point
 """
 
 import sys

@@ -1,8 +1,8 @@
-# Architecture - GhostOffice v3.0
+# Architecture - Aegis v3.0
 
 ## System Overview
 
-GhostOffice is a local AI assistant that automates email, file, and data entry tasks while learning user preferences over time.
+Aegis is a local AI assistant that automates email, file, and data entry tasks while learning user preferences over time.
 
 ## Design Principles
 
@@ -18,7 +18,7 @@ GhostOffice is a local AI assistant that automates email, file, and data entry t
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      AIOfficePilot                         │
+│                      AegisEngine                         │
 │                    (Main Orchestrator)                      │
 ├─────────────────────────────────────────────────────────────┤
 │  Coordinates all subsystems, manages lifecycle,            │

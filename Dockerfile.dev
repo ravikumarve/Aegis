@@ -1,4 +1,4 @@
-# GhostOffice Development Dockerfile
+# Aegis Development Dockerfile
 # For local development with hot-reload and debugging
 
 FROM python:3.11-slim

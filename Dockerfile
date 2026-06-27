@@ -1,4 +1,4 @@
-# GhostOffice Dockerfile
+# Aegis Dockerfile
 # Multi-stage build for optimized production image
 
 # ─────────────────────────────────────────────

@@ -1,427 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SETUP — GHOSTOFFICE</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='brutalist.css') }}">
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+    <title>Setup — Aegis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        dark: '#0A0A0B',
+                        surface: '#111113',
+                        amber: '#F59E0B',
+                        'amber-dim': '#F59E0B15',
+                    }
+                }
+            }
         }
-
+    </script>
+    <style>
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            background: #0A0A0B;
+            color: #f5f5f5;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 2rem 1rem;
         }
 
-        .setup-container {
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .setup-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .setup-logo {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .setup-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            margin-bottom: 2rem;
-        }
-
-        .progress-steps {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin-bottom: 0.5rem;
-        }
-
-        .progress-steps::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 30px;
-            right: 30px;
-            height: 2px;
-            background: var(--border);
+        /* Noise texture */
+        .noise {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
             z-index: 0;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        .progress-line {
-            position: absolute;
-            top: 15px;
-            left: 30px;
-            height: 2px;
-            background: var(--accent);
-            z-index: 1;
-            transition: width 0.4s ease;
-        }
-
-        .step-indicator {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.85rem;
-            position: relative;
-            z-index: 2;
-            transition: all 0.3s ease;
-        }
-
-        .step-indicator.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: white;
-        }
-
-        .step-indicator.completed {
-            background: var(--success);
-            border-color: var(--success);
-            color: white;
-        }
-
-        .progress-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-        }
-
-        .progress-labels span {
-            text-align: center;
-            width: 70px;
-        }
-
-        /* Card */
         .setup-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 2rem;
             animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Step 1 - Welcome */
-        .welcome-intro {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .welcome-intro h2 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome-intro p {
-            color: var(--text-secondary);
-        }
-
-        .checklist {
-            list-style: none;
-            margin: 1.5rem 0;
-        }
-
-        .checklist li {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .checklist li:last-child {
-            border-bottom: none;
-        }
-
-        .checklist .check-icon {
-            color: var(--success);
-            font-size: 1.25rem;
-        }
-
-        /* Step 2 - Email Setup */
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
         }
 
         .form-input {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            transition: border-color 0.2s;
+            padding: 0.75rem 1rem;
+            background: #0A0A0B;
+            border: 1px solid #1f1f23;
+            border-radius: 0.5rem;
+            color: #f5f5f5;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
         }
-
         .form-input:focus {
             outline: none;
-            border-color: var(--accent);
+            border-color: #F59E0B;
+            box-shadow: 0 0 0 3px #F59E0B20;
+        }
+        .form-input::placeholder { color: #4b5563; }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: #F59E0B;
+            color: #0A0A0B;
+            font-weight: 600;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+        .btn-primary:hover { background: #d97706; }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            color: #9ca3af;
+            border: 1px solid #1f1f23;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            border-color: #3a3a3e;
+            color: #f5f5f5;
         }
 
-        .form-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .form-hint {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
-        }
+        .hidden { display: none !important; }
 
         .test-result {
-            padding: 0.75rem;
-            border-radius: var(--radius-sm);
-            margin-top: 0.5rem;
-            font-size: 0.9rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
         }
-
         .test-result.success {
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid var(--success);
-            color: var(--success);
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #4ade80;
         }
-
         .test-result.error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid var(--danger);
-            color: var(--danger);
-        }
-
-        /* Step 3 - AI Model */
-        .model-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin: 1.5rem 0;
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.3);
+            color: #f87171;
         }
 
         .model-option {
             display: flex;
             align-items: center;
             padding: 1rem;
-            background: var(--bg-primary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
+            background: #0A0A0B;
+            border: 1px solid #1f1f23;
+            border-radius: 0.5rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
-
-        .model-option:hover {
-            border-color: var(--accent);
+        .model-option:hover, .model-option.selected {
+            border-color: #F59E0B;
         }
-
         .model-option.selected {
-            border-color: var(--accent);
-            background: rgba(59, 130, 246, 0.1);
+            background: #F59E0B10;
         }
 
-        .model-option input {
-            margin-right: 1rem;
-            width: 18px;
-            height: 18px;
-        }
-
-        .model-info {
-            flex: 1;
-        }
-
-        .model-name {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-
-        .model-desc {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .recommended-badge {
-            background: var(--success);
-            color: white;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        .ai-info {
-            background: var(--bg-primary);
-            padding: 1rem;
-            border-radius: var(--radius-sm);
-            margin-top: 1rem;
-        }
-
-        .ai-info h4 {
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .ai-info p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        /* Step 4 - Done */
-        .done-content {
-            text-align: center;
-        }
-
-        .done-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .done-content h2 {
-            margin-bottom: 0.5rem;
-        }
-
-        .done-content p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .done-checklist {
-            list-style: none;
-            display: inline-block;
-            text-align: left;
-            margin-bottom: 2rem;
-        }
-
-        .done-checklist li {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0;
-            color: var(--text-secondary);
-        }
-
-        .done-checklist li span {
-            color: var(--success);
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-            text-decoration: none;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-hover);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-hover);
-        }
-
-        .btn-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 1.5rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .btn-group.right {
-            justify-content: flex-end;
-            gap: 0.75rem;
-        }
-
-        .skip-link {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .skip-link:hover {
-            color: var(--text-secondary);
-        }
-
-        /* Hidden */
-        .hidden {
-            display: none;
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition-duration: 0.01ms !important; }
+            .setup-card { animation: none; }
         }
     </style>
 </head>
 <body>
-    <div class="setup-container">
-        <div class="setup-header">
-            <div class="setup-logo">🤖</div>
-            <h1 class="setup-title">GhostOffice Setup</h1>
+    <div class="noise"></div>
+
+    <div class="w-full max-w-lg relative z-10">
+        <!-- Brand -->
+        <div class="text-center mb-8">
+            <div class="w-12 h-12 rounded-xl bg-amber flex items-center justify-center mx-auto mb-3">
+                <span class="font-display font-bold text-dark text-xl">A</span>
+            </div>
+            <h1 class="font-display font-bold text-2xl tracking-tighter">Aegis Setup</h1>
         </div>
 
         <!-- Progress Bar -->
-        <div class="progress-container">
-            <div class="progress-steps">
-                <div class="progress-line" id="progressLine"></div>
-                <div class="step-indicator active" data-step="1">1</div>
-                <div class="step-indicator" data-step="2">2</div>
-                <div class="step-indicator" data-step="3">3</div>
-                <div class="step-indicator" data-step="4">4</div>
+        <div class="mb-8">
+            <div class="flex items-center justify-between relative mb-2">
+                <div class="absolute top-1/2 left-0 right-0 h-0.5 bg-[#1f1f23] -translate-y-1/2 z-0"></div>
+                <div class="absolute top-1/2 left-0 h-0.5 bg-amber -translate-y-1/2 z-0 transition-all duration-500" id="progressLine" style="width: 0%"></div>
+                <div class="step-indicator z-10 w-8 h-8 rounded-full bg-surface border-2 border-[#1f1f23] flex items-center justify-center text-xs font-bold font-mono transition-all duration-300" data-step="1">1</div>
+                <div class="step-indicator z-10 w-8 h-8 rounded-full bg-surface border-2 border-[#1f1f23] flex items-center justify-center text-xs font-bold font-mono transition-all duration-300" data-step="2">2</div>
+                <div class="step-indicator z-10 w-8 h-8 rounded-full bg-surface border-2 border-[#1f1f23] flex items-center justify-center text-xs font-bold font-mono transition-all duration-300" data-step="3">3</div>
+                <div class="step-indicator z-10 w-8 h-8 rounded-full bg-surface border-2 border-[#1f1f23] flex items-center justify-center text-xs font-bold font-mono transition-all duration-300" data-step="4">4</div>
             </div>
-            <div class="progress-labels">
+            <div class="flex justify-between text-[10px] font-mono text-gray-700 uppercase tracking-widest">
                 <span>Welcome</span>
                 <span>Email</span>
                 <span>AI Model</span>
@@ -430,143 +186,140 @@
         </div>
 
         <!-- Step 1: Welcome -->
-        <div class="setup-card" id="step1">
-            <div class="welcome-intro">
-                <h2>Welcome to GhostOffice</h2>
-                <p>Your private AI assistant that works 100% locally. Let's get you set up in just a few minutes.</p>
+        <div class="setup-card bg-surface border border-[#1f1f23] rounded-2xl p-8" id="step1">
+            <div class="text-center mb-6">
+                <h2 class="font-display font-bold text-xl mb-2">Welcome to Aegis</h2>
+                <p class="text-sm text-gray-500">Your private AI assistant that works 100% locally. Let's get you set up in just a few minutes.</p>
             </div>
-            
-            <h3 style="margin-bottom: 0.5rem;">What you'll set up:</h3>
-            <ul class="checklist">
-                <li>
-                    <span class="check-icon">✓</span>
-                    <span>Email account connection</span>
+
+            <h3 class="text-xs font-mono uppercase tracking-widest text-gray-600 mb-4">What you'll set up:</h3>
+            <ul class="space-y-3 mb-8">
+                <li class="flex items-center gap-3 text-sm text-gray-400">
+                    <span class="w-5 h-5 rounded-full bg-green-500/15 text-green-400 flex items-center justify-center text-xs font-bold">&#x2713;</span>
+                    Email account connection
                 </li>
-                <li>
-                    <span class="check-icon">✓</span>
-                    <span>Local AI model selection</span>
+                <li class="flex items-center gap-3 text-sm text-gray-400">
+                    <span class="w-5 h-5 rounded-full bg-green-500/15 text-green-400 flex items-center justify-center text-xs font-bold">&#x2713;</span>
+                    Local AI model selection
                 </li>
-                <li>
-                    <span class="check-icon">✓</span>
-                    <span>AES-256 encryption setup</span>
+                <li class="flex items-center gap-3 text-sm text-gray-400">
+                    <span class="w-5 h-5 rounded-full bg-green-500/15 text-green-400 flex items-center justify-center text-xs font-bold">&#x2713;</span>
+                    AES-256 encryption setup
                 </li>
-                <li>
-                    <span class="check-icon">✓</span>
-                    <span>Your secure master password</span>
+                <li class="flex items-center gap-3 text-sm text-gray-400">
+                    <span class="w-5 h-5 rounded-full bg-green-500/15 text-green-400 flex items-center justify-center text-xs font-bold">&#x2713;</span>
+                    Your secure master password
                 </li>
             </ul>
 
-            <div class="btn-group right">
-                <button class="btn btn-primary" onclick="nextStep(2)">
-                    Get Started
-                </button>
+            <div class="flex justify-end">
+                <button class="btn-primary" onclick="nextStep(2)">Get Started</button>
             </div>
         </div>
 
         <!-- Step 2: Email Setup -->
-        <div class="setup-card hidden" id="step2">
-            <h2 style="margin-bottom: 1rem;">Email Setup</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
-                Connect your email to enable AI-powered classification and smart replies. All data stays on your machine.
-            </p>
+        <div class="setup-card bg-surface border border-[#1f1f23] rounded-2xl p-8 hidden" id="step2">
+            <h2 class="font-display font-bold text-lg mb-2">Email Setup</h2>
+            <p class="text-sm text-gray-500 mb-6">Connect your email to enable AI-powered classification and smart replies. All data stays on your machine.</p>
 
-            <form id="emailForm">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
+            <form id="emailForm" class="space-y-4">
+                <div>
+                    <label for="email" class="block text-xs font-mono uppercase tracking-widest text-gray-600 mb-2">Email Address</label>
                     <input type="email" id="email" class="form-input" placeholder="your.email@gmail.com">
                 </div>
-
-                <div class="form-group">
-                    <label for="appPassword">App Password</label>
+                <div>
+                    <label for="appPassword" class="block text-xs font-mono uppercase tracking-widest text-gray-600 mb-2">App Password</label>
                     <input type="password" id="appPassword" class="form-input" placeholder="xxxx xxxx xxxx xxxx">
-                    <p class="form-hint">Use an app password, not your regular password. <a href="https://support.google.com/accounts/answer/185833" target="_blank" style="color: var(--accent);">Get one here</a></p>
+                    <p class="text-xs text-gray-600 mt-1">Use an app password, not your regular password. <a href="https://support.google.com/accounts/answer/185833" target="_blank" class="text-amber hover:text-white transition-colors">Get one here</a></p>
                 </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div class="form-group">
-                        <label for="imapHost">IMAP Host</label>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="imapHost" class="block text-xs font-mono uppercase tracking-widest text-gray-600 mb-2">IMAP Host</label>
                         <input type="text" id="imapHost" class="form-input" value="imap.gmail.com">
                     </div>
-                    <div class="form-group">
-                        <label for="smtpHost">SMTP Host</label>
+                    <div>
+                        <label for="smtpHost" class="block text-xs font-mono uppercase tracking-widest text-gray-600 mb-2">SMTP Host</label>
                         <input type="text" id="smtpHost" class="form-input" value="smtp.gmail.com">
                     </div>
                 </div>
-
-                <div id="testResult" class="test-result hidden"></div>
+                <div id="testResult" class="hidden"></div>
             </form>
 
-            <div class="btn-group">
-                <button class="btn btn-secondary" onclick="testEmailConnection()">Test Connection</button>
-                <div>
-                    <a class="skip-link" onclick="skipStep(3)">Skip for now</a>
-                    <button class="btn btn-primary" onclick="saveEmailAndNext()">Continue</button>
+            <div class="flex items-center justify-between mt-6 pt-6 border-t border-[#1f1f23]">
+                <button class="btn-secondary" onclick="testEmailConnection()">Test Connection</button>
+                <div class="flex gap-3 items-center">
+                    <button class="text-xs font-mono text-gray-600 hover:text-gray-400 transition-colors" onclick="skipStep(3)">Skip for now</button>
+                    <button class="btn-primary" onclick="saveEmailAndNext()">Continue</button>
                 </div>
             </div>
         </div>
 
         <!-- Step 3: AI Model -->
-        <div class="setup-card hidden" id="step3">
-            <h2 style="margin-bottom: 0.5rem;">AI Model Selection</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                Choose a local AI model to power GhostOffice's intelligence. Smaller models run faster, larger models are smarter.
-            </p>
+        <div class="setup-card bg-surface border border-[#1f1f23] rounded-2xl p-8 hidden" id="step3">
+            <h2 class="font-display font-bold text-lg mb-2">AI Model Selection</h2>
+            <p class="text-sm text-gray-500 mb-4">Choose a local AI model to power Aegis's intelligence.</p>
 
-            <div class="ai-info">
-                <h4>What the AI does:</h4>
-                <p>Reads and classifies your emails, drafts smart replies in your writing style, organizes files intelligently, and learns your preferences over time.</p>
+            <div class="p-4 rounded-lg bg-white/[0.02] border border-[#1f1f23] text-sm text-gray-400 mb-6">
+                <strong class="text-white block mb-1">What the AI does:</strong>
+                Reads and classifies your emails, drafts smart replies in your writing style, organizes files intelligently, and learns your preferences over time.
             </div>
 
             {% if models %}
-            <h3 style="margin: 1.5rem 0 0.5rem;">Available Models</h3>
-            <div class="model-list">
+            <h3 class="text-xs font-mono uppercase tracking-widest text-gray-600 mb-3">Available Models</h3>
+            <div class="space-y-2 mb-6">
                 {% for model in models %}
                 <label class="model-option {% if loop.first %}selected{% endif %}">
-                    <input type="radio" name="model" value="{{ model }}" {% if loop.first %}checked{% endif %}>
-                    <div class="model-info">
-                        <div class="model-name">{{ model }}</div>
-                        <div class="model-desc">Local AI model - runs entirely on your machine</div>
+                    <input type="radio" name="model" value="{{ model }}" {% if loop.first %}checked{% endif %} class="mr-3 accent-amber w-4 h-4">
+                    <div class="flex-1">
+                        <div class="text-sm font-medium text-white">{{ model }}</div>
+                        <div class="text-xs text-gray-600">Local AI model - runs entirely on your machine</div>
                     </div>
                     {% if 'phi3' in model.lower() %}
-                    <span class="recommended-badge">Recommended</span>
+                    <span class="text-[10px] font-mono uppercase tracking-widest bg-amber text-dark px-2 py-0.5 rounded font-bold">Recommended</span>
                     {% endif %}
                 </label>
                 {% endfor %}
             </div>
             {% else %}
-            <div class="ai-info" style="background: rgba(234, 179, 8, 0.1); border: 1px solid var(--warning);">
-                <h4 style="color: var(--warning);">No Models Found</h4>
-                <p>Install Ollama and download a model to enable AI features.</p>
-                <a href="https://ollama.ai" target="_blank" class="btn btn-secondary" style="margin-top: 0.75rem; display: inline-flex;">
-                    Download Ollama
-                </a>
+            <div class="p-4 rounded-lg bg-amber/5 border border-amber/20 text-sm text-gray-400 mb-6">
+                <strong class="text-amber block mb-1">No Models Found</strong>
+                <p class="mb-3">Install Ollama and download a model to enable AI features.</p>
+                <a href="https://ollama.ai" target="_blank" class="btn-secondary text-xs">Download Ollama</a>
             </div>
             {% endif %}
 
-            <div class="btn-group right">
-                <button class="btn btn-primary" onclick="saveModelAndNext()">
-                    Continue
-                </button>
+            <div class="flex justify-end pt-6 border-t border-[#1f1f23]">
+                <button class="btn-primary" onclick="saveModelAndNext()">Continue</button>
             </div>
         </div>
 
         <!-- Step 4: Done -->
-        <div class="setup-card hidden" id="step4">
-            <div class="done-content">
-                <div class="done-icon">🎉</div>
-                <h2>You're All Set!</h2>
-                <p>GhostOffice is configured and ready to work for you.</p>
+        <div class="setup-card bg-surface border border-[#1f1f23] rounded-2xl p-8 hidden" id="step4">
+            <div class="text-center">
+                <div class="text-5xl mb-4">&#x1F389;</div>
+                <h2 class="font-display font-bold text-2xl mb-2">You're All Set!</h2>
+                <p class="text-sm text-gray-500 mb-8">Aegis is configured and ready to work for you.</p>
 
-                <ul class="done-checklist">
-                    <li><span>✓</span> Email account configured</li>
-                    <li><span>✓</span> AI model selected</li>
-                    <li><span>✓</span> Encryption enabled</li>
-                    <li><span>✓</span> Running 100% locally</li>
+                <ul class="inline-block text-left space-y-3 mb-8">
+                    <li class="flex items-center gap-3 text-sm text-gray-400">
+                        <span class="w-5 h-5 rounded-full bg-green-500/15 text-green-400 flex items-center justify-center text-xs">&#x2713;</span>
+                        Email account configured
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-gray-400">
+                        <span class="w-5 h-5 rounded-full bg-green-500/15 text-green-400 flex items-center justify-center text-xs">&#x2713;</span>
+                        AI model selected
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-gray-400">
+                        <span class="w-5 h-5 rounded-full bg-green-500/15 text-green-400 flex items-center justify-center text-xs">&#x2713;</span>
+                        Encryption enabled
+                    </li>
+                    <li class="flex items-center gap-3 text-sm text-gray-400">
+                        <span class="w-5 h-5 rounded-full bg-green-500/15 text-green-400 flex items-center justify-center text-xs">&#x2713;</span>
+                        Running 100% locally
+                    </li>
                 </ul>
 
-                <button class="btn btn-primary btn-lg" onclick="launchDashboard()">
-                    Launch Dashboard
-                </button>
+                <button class="btn-primary text-base px-10 py-3" onclick="launchDashboard()">Launch Dashboard</button>
             </div>
         </div>
     </div>
@@ -579,20 +332,28 @@
             const progressLine = document.getElementById('progressLine');
 
             indicators.forEach((ind, idx) => {
-                ind.classList.remove('active', 'completed');
-                if (idx + 1 < step) {
-                    ind.classList.add('completed');
-                    ind.innerHTML = '✓';
-                } else if (idx + 1 === step) {
-                    ind.classList.add('active');
-                    ind.innerHTML = step;
+                const num = idx + 1;
+                ind.classList.remove('!bg-amber', '!border-amber', '!text-dark', '!bg-green-500', '!border-green-500', '!text-white');
+                ind.style.background = '';
+                ind.style.borderColor = '';
+                ind.style.color = '';
+                if (num < step) {
+                    ind.style.background = '#22c55e';
+                    ind.style.borderColor = '#22c55e';
+                    ind.style.color = '#fff';
+                    ind.textContent = '✓';
+                } else if (num === step) {
+                    ind.style.background = '#F59E0B';
+                    ind.style.borderColor = '#F59E0B';
+                    ind.style.color = '#0A0A0B';
+                    ind.textContent = num;
                 } else {
-                    ind.innerHTML = idx + 1;
+                    ind.textContent = num;
                 }
             });
 
             const percent = ((step - 1) / 3) * 100;
-            progressLine.style.width = `calc(${percent}% - ${percent > 0 ? 30 : 0}px + 30px)`;
+            progressLine.style.width = `calc(${percent}% + 0px)`;
         }
 
         function showStep(step) {
@@ -615,9 +376,10 @@
 
         async function testEmailConnection() {
             const result = document.getElementById('testResult');
-            result.classList.remove('hidden', 'success', 'error');
-            result.classList.add('loading');
+            result.classList.add('hidden');
             result.textContent = 'Testing connection...';
+            result.className = 'test-result';
+            result.classList.remove('hidden');
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('appPassword').value;
@@ -630,18 +392,15 @@
                     body: JSON.stringify({ email, password, imap_host: imapHost })
                 });
                 const data = await res.json();
-
-                result.classList.remove('loading');
                 if (data.success) {
-                    result.classList.add('success');
+                    result.className = 'test-result success';
                     result.textContent = '✓ Connection successful!';
                 } else {
-                    result.classList.add('error');
+                    result.className = 'test-result error';
                     result.textContent = '✗ ' + (data.message || 'Connection failed');
                 }
             } catch (err) {
-                result.classList.remove('loading', 'success');
-                result.classList.add('error');
+                result.className = 'test-result error';
                 result.textContent = '✗ Error: ' + err.message;
             }
         }
@@ -675,10 +434,9 @@
 
         function launchDashboard() {
             fetch('/api/setup/complete', { method: 'POST' })
-                .then(() => window.location.href = '/dashboard');
+                .then(() => window.location.href = '/login');
         }
 
-        // Model selection visual
         document.querySelectorAll('.model-option').forEach(option => {
             option.addEventListener('click', () => {
                 document.querySelectorAll('.model-option').forEach(o => o.classList.remove('selected'));

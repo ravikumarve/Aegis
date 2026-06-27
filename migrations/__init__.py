@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Database Migration System
+Aegis - Database Migration System
 Manages schema migrations for memory.db
 """
 

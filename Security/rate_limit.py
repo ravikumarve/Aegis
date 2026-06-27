@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Rate Limiting Middleware
+Aegis - Rate Limiting Middleware
 Dashboard API rate limiting with configurable limits
 """
 

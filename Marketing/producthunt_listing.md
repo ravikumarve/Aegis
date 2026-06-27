@@ -5,7 +5,7 @@ AI office assistant that learns your style & never touches the cloud
 
 ## Description:
 
-🤖 **AI Office Pilot** automates your emails, files, and data entry
+🤖 **Aegis** automates your emails, files, and data entry
 while keeping everything 100% local and encrypted.
 
 **What makes it different:**
@@ -33,7 +33,7 @@ while keeping everything 100% local and encrypted.
 
 Hey PH! 👋
 
-I built AI Office Pilot because I was tired of two things:
+I built Aegis because I was tired of two things:
 
 1. Spending 3+ hours daily on emails, file organization, 
    and data entry

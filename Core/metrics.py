@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Prometheus Metrics
+Aegis - Prometheus Metrics
 Collects and exposes application metrics
 """
 

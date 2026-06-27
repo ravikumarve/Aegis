@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Retry Utilities
+Aegis - Retry Utilities
 Exponential backoff retry logic for network operations
 """
 

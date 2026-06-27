@@ -1,4 +1,4 @@
-# GhostOffice Screenshot Capture Guide
+# Aegis Screenshot Capture Guide
 
 ## Screenshots Needed for Gumroad Listing
 
@@ -95,7 +95,7 @@ import -window root screenshot.png
 - **Format:** PNG
 - **Quality:** High resolution, clear text
 - **Content:** Must show demo mode with yellow banner
-- **Branding:** Must use GhostOffice color scheme (amber #F59E0B, dark #0A0A0B)
+- **Branding:** Must use Aegis color scheme (amber #F59E0B, dark #0A0A0B)
 
 ## Current Status
 ⚠️ **Automated screenshot capture encountered issues**

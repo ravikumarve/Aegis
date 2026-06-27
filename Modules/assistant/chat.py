@@ -1,5 +1,5 @@
 """
-GhostOffice Assistant - AI Chat Interface
+Aegis Assistant - AI Chat Interface
 Provides conversational access to system status, operations, and data
 """
 
@@ -13,7 +13,7 @@ from learning.memory import MemoryEngine
 
 
 class OfficeAssistant:
-    """AI Assistant that answers questions about GhostOffice operations"""
+    """AI Assistant that answers questions about Aegis operations"""
 
     def __init__(self):
         self.brain = OllamaBrain()
@@ -21,9 +21,9 @@ class OfficeAssistant:
 
     def get_system_context(self) -> str:
         """Get current system status and context for the AI"""
-        from core.pilot import AIOfficePilot
+        from core.pilot import AegisEngine
 
-        pilot = AIOfficePilot()
+        pilot = AegisEngine()
         status = pilot.get_status()
 
         # Simple text format instead of JSON
@@ -83,7 +83,7 @@ class OfficeAssistant:
             return "Email statistics temporarily unavailable"
 
     def answer_question(self, question: str) -> str:
-        """Answer questions about GhostOffice operations"""
+        """Answer questions about Aegis operations"""
 
         # Get current system context
         system_context = self.get_system_context()
@@ -100,7 +100,7 @@ Email Status: {email_stats}
 
 Question: {question}
 
-Answer concisely as GhostOffice Assistant:
+Answer concisely as Aegis Assistant:
 """
 
         response = self.brain.query(combined_prompt)

@@ -8,7 +8,7 @@
 
 Hey {name}!
 
-Welcome to AI Office Pilot! 🎉
+Welcome to Aegis! 🎉
 
 Here's your 3-minute setup:
 
@@ -28,7 +28,7 @@ If you lose it, data can't be recovered.
 
 Need help? Reply to this email.
 
-— The AI Office Pilot Team
+— The Aegis Team
 
 P.S. Check your dashboard at http://localhost:5000 
 for a beautiful overview of everything happening.
@@ -41,7 +41,7 @@ for a beautiful overview of everything happening.
 
 Hey {name}!
 
-Your AI Office Pilot has been running for 3 days.
+Your Aegis has been running for 3 days.
 Here's what it's learned about you:
 
 🧠 **Learning Progress:**
@@ -141,7 +141,7 @@ ONE thing to do today
 ### Email 3: Day 5
 
 **Subject:** Compare: What you did manually vs 
-what AI Office Pilot automated
+what Aegis automated
 
 [Side-by-side comparison, time savings calculation]
 

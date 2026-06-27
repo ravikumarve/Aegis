@@ -1,9 +1,9 @@
 <div align="center">
 
 <!-- LOGO -->
-<img width="120" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Ghost.png" alt="GhostOffice Ghost" />
+<img width="120" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Ghost.png" alt="Aegis Ghost" />
 
-# GhostOffice
+# Aegis
 
 **Your Private AI Assistant for Email, Files & Data**
 
@@ -39,7 +39,7 @@
 
 ## 🛒 Purchase on Gumroad
 
-**Get GhostOffice with a one-time purchase - No subscriptions!**
+**Get Aegis with a one-time purchase - No subscriptions!**
 
 ### Why Buy on Gumroad?
 
@@ -68,7 +68,7 @@
    chmod +x install.sh
    ./install.sh
    ```
-4. **Start** GhostOffice:
+4. **Start** Aegis:
    ```bash
    source venv/bin/activate
    python3 main.py
@@ -85,9 +85,9 @@
 
 ## 📋 Table of Contents
 
-- [👻 What is GhostOffice?](#-what-is-ghostoffice)
+- [👻 What is Aegis?](#-what-is-ghostoffice)
 - [✨ Key Features](#-key-features)
-- [🆚 Why GhostOffice?](#-why-ghostoffice)
+- [🆚 Why Aegis?](#-why-ghostoffice)
 - [🏗️ Architecture](#-architecture)
 - [🚀 Quick Start](#-quick-start)
 - [🔐 Security](#-security)
@@ -100,11 +100,11 @@
 
 ---
 
-## 👻 What is GhostOffice?
+## 👻 What is Aegis?
 
-GhostOffice is a **privacy-first, fully local AI assistant** that silently handles your email, files, and data entry — automatically, every day, without sending a single byte to the cloud.
+Aegis is a **privacy-first, fully local AI assistant** that silently handles your email, files, and data entry — automatically, every day, without sending a single byte to the cloud.
 
-Unlike SaaS tools that charge monthly fees and store your data on their servers, GhostOffice runs entirely on your machine using [Ollama](https://ollama.ai). Your emails, documents, and business data stay **100% yours**.
+Unlike SaaS tools that charge monthly fees and store your data on their servers, Aegis runs entirely on your machine using [Ollama](https://ollama.ai). Your emails, documents, and business data stay **100% yours**.
 
 > *"It just works in the background. Like a ghost."*
 
@@ -177,11 +177,11 @@ Layer 5 │ Predictions        ── Anticipates your next action
 
 ---
 
-## 🆚 Why GhostOffice?
+## 🆚 Why Aegis?
 
 <div align="center">
 
-|  | GhostOffice | Zapier / Make | Microsoft Copilot | Notion AI |
+|  | Aegis | Zapier / Make | Microsoft Copilot | Notion AI |
 |--|:-----------:|:-------------:|:-----------------:|:---------:|
 | **100% Local** | ✅ | ❌ | ❌ | ❌ |
 | **No Subscription** | ✅ | ❌ | ❌ | ❌ |
@@ -200,7 +200,7 @@ Layer 5 │ Predictions        ── Anticipates your next action
 ```mermaid
 graph TD
     subgraph Core["⚙️ Core Layer"]
-        PILOT[GhostOffice Orchestrator]
+        PILOT[Aegis Orchestrator]
         BRAIN[OllamaBrain - Local LLM]
         QUEUE[Task Queue + Dead Letter]
         HEALTH[Health Monitor]
@@ -252,7 +252,7 @@ graph TD
 ```bash
 # 1. Clone the repository
 git clone https://github.com/ravikumarve/OfficeGhost.git
-cd OfficeGhost
+cd Aegis
 
 # 2. Create virtual environment
 python3 -m venv venv
@@ -279,7 +279,7 @@ FLASK_SECRET_KEY=$(python -c 'import secrets; print(secrets.token_hex(32))')
 echo "JWT_SECRET=$JWT_SECRET" >> .env
 echo "FLASK_SECRET_KEY=$FLASK_SECRET_KEY" >> .env
 
-# 8. Launch GhostOffice
+# 8. Launch Aegis
 python3 main.py
 ```
 
@@ -299,7 +299,7 @@ docker logs -f ghostoffice
 
 ## 🔐 Security
 
-GhostOffice is built with a security-first mindset. Every byte of sensitive data is protected.
+Aegis is built with a security-first mindset. Every byte of sensitive data is protected.
 
 ### Encryption
 | Layer | Method | Detail |
@@ -319,7 +319,7 @@ GhostOffice is built with a security-first mindset. Every byte of sensitive data
 
 ### ⚠️ Required Security Configuration
 
-**Before launching GhostOffice in production, you MUST set these environment variables:**
+**Before launching Aegis in production, you MUST set these environment variables:**
 
 #### 1. JWT_SECRET (Required)
 ```bash
@@ -345,7 +345,7 @@ echo "FLASK_SECRET_KEY=$FLASK_SECRET_KEY" >> .env
 
 #### 3. First-Time Setup Security
 
-When you first launch GhostOffice:
+When you first launch Aegis:
 - A **random temporary password** will be generated for the admin account
 - This password will be **displayed in your console** - save it securely
 - You will be **forced to change this password** on first login
@@ -433,7 +433,7 @@ Introduced the 5-layer memory system and AI-powered self-improvement.
 The original release. Solid core. Battle-tested security layer.
 
 **What's included:**
-- GhostOffice core orchestrator
+- Aegis core orchestrator
 - AES-256 encryption engine with PBKDF2
 - IMAP/SMTP email reader and sender
 - File watcher and basic data extraction
@@ -463,7 +463,7 @@ ghostoffice/
 ├── main.py                     # Entry point + CLI menu
 ├── setup.py                    # First-run setup wizard
 ├── Core/                       # Orchestration layer
-│   ├── pilot.py               # Main GhostOffice class
+│   ├── pilot.py               # Main Aegis class
 │   ├── config.py              # Configuration manager
 │   ├── ollama_brain.py        # Local LLM interface
 │   ├── queue_manager.py       # Task queue + dead letter
@@ -569,7 +569,7 @@ The monitoring stack includes:
 - **Prometheus** for metrics collection
 - **Grafana** for visualization dashboards  
 - **Node Exporter** for system metrics
-- Pre-configured GhostOffice dashboards
+- Pre-configured Aegis dashboards
 
 ---
 
@@ -590,7 +590,7 @@ Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) before
 ```bash
 # Fork and clone
 git clone https://github.com/ravikumarve/OfficeGhost.git
-cd OfficeGhost
+cd Aegis
 
 # Install dev dependencies
 pip install -e .[dev]
@@ -612,7 +612,7 @@ MIT License — see [LICENSE](LICENSE) for details. Free to use, modify, and dis
 
 **Built with ❤️ for privacy-focused productivity**
 
-*GhostOffice — your AI assistant that's seen but never heard*
+*Aegis — your AI assistant that's seen but never heard*
 
 <br/>
 
@@ -622,6 +622,6 @@ MIT License — see [LICENSE](LICENSE) for details. Free to use, modify, and dis
 
 <br/>
 
-© 2024–2026 GhostOffice · [MIT License](LICENSE)
+© 2024–2026 Aegis · [MIT License](LICENSE)
 
 </div>

@@ -1,5 +1,5 @@
 """
-AI Office Pilot - System Health Monitor
+Aegis - System Health Monitor
 """
 
 import shutil

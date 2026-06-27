@@ -1,4 +1,4 @@
-"""Calendar module for AI Office Pilot"""
+"""Calendar module for Aegis"""
 
 from modules.calendar.manager import CalendarManager, CalendarEvent, ICSParseError
 

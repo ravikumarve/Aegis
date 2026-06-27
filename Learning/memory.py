@@ -1,5 +1,5 @@
 """
-AI Office Pilot - Core Memory Engine
+Aegis - Core Memory Engine
 5-layer self-learning system
 """
 

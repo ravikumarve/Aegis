@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AI Office Pilot - One-Click Setup Script
+Aegis - One-Click Setup Script
 """
 
 import subprocess

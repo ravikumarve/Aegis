@@ -1,5 +1,5 @@
 """
-GhostOffice - Web Dashboard
+Aegis - Web Dashboard
 Beautiful local web interface
 """
 
@@ -15,8 +15,9 @@ from functools import wraps
 
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
 from flask_wtf.csrf import CSRFProtect
+from flask_cors import CORS
 
-from core.pilot import AIOfficePilot
+from core.pilot import AegisEngine
 from core.config import Config
 from security.auth import AuthError, TwoFactorError
 
@@ -37,6 +38,9 @@ except ImportError:
 
 app = Flask(__name__)
 
+# Enable CORS for React dev server (localhost:5173)
+CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://127.0.0.1:5173"])
+
 # Configure CSRF protection
 csrf = CSRFProtect(app)
 
@@ -55,7 +59,7 @@ def get_pilot():
     """Get or create pilot instance"""
     global pilot
     if pilot is None:
-        pilot = AIOfficePilot()
+        pilot = AegisEngine()
     return pilot
 
 
@@ -113,7 +117,7 @@ def login():
                 p.first_time_setup(password)
                 p.login(password)
                 session["authenticated"] = True
-                flash("Setup complete! Welcome to AI Office Pilot", "success")
+                flash("Setup complete! Welcome to Aegis", "success")
                 return redirect(url_for("dashboard"))
             except TwoFactorError as e:
                 flash(str(e), "error")
@@ -125,14 +129,6 @@ def login():
             try:
                 p.login(password, totp_token=totp_token or None)
                 session["authenticated"] = True
-                
-                # Check if password change is required
-                from Dashboard.auth import get_current_user, force_password_change_required
-                user = get_current_user()
-                if user and force_password_change_required(user["id"]):
-                    flash("⚠️ You must change your password before continuing", "warning")
-                    return redirect(url_for("change_password"))
-                
                 return redirect(url_for("dashboard"))
             except TwoFactorError as e:
                 flash(str(e), "error")
@@ -220,6 +216,7 @@ def setup():
 
 
 @app.route("/api/email/test", methods=["POST"])
+@csrf.exempt
 def test_email():
     """Test email connection"""
     data = request.get_json()
@@ -239,6 +236,7 @@ def test_email():
 
 
 @app.route("/api/setup/email", methods=["POST"])
+@csrf.exempt
 def save_email_setup():
     """Save email configuration"""
     data = request.get_json()
@@ -283,6 +281,7 @@ def save_email_setup():
 
 
 @app.route("/api/setup/model", methods=["POST"])
+@csrf.exempt
 def save_model_setup():
     """Save model selection"""
     data = request.get_json()
@@ -311,8 +310,14 @@ def save_model_setup():
 
 
 @app.route("/api/setup/complete", methods=["POST"])
+@csrf.exempt
 def complete_setup():
-    """Mark setup as complete"""
+    """Mark setup as complete and reset crypto state"""
+    # Purge old crypto files so login page shows "Create Master Password"
+    for f in [Config.SALT_FILE, Config.KEYSTORE_FILE]:
+        if f.exists():
+            f.unlink()
+
     env_path = Config.BASE_DIR / ".env"
     with open(env_path, "r") as f:
         lines = f.readlines()
@@ -335,6 +340,10 @@ def complete_setup():
         f.writelines(new_lines)
 
     Config.reload()
+
+    # Reset pilot so a fresh engine is created (crypto state cleared)
+    global pilot
+    pilot = None
 
     return jsonify({"status": "success"})
 
@@ -588,6 +597,13 @@ def api_security():
             "audit_integrity": p.audit.verify_integrity(),
         }
     )
+
+
+@app.route("/security")
+@login_required
+def security():
+    """Security page"""
+    return render_template("security.html")
 
 
 # ═══════════════════════════════════════
@@ -950,8 +966,9 @@ def assistant_ask():
 
 
 def start_dashboard():
-    """Start the web dashboard"""
-    print(f"\n🌐 Dashboard: http://{Config.DASHBOARD_HOST}:{Config.DASHBOARD_PORT}")
+    """Start the Aegis web dashboard"""
+    print(f"\n━━━ Aegis Engine ━━━")
+    print(f"🌐 Dashboard: http://{Config.DASHBOARD_HOST}:{Config.DASHBOARD_PORT}")
     app.run(host=Config.DASHBOARD_HOST, port=Config.DASHBOARD_PORT, debug=False)
 
 

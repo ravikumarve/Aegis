@@ -13,7 +13,7 @@ def simple_ask(question: str) -> str:
     brain = OllamaBrain()
 
     prompt = f"""
-You are GhostOffice Assistant. Please answer this question concisely.
+You are Aegis Assistant. Please answer this question concisely.
 
 Question: {question}
 
@@ -25,5 +25,5 @@ Answer:
 
 if __name__ == "__main__":
     # Test
-    response = simple_ask("What is GhostOffice?")
+    response = simple_ask("What is Aegis?")
     print("Response:", response)
