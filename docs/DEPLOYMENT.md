@@ -21,7 +21,7 @@ Aegis can be deployed in multiple ways:
 
 ```bash
 # Clone repository
-git clone https://github.com/ravikumarve/OfficeGhost.git
+git clone https://github.com/ravikumarve/Aegis.git
 cd Aegis
 
 # Create virtual environment

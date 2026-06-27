@@ -1,16 +1,15 @@
 version: '3.8'
 
 # Aegis Docker Compose
-# Use: docker-compose up -d (production)
-# Use: docker-compose -f docker-compose.dev.yml up -d (development)
+# Use: docker-compose up -d
 
 services:
   # Aegis Application
-  ghostoffice:
+  aegis:
     build: 
       context: .
       dockerfile: Dockerfile
-    container_name: ghostoffice
+    container_name: aegis
     restart: unless-stopped
     ports:
       - "5000:5000"  # Dashboard
@@ -37,12 +36,12 @@ services:
       - ENABLE_DESKTOP_NOTIFICATIONS=false
     volumes:
       # Persist data
-      - ghostoffice-data:/app/data
+      - aegis-data:/app/data
       # Watch folders (create these on host)
       - ~/Downloads:/watch/Downloads:ro
       - ~/Desktop:/watch/Desktop:ro
     networks:
-      - ghostoffice-network
+      - aegis-network
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/api/health"]
       interval: 30s
@@ -53,14 +52,14 @@ services:
   # Ollama (optional - if not using host Ollama)
   ollama:
     image: ollama/ollama:latest
-    container_name: ghostoffice-ollama
+    container_name: aegis-ollama
     restart: unless-stopped
     ports:
       - "11434:11434"
     volumes:
       - ollama-data:/root/.ollama
     networks:
-      - ghostoffice-network
+      - aegis-network
     deploy:
       resources:
         reservations:
@@ -70,11 +69,11 @@ services:
               capabilities: [gpu]
 
 networks:
-  ghostoffice-network:
+  aegis-network:
     driver: bridge
 
 volumes:
-  ghostoffice-data:
+  aegis-data:
     driver: local
   ollama-data:
     driver: local

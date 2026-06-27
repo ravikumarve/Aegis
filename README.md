@@ -1,9 +1,6 @@
 <div align="center">
 
-<!-- LOGO -->
-<img width="120" src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Ghost.png" alt="Aegis Ghost" />
-
-# Aegis
+# ⚡ Aegis
 
 **Your Private AI Assistant for Email, Files & Data**
 
@@ -11,9 +8,9 @@
 
 <br/>
 
-[![Version](https://img.shields.io/badge/version-v3.1.0-0d1117?style=for-the-badge&labelColor=58a6ff&color=0d1117)](https://github.com/ravikumarve/OfficeGhost/releases)
+[![Version](https://img.shields.io/badge/version-v3.1.0-0d1117?style=for-the-badge&labelColor=F59E0B&color=0d1117)](https://github.com/ravikumarve/Aegis/releases)
 [![Python](https://img.shields.io/badge/python-3.8+-0d1117?style=for-the-badge&logo=python&logoColor=white&labelColor=3572A5&color=0d1117)](https://python.org)
-[![Tests](https://img.shields.io/badge/tests-41%20passing-0d1117?style=for-the-badge&labelColor=238636&color=0d1117)](https://github.com/ravikumarve/OfficeGhost/tree/main/Tests)
+[![Tests](https://img.shields.io/badge/tests-41%20passing-0d1117?style=for-the-badge&labelColor=238636&color=0d1117)](https://github.com/ravikumarve/Aegis/tree/main/Tests)
 [![License](https://img.shields.io/badge/license-MIT-0d1117?style=for-the-badge&labelColor=6e40c9&color=0d1117)](LICENSE)
 [![Docker](https://img.shields.io/badge/docker-ready-0d1117?style=for-the-badge&logo=docker&logoColor=white&labelColor=1D63ED&color=0d1117)](https://hub.docker.com)
 [![Status](https://img.shields.io/badge/status-active-0d1117?style=for-the-badge&labelColor=238636&color=0d1117)](#)
@@ -21,99 +18,65 @@
 <br/>
 
 ```
-  ██████╗ ██╗  ██╗ ██████╗ ███████╗████████╗ ██████╗ ███████╗███████╗██╗ ██████╗███████╗
- ██╔════╝ ██║  ██║██╔═══██╗██╔════╝╚══██╔══╝██╔═══██╗██╔════╝██╔════╝██║██╔════╝██╔════╝
- ██║  ███╗███████║██║   ██║███████╗   ██║   ██║   ██║█████╗  █████╗  ██║██║     █████╗  
- ██║   ██║██╔══██║██║   ██║╚════██║   ██║   ██║   ██║██╔══╝  ██╔══╝  ██║██║     ██╔══╝  
- ╚██████╔╝██║  ██║╚██████╔╝███████║   ██║   ╚██████╔╝██║     ██║     ██║╚██████╗███████╗
-  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝     ╚═╝ ╚═════╝╚══════╝
+   █████╗ ███████╗ ██████╗ ██╗███████╗
+  ██╔══██╗██╔════╝██╔════╝ ██║██╔════╝
+  ███████║█████╗  ██║  ███╗██║███████╗
+  ██╔══██║██╔══╝  ██║   ██║██║╚════██║
+  ██║  ██║███████╗╚██████╔╝██║███████║
+  ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝╚══════╝
 ```
 
 <br/>
 
-[**🛒 Purchase on Gumroad**](#-purchase-on-gumroad) &nbsp;·&nbsp; [**Get Started →**](#-quick-start) &nbsp;·&nbsp; [**View Demo**](#-screenshots) &nbsp;·&nbsp; [**Documentation**](#-documentation) &nbsp;·&nbsp; [**Roadmap**](#-roadmap)
+[**Get Started →**](#-quick-start) &nbsp;·&nbsp; [**Screenshots**](#-screenshots) &nbsp;·&nbsp; [**Features**](#-key-features) &nbsp;·&nbsp; [**Documentation**](#-documentation)
 
 ---
 
 </div>
 
-## 🛒 Purchase on Gumroad
+## 🚀 Quick Start
 
-**Get Aegis with a one-time purchase - No subscriptions!**
+### Prerequisites
 
-### Why Buy on Gumroad?
+- Python 3.8+
+- [Ollama](https://ollama.ai) installed and running
+- 4GB+ RAM recommended
 
-- ✅ **One-time payment** - No monthly fees
-- ✅ **Lifetime updates** - Get all future versions
-- ✅ **Priority support** - Direct access to the developer
-- ✅ **Money-back guarantee** - 30-day refund policy
-- ✅ **Support open source** - Help fund continued development
+### One-Line Install
 
-### Purchase Options
+```bash
+git clone https://github.com/ravikumarve/Aegis.git
+cd Aegis
+python3 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+ollama pull phi3:mini
+cp .env.example .env
+python3 setup.py
+```
 
-| Plan | Price | Features |
-|------|-------|----------|
-| **Personal** | $29 | Single user, all features |
-| **Team** | $79 | Up to 5 users, team collaboration |
-| **Enterprise** | $199 | Unlimited users, priority support |
+Then access the dashboard at **http://localhost:5000**.
 
-[**🛒 Buy Now on Gumroad**](https://gumroad.com/l/ghostoffice)
+### Docker
 
-### After Purchase
-
-1. **Download** the package from Gumroad
-2. **Extract** the zip file to your desired location
-3. **Run** the installation script:
-   ```bash
-   chmod +x install.sh
-   ./install.sh
-   ```
-4. **Start** Aegis:
-   ```bash
-   source venv/bin/activate
-   python3 main.py
-   ```
-5. **Access** the dashboard at http://localhost:5000
-
-### Need Help?
-
-- 📖 [Quick Start Guide](QUICKSTART.md) - Get started in 5 minutes
-- 📧 [Email Support](mailto:support@ghostoffice.local) - Get help from the team
-- 💬 [Community Discord](https://discord.gg/ghostoffice) - Chat with other users
+```bash
+docker-compose up -d
+# Dashboard at http://localhost:5000
+```
 
 ---
 
-## 📋 Table of Contents
-
-- [👻 What is Aegis?](#-what-is-ghostoffice)
-- [✨ Key Features](#-key-features)
-- [🆚 Why Aegis?](#-why-ghostoffice)
-- [🏗️ Architecture](#-architecture)
-- [🚀 Quick Start](#-quick-start)
-- [🔐 Security](#-security)
-- [📚 Version History](#-version-history)
-- [📖 Documentation](#-documentation)
-- [🛠️ Development](#-development)
-- [🐳 Docker](#-docker)
-- [🗺️ Roadmap](#-roadmap)
-- [🤝 Contributing](#-contributing)
-
----
-
-## 👻 What is Aegis?
-
-Aegis is a **privacy-first, fully local AI assistant** that silently handles your email, files, and data entry — automatically, every day, without sending a single byte to the cloud.
-
-Unlike SaaS tools that charge monthly fees and store your data on their servers, Aegis runs entirely on your machine using [Ollama](https://ollama.ai). Your emails, documents, and business data stay **100% yours**.
-
-> *"It just works in the background. Like a ghost."*
-
-<br/>
+## 📸 Screenshots
 
 <div align="center">
 
-| 🛡️ AES-256 Encrypted | 🧠 Self-Learning AI | ☁️ 100% Local | 📱 Web Dashboard | ✅ GDPR / HIPAA |
-|:---:|:---:|:---:|:---:|:---:|
+| | |
+|:---:|:---:|
+| **Dashboard** | **Email Brain** |
+| ![Dashboard](docs/Screenshots/dashboard.png) | ![Email](docs/Screenshots/email.png) |
+| **Learning** | **Security** |
+| ![Learning](docs/Screenshots/learning.png) | ![Security](docs/Screenshots/security.png) |
+| **Settings** | **Assistant** |
+| ![Settings](docs/Screenshots/settings.png) | ![Assistant](docs/Screenshots/assistant.png) |
 
 </div>
 
@@ -151,47 +114,19 @@ Layer 5 │ Predictions        ── Anticipates your next action
 
 ### 🔒 Enterprise Security
 - AES-256 Fernet encryption with PBKDF2 key derivation (600K iterations)
-- Biometric unlock: Windows Hello · Touch ID · Linux PAM
 - TOTP 2FA support
 - Network isolation modes: `normal` · `isolated` · `air-gapped`
 - Tamper-proof audit log with hash chain
+- IP allowlisting and rate limiting
 
 ### 🌐 Web Dashboard
-- Beautiful Flask-based monitoring UI
+- Beautiful dark-themed monitoring UI
 - Real-time task queue visibility
 - System health and Ollama status monitoring
-- Prometheus metrics export
-- Notification bell with real-time alerts (errors, tasks, security events)
-- SQLite-backed notification storage
+- Notification bell with real-time alerts
 - First-run setup wizard with 4-step guided configuration
-- Dedicated Email Brain page with classification stats and draft replies
-- Demo mode for showcasing fully populated dashboard
-- **New**: AI Assistant chat interface with system context awareness
-- **New**: Full monitoring stack with Prometheus + Grafana integration
-
-### 🧪 Demo Mode
-- Enable with `DEMO_MODE=true` in `.env`
-- Pre-populated sample data for evaluation and screenshots
-- Yellow banner indicates demo mode is active
-- Perfect for buyers to see the fully featured dashboard
-
----
-
-## 🆚 Why Aegis?
-
-<div align="center">
-
-|  | Aegis | Zapier / Make | Microsoft Copilot | Notion AI |
-|--|:-----------:|:-------------:|:-----------------:|:---------:|
-| **100% Local** | ✅ | ❌ | ❌ | ❌ |
-| **No Subscription** | ✅ | ❌ | ❌ | ❌ |
-| **Your Data Stays Private** | ✅ | ❌ | ❌ | ❌ |
-| **Learns Your Style** | ✅ | ❌ | ⚠️ | ⚠️ |
-| **Works Offline** | ✅ | ❌ | ❌ | ❌ |
-| **GDPR / HIPAA Ready** | ✅ | ⚠️ | ⚠️ | ❌ |
-| **Open Source** | ✅ | ❌ | ❌ | ❌ |
-
-</div>
+- AI Assistant chat interface with system context awareness
+- Prometheus + Grafana integration
 
 ---
 
@@ -239,61 +174,21 @@ graph TD
 
 ---
 
-## 🚀 Quick Start
+## 🆚 Why Aegis?
 
-### Prerequisites
+<div align="center">
 
-- Python 3.8+
-- [Ollama](https://ollama.ai) installed and running
-- 4GB+ RAM recommended
+| | Aegis | Zapier / Make | Microsoft Copilot | Notion AI |
+|--|:-----------:|:-------------:|:-----------------:|:---------:|
+| **100% Local** | ✅ | ❌ | ❌ | ❌ |
+| **No Subscription** | ✅ | ❌ | ❌ | ❌ |
+| **Your Data Stays Private** | ✅ | ❌ | ❌ | ❌ |
+| **Learns Your Style** | ✅ | ❌ | ⚠️ | ⚠️ |
+| **Works Offline** | ✅ | ❌ | ❌ | ❌ |
+| **GDPR / HIPAA Ready** | ✅ | ⚠️ | ⚠️ | ❌ |
+| **Open Source** | ✅ | ❌ | ❌ | ❌ |
 
-### Installation
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/ravikumarve/OfficeGhost.git
-cd Aegis
-
-# 2. Create virtual environment
-python3 -m venv venv
-source venv/bin/activate        # Linux / Mac
-# venv\Scripts\activate         # Windows
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Pull a local model (phi3:mini is fast and lightweight)
-ollama pull phi3:mini
-
-# 5. Run setup wizard
-python3 setup.py
-
-# 6. Configure your settings
-cp .env.example .env
-nano .env                       # Add your email credentials
-
-# 7. ⚠️ CRITICAL: Set security secrets
-# Generate secure secrets and add to .env file
-JWT_SECRET=$(python -c 'import secrets; print(secrets.token_hex(32))')
-FLASK_SECRET_KEY=$(python -c 'import secrets; print(secrets.token_hex(32))')
-echo "JWT_SECRET=$JWT_SECRET" >> .env
-echo "FLASK_SECRET_KEY=$FLASK_SECRET_KEY" >> .env
-
-# 8. Launch Aegis
-python3 main.py
-```
-
-> ✅ The web dashboard will be available at `http://localhost:5000`
-
-### Docker (Fastest Way)
-
-```bash
-# One-command start
-docker-compose up -d
-
-# View logs
-docker logs -f ghostoffice
-```
+</div>
 
 ---
 
@@ -312,133 +207,19 @@ Aegis is built with a security-first mindset. Every byte of sensitive data is pr
 ### Authentication
 - ✅ Master password with strength enforcement
 - ✅ TOTP 2FA (Google Authenticator, Authy)
-- ✅ Biometric unlock — Windows Hello · Touch ID · Linux PAM
 - ✅ Session tokens with automatic refresh and expiry
-- ✅ **Forced password change on first login**
-- ✅ **CSRF protection on all forms**
-
-### ⚠️ Required Security Configuration
-
-**Before launching Aegis in production, you MUST set these environment variables:**
-
-#### 1. JWT_SECRET (Required)
-```bash
-# Generate a secure JWT secret
-JWT_SECRET=$(python -c 'import secrets; print(secrets.token_hex(32))')
-
-# Add to your .env file
-echo "JWT_SECRET=$JWT_SECRET" >> .env
-```
-
-**Why it's required**: JWT tokens are used for session authentication. Without a secure secret, tokens could be forged, allowing unauthorized access.
-
-#### 2. FLASK_SECRET_KEY (Required)
-```bash
-# Generate a secure Flask secret
-FLASK_SECRET_KEY=$(python -c 'import secrets; print(secrets.token_hex(32))')
-
-# Add to your .env file
-echo "FLASK_SECRET_KEY=$FLASK_SECRET_KEY" >> .env
-```
-
-**Why it's required**: Flask secret key is used for CSRF protection and session security. Without it, your application is vulnerable to cross-site request forgery attacks.
-
-#### 3. First-Time Setup Security
-
-When you first launch Aegis:
-- A **random temporary password** will be generated for the admin account
-- This password will be **displayed in your console** - save it securely
-- You will be **forced to change this password** on first login
-- Your new password must meet **strength requirements**:
-  - Minimum 12 characters
-  - Both uppercase and lowercase letters
-  - At least one digit
-  - At least one special character (!@#$%^&*()_+-=[]{}|;:,.<>?)
-
-#### 4. Security Best Practices
-
-- ✅ **Never commit** `.env` file to version control
-- ✅ **Use strong, unique passwords** for all accounts
-- ✅ **Enable 2FA** for additional security
-- ✅ **Keep dependencies updated** with `pip install --upgrade -r requirements.txt`
-- ✅ **Run security tests** with `python3 Tests/test_security_fixes.py`
-- ✅ **Monitor logs** for suspicious activity
-- ✅ **Backup regularly** using the built-in backup feature
+- ✅ CSRF protection on all forms
 
 ### Network Security
 - ✅ IP allowlisting
-- ✅ Configurable rate limiting via `.env`
+- ✅ Configurable rate limiting
 - ✅ Network isolation modes: `normal` · `isolated` · `air-gapped`
-- ✅ Optional VPN auto-connect
 
 ### Compliance
 - ✅ GDPR Article 17 & 20 (right to erasure, data portability)
 - ✅ HIPAA-ready audit trail
 - ✅ Tamper-proof hash chain logging
 - ✅ Full data export and secure deletion
-
----
-
-## 📚 Version History
-
-### 🔵 v3.1.0 — "The Dashboard Edition" *(March 2026)*
-
-Major dashboard improvements and demo mode for evaluations.
-
-**What's new:**
-- First-run setup wizard with 4-step guided configuration
-- Dedicated Email Brain page with classification stats and draft reply modal
-- Notification bell with SQLite-backed real-time alerts
-- Demo mode for showcasing fully populated dashboard
-- Data Flow Monitor with two-column visual design
-- Watch folder management via dashboard UI
-- Security status indicator (Fully Secure / Partially Secure)
-- Quick actions and activity feed on dashboard
-- Learning page with Chart.js score projection
-
----
-
-### 🔵 v3.0.0 — "The Enterprise Edition" *(March 2026)*
-
-The most hardened and feature-complete release. Built for teams, freelancers, and privacy-obsessed power users.
-
-**What's new:**
-- 138-test suite (135 passing) with full coverage reporting
-- Retry logic with exponential backoff for all network operations
-- Dead letter queue for failed task recovery
-- Email templates system with customizable reply scaffolds
-- Calendar integration — `.ics` parsing and meeting automation
-- Biometric unlock support across all major OS platforms
-- Network isolation and air-gapped operation mode
-- Docker multi-stage build optimization
-- Prometheus metrics and health monitoring
-
----
-
-### 🟢 v2.0.0 — "The Learning Edition" *(2025)*
-
-Introduced the 5-layer memory system and AI-powered self-improvement.
-
-**What's new:**
-- 5-layer memory engine (feedback, preferences, style, patterns, predictions)
-- Smart email classification: URGENT · ROUTINE · SPAM · MEETING
-- File Commander Pro with AI content analysis
-- Invoice/receipt extraction and spreadsheet export
-- Enhanced contact learning and prioritization
-
----
-
-### ⚪ v1.0.0 — "The Foundation" *(2024)*
-
-The original release. Solid core. Battle-tested security layer.
-
-**What's included:**
-- Aegis core orchestrator
-- AES-256 encryption engine with PBKDF2
-- IMAP/SMTP email reader and sender
-- File watcher and basic data extraction
-- CLI interface
-- GDPR / HIPAA compliance groundwork
 
 ---
 
@@ -450,7 +231,6 @@ The original release. Solid core. Battle-tested security layer.
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Detailed system design and module breakdown |
 | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | Local, Docker, and production deployment guide |
 | [docs/API.md](docs/API.md) | REST API reference |
-| [TODO.md](TODO.md) | Development roadmap and progress tracker |
 
 ---
 
@@ -459,10 +239,10 @@ The original release. Solid core. Battle-tested security layer.
 ### Project Structure
 
 ```
-ghostoffice/
+aegis/
 ├── main.py                     # Entry point + CLI menu
 ├── setup.py                    # First-run setup wizard
-├── Core/                       # Orchestration layer
+├── core/                       # Orchestration layer
 │   ├── pilot.py               # Main Aegis class
 │   ├── config.py              # Configuration manager
 │   ├── ollama_brain.py        # Local LLM interface
@@ -471,41 +251,34 @@ ghostoffice/
 │   ├── retry.py               # Exponential backoff
 │   ├── metrics.py             # Prometheus metrics
 │   └── demo_data.py           # Demo mode sample data
-├── Security/                   # Security layer
+├── security/                   # Security layer
 │   ├── encryption.py          # AES-256 engine
 │   ├── auth.py                # Access control
 │   ├── audit.py               # Audit logging
-│   ├── biometric.py           # Biometric unlock
 │   ├── session.py             # Session management
 │   ├── network.py             # Network isolation
-│   └── rate_limit.py          # Rate limiting
-├── Learning/                   # Self-learning engine
+│   └── compliance.py          # GDPR/HIPAA compliance
+├── learning/                   # Self-learning engine
 │   └── memory.py              # 5-layer memory system
-├── Modules/                    # Feature modules
+├── modules/                    # Feature modules
 │   ├── email_brain/           # Email read/send/classify
 │   ├── file_commander/        # Watch/analyze/sort files
 │   ├── data_engine/           # Extract/export data
 │   └── calendar/              # Calendar + meetings
-├── Tests/                      # Test suite (138 tests)
-├── Dashboard/                  # Flask web dashboard
+├── dashboard/                  # Flask web dashboard
 │   ├── app.py                 # Flask routes + API
-│   ├── notifications.py        # SQLite notification storage
+│   ├── notifications.py       # SQLite notification storage
 │   └── templates/             # HTML templates
-├── docs/                       # Documentation
+├── Tests/                      # Test suite
+├── docs/                       # Documentation & screenshots
 └── .env.example                # Config template
 ```
 
 ### Running Tests
 
 ```bash
-# Run all tests
-pytest Tests/
-
-# With coverage report
-pytest Tests/ --cov=. --cov-report=term-missing
-
-# Single module
-pytest Tests/test_learning.py -v
+pytest Tests/                          # All tests
+pytest Tests/ --cov=. --cov-report=term-missing  # With coverage
 ```
 
 ### Code Style
@@ -513,91 +286,19 @@ pytest Tests/test_learning.py -v
 ```bash
 ruff format .         # Format code
 ruff check .          # Lint
-pre-commit run --all-files
 ```
 
 ---
 
 ## 🐳 Docker
 
-### Quick Start
-
 ```bash
 # Build and run
-docker build -t ghostoffice .
+docker build -t aegis .
+docker run -d --name aegis -p 5000:5000 aegis
 
-docker run -d \
-  --name ghostoffice \
-  -p 5000:5000 \
-  -v ~/ghostoffice-data:/data \
-  -e EMAIL_1_ADDRESS=your@email.com \
-  -e EMAIL_1_PASSWORD=your_password \
-  ghostoffice
-```
-
-### Docker Compose
-
-```yaml
-version: '3.8'
-services:
-  ghostoffice:
-    build: .
-    container_name: ghostoffice
-    ports:
-      - "5000:5000"
-    volumes:
-      - ~/ghostoffice-data:/data
-    environment:
-      - OLLAMA_HOST=http://host.docker.internal:11434
-    restart: unless-stopped
-
-### Production Monitoring Stack
-
-For production deployments, use the monitoring stack with Prometheus and Grafana:
-
-```bash
-# Start full monitoring stack
-docker-compose -f docker-compose.monitoring.yml up -d
-
-# Access monitoring tools:
-# Grafana: http://localhost:3000 (admin/admin)
-# Prometheus: http://localhost:9090
-# Node Exporter: http://localhost:9100
-```
-
-The monitoring stack includes:
-- **Prometheus** for metrics collection
-- **Grafana** for visualization dashboards  
-- **Node Exporter** for system metrics
-- Pre-configured Aegis dashboards
-
----
-
-## 🗺️ Roadmap
-
-| Version | ETA | Features |
-|---------|-----|----------|
-| **v3.2** | Q2 2026 | Google Calendar API · Multi-language support · Enhanced voice commands |
-| **v3.3** | Q3 2026 | Mobile companion app · Slack/Teams integration · Advanced analytics |
-| **v4.0** | Q4 2026 | Multi-user support · Team collaboration · Custom model fine-tuning |
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting a PR.
-
-```bash
-# Fork and clone
-git clone https://github.com/ravikumarve/OfficeGhost.git
-cd Aegis
-
-# Install dev dependencies
-pip install -e .[dev]
-
-# Run tests before submitting
-pytest Tests/ -v
-ruff format .
+# Or with docker-compose (includes Ollama)
+docker-compose up -d
 ```
 
 ---
@@ -612,13 +313,13 @@ MIT License — see [LICENSE](LICENSE) for details. Free to use, modify, and dis
 
 **Built with ❤️ for privacy-focused productivity**
 
-*Aegis — your AI assistant that's seen but never heard*
+*Aegis — your AI assistant that runs entirely on your machine*
 
 <br/>
 
-[![GitHub Stars](https://img.shields.io/github/stars/ravikumarve/OfficeGhost?style=for-the-badge&labelColor=0d1117&color=f0c000)](https://github.com/ravikumarve/OfficeGhost/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/ravikumarve/OfficeGhost?style=for-the-badge&labelColor=0d1117&color=58a6ff)](https://github.com/ravikumarve/OfficeGhost/fork)
-[![GitHub Issues](https://img.shields.io/github/issues/ravikumarve/OfficeGhost?style=for-the-badge&labelColor=0d1117&color=f85149)](https://github.com/ravikumarve/OfficeGhost/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/ravikumarve/Aegis?style=for-the-badge&labelColor=0d1117&color=f0c000)](https://github.com/ravikumarve/Aegis/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/ravikumarve/Aegis?style=for-the-badge&labelColor=0d1117&color=58a6ff)](https://github.com/ravikumarve/Aegis/fork)
+[![GitHub Issues](https://img.shields.io/github/issues/ravikumarve/Aegis?style=for-the-badge&labelColor=0d1117&color=f85149)](https://github.com/ravikumarve/Aegis/issues)
 
 <br/>
 

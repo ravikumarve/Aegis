@@ -3,11 +3,11 @@ global:
   evaluation_interval: 15s
 
 scrape_configs:
-  - job_name: 'ghostoffice'
+  - job_name: 'aegis'
     static_configs:
-      - targets: ['ghostoffice-prod:5000']
+      - targets: ['aegis-prod:5000']
         labels:
-          service: 'ghostoffice'
+          service: 'aegis'
 
   - job_name: 'node-exporter'
     static_configs:

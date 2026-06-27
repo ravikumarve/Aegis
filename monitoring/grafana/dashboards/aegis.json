@@ -2,7 +2,7 @@
   "dashboard": {
     "id": null,
     "title": "Aegis Metrics",
-    "tags": ["ghostoffice", "ai", "automation"],
+    "tags": ["aegis", "ai", "automation"],
     "timezone": "browser",
     "panels": [
       {

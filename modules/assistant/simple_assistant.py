@@ -6,7 +6,7 @@ from typing import Dict, List
 from core.config import Config
 
 
-class SimpleOfficeAssistant:
+class SimpleAssistant:
     """Simple assistant that answers common questions without Ollama"""
 
     def __init__(self):
@@ -21,7 +21,7 @@ class SimpleOfficeAssistant:
             "learning progress": "I'll check how much the AI has learned...",
             "security status": "Let me check your security settings...",
             "how does it work": "Aegis automatically processes emails, organizes files, and extracts data using local AI.",
-            "what is ghostoffice": "Aegis is your private AI assistant that handles emails, files, and data processing locally.",
+            "what is aegis": "Aegis is your private AI assistant that handles emails, files, and data processing locally.",
             "help": "I can help you with: system status, file processing, email accounts, learning progress, and security questions.",
         }
 
@@ -118,5 +118,5 @@ class SimpleOfficeAssistant:
 
 def ask_simple_assistant(question: str) -> str:
     """Convenience function"""
-    assistant = SimpleOfficeAssistant()
+    assistant = SimpleAssistant()
     return assistant.answer_question(question)

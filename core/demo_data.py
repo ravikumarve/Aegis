@@ -112,7 +112,7 @@ def get_demo_emails():
             "classification": "ROUTINE",
             "sender": "github@noreply.github.com",
             "sender_name": "GitHub",
-            "subject": "[ghostoffice/officeghost] PR #45: Add notification bell feature",
+            "subject": "[aegis] PR #45: Add notification bell feature",
             "preview": "@developer merged 3 hours ago - Added notification bell icon to dashboard header...",
             "confidence": 91,
             "timestamp": (base_time - timedelta(days=3)).isoformat(),

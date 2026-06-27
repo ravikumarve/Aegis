@@ -3,8 +3,10 @@ Simple test version of the assistant
 """
 
 import sys
+from pathlib import Path
 
-sys.path.insert(0, "/home/matrix/Desktop/officeghost")
+# Run from project root: python3 modules/assistant/simple_chat.py
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from core.ollama_brain import OllamaBrain
 
 

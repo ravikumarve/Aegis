@@ -338,7 +338,7 @@ def test_database_schema():
 def run_all_tests():
     """Run all security tests"""
     print("\n" + "="*60)
-    print("🔐 GHOSTOFFICE SECURITY FIXES VERIFICATION")
+    print("🔐 AEGIS SECURITY FIXES VERIFICATION")
     print("="*60)
     
     tests = [
