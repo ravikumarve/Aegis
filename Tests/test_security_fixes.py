@@ -12,7 +12,7 @@ from pathlib import Path
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from Dashboard.auth import (
+from dashboard.auth import (
     init_auth_db,
     create_session_token,
     verify_session_token,

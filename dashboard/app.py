@@ -157,7 +157,7 @@ def logout():
 @login_required
 def change_password():
     """Change user password"""
-    from Dashboard.auth import get_current_user, change_password, validate_password_strength, force_password_change_required
+    from dashboard.auth import get_current_user, change_password, validate_password_strength, force_password_change_required
     
     user = get_current_user()
     if not user:
