@@ -359,6 +359,44 @@ class MemoryEngine:
 
     # ═══ LAYER 3: STYLE LEARNING ═══
 
+    def _classify_sentence_length(self, text: str) -> str | None:
+        """Classify average sentence length category"""
+        sentences = [s.strip() for s in re.split(r"[.!?]+", text) if s.strip()]
+        if not sentences:
+            return None
+        avg = sum(len(s.split()) for s in sentences) / len(sentences)
+        if avg < 8:
+            return "very_short"
+        if avg < 15:
+            return "short"
+        if avg < 25:
+            return "medium"
+        return "long"
+
+    def _classify_formality(self, text: str) -> str:
+        """Classify text as formal, casual, or neutral"""
+        text_l = text.lower()
+        informal_score = sum(1 for w in ["hey", "hi", "thanks", "cool", "awesome", "!"] if w in text_l)
+        formal_score = sum(1 for w in ["dear", "sincerely", "regards", "kindly"] if w in text_l)
+        if formal_score > informal_score:
+            return "formal"
+        if informal_score > formal_score:
+            return "casual"
+        return "neutral"
+
+    def _extract_greeting(self, text: str) -> str | None:
+        """Extract greeting from first line"""
+        first_line = text.strip().split("\n")[0].strip()
+        return first_line if first_line else None
+
+    def _extract_signoff(self, text: str) -> str | None:
+        """Extract sign-off from last lines"""
+        lines = [l.strip() for l in text.strip().split("\n") if l.strip()]
+        for line in reversed(lines[-3:]):
+            if any(s in line.lower() for s in ["best", "thanks", "regards", "cheers", "sincerely"]):
+                return line
+        return None
+
     def learn_style(self, text: str, recipient: Optional[str] = None) -> None:
         """Analyze and store writing sample"""
         conn = sqlite3.connect(self.db_path)
@@ -374,47 +412,16 @@ class MemoryEngine:
         conn.commit()
         conn.close()
 
-        # Extract traits
-        traits = {}
+        traits: dict[str, str] = {}
 
-        # Sentence length
-        sentences = [s.strip() for s in re.split(r"[.!?]+", text) if s.strip()]
-        if sentences:
-            avg = sum(len(s.split()) for s in sentences) / len(sentences)
-            if avg < 8:
-                traits["sentence_length"] = "very_short"
-            elif avg < 15:
-                traits["sentence_length"] = "short"
-            elif avg < 25:
-                traits["sentence_length"] = "medium"
-            else:
-                traits["sentence_length"] = "long"
+        if sentence_length := self._classify_sentence_length(text):
+            traits["sentence_length"] = sentence_length
 
-        # Formality
-        text_l = text.lower()
-        informal = sum(1 for w in ["hey", "hi", "thanks", "cool", "awesome", "!"] if w in text_l)
-        formal = sum(1 for w in ["dear", "sincerely", "regards", "kindly"] if w in text_l)
+        traits["formality"] = self._classify_formality(text)
+        traits["greeting"] = self._extract_greeting(text)
+        if signoff := self._extract_signoff(text):
+            traits["signoff"] = signoff
 
-        if formal > informal:
-            traits["formality"] = "formal"
-        elif informal > formal:
-            traits["formality"] = "casual"
-        else:
-            traits["formality"] = "neutral"
-
-        # Greeting
-        first_line = text.strip().split("\n")[0].strip()
-        if first_line:
-            traits["greeting"] = first_line
-
-        # Sign-off
-        lines = [l.strip() for l in text.strip().split("\n") if l.strip()]
-        for line in reversed(lines[-3:]):
-            if any(s in line.lower() for s in ["best", "thanks", "regards", "cheers", "sincerely"]):
-                traits["signoff"] = line
-                break
-
-        # Store traits
         self._update_style_traits(traits)
 
     def _update_style_traits(self, traits):
