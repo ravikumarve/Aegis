@@ -127,16 +127,6 @@ def rate_limit(limiter: Optional[RateLimiter] = None, key_func=None):
     return decorator
 
 
-def rate_limit_auth():
-    """Rate limit for authentication endpoints"""
-    return rate_limit(limiter=_auth_limiter)
-
-
 def rate_limit_api():
     """Rate limit for general API endpoints"""
     return rate_limit(limiter=_api_limiter)
-
-
-def rate_limit_status():
-    """Rate limit for status/metrics endpoints"""
-    return rate_limit(limiter=_status_limiter)

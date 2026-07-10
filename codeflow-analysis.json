@@ -1,0 +1,3099 @@
+{
+  "stats": {
+    "files": 101,
+    "functions": 643,
+    "connections": 194,
+    "dead": 19,
+    "patterns": 8,
+    "security": 7,
+    "duplicates": 0,
+    "violations": 3,
+    "loc": 17406,
+    "languages": [
+      {
+        "ext": "py",
+        "lines": 10881,
+        "pct": 63
+      },
+      {
+        "ext": "html",
+        "lines": 3700,
+        "pct": 21
+      },
+      {
+        "ext": "md",
+        "lines": 1449,
+        "pct": 8
+      },
+      {
+        "ext": "yml",
+        "lines": 434,
+        "pct": 2
+      },
+      {
+        "ext": "json",
+        "lines": 217,
+        "pct": 1
+      },
+      {
+        "ext": "sh",
+        "lines": 201,
+        "pct": 1
+      },
+      {
+        "ext": "toml",
+        "lines": 129,
+        "pct": 1
+      },
+      {
+        "ext": "example",
+        "lines": 92,
+        "pct": 1
+      },
+      {
+        "ext": "ini",
+        "lines": 91,
+        "pct": 1
+      },
+      {
+        "ext": "dockerfile",
+        "lines": 62,
+        "pct": 0
+      },
+      {
+        "ext": "gitignore",
+        "lines": 51,
+        "pct": 0
+      },
+      {
+        "ext": "txt",
+        "lines": 49,
+        "pct": 0
+      },
+      {
+        "ext": "yaml",
+        "lines": 28,
+        "pct": 0
+      },
+      {
+        "ext": "license",
+        "lines": 22,
+        "pct": 0
+      }
+    ],
+    "parserModes": [
+      {
+        "mode": "heuristic-regex",
+        "files": 77
+      },
+      {
+        "mode": "text",
+        "files": 18
+      },
+      {
+        "mode": "markdown-link-parser",
+        "files": 6
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": ".env.example",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 92,
+      "dependencies": []
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 206,
+      "dependencies": []
+    },
+    {
+      "path": ".github/workflows/docker.yml",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 0,
+      "dependencies": []
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 106,
+      "dependencies": []
+    },
+    {
+      "path": ".gitignore",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 51,
+      "dependencies": []
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 28,
+      "dependencies": []
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "fns": 0,
+      "layer": "note",
+      "lines": 244,
+      "dependencies": []
+    },
+    {
+      "path": "Dockerfile",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 62,
+      "dependencies": []
+    },
+    {
+      "path": "LICENSE",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 22,
+      "dependencies": []
+    },
+    {
+      "path": "QUICKSTART.md",
+      "fns": 0,
+      "layer": "note",
+      "lines": 0,
+      "dependencies": []
+    },
+    {
+      "path": "README.md",
+      "fns": 0,
+      "layer": "note",
+      "lines": 329,
+      "dependencies": [
+        {
+          "kind": "mdlink",
+          "raw": "[![License](https://img.shields.io/badge/license-MIT-0d1117?style=for-the-badge&labelColor=6e40c9&color=0d1117)](LICENSE)",
+          "target": "LICENSE",
+          "resolved": "LICENSE"
+        },
+        {
+          "kind": "mdlink",
+          "raw": "[README.md](README.md)",
+          "target": "README.md",
+          "resolved": "README.md"
+        },
+        {
+          "kind": "mdlink",
+          "raw": "[ARCHITECTURE.md](ARCHITECTURE.md)",
+          "target": "ARCHITECTURE.md",
+          "resolved": "ARCHITECTURE.md"
+        },
+        {
+          "kind": "mdlink",
+          "raw": "[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)",
+          "target": "docs/DEPLOYMENT.md",
+          "resolved": "docs/DEPLOYMENT.md"
+        },
+        {
+          "kind": "mdlink",
+          "raw": "[docs/API.md](docs/API.md)",
+          "target": "docs/API.md",
+          "resolved": "docs/API.md"
+        },
+        {
+          "kind": "mdlink",
+          "raw": "[LICENSE](LICENSE)",
+          "target": "LICENSE",
+          "resolved": "LICENSE"
+        },
+        {
+          "kind": "mdlink",
+          "raw": "[MIT License](LICENSE)",
+          "target": "LICENSE",
+          "resolved": "LICENSE"
+        }
+      ]
+    },
+    {
+      "path": "Tests/__init__.py",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 2,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/conftest.py",
+      "fns": 13,
+      "layer": "test",
+      "lines": 236,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_audit.py",
+      "fns": 14,
+      "layer": "test",
+      "lines": 173,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_compliance.py",
+      "fns": 11,
+      "layer": "test",
+      "lines": 189,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_data_extractor.py",
+      "fns": 11,
+      "layer": "test",
+      "lines": 148,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_email_reader.py",
+      "fns": 9,
+      "layer": "test",
+      "lines": 198,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_email_sender.py",
+      "fns": 12,
+      "layer": "test",
+      "lines": 235,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_encryption.py",
+      "fns": 9,
+      "layer": "test",
+      "lines": 84,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_file_analyzer.py",
+      "fns": 8,
+      "layer": "test",
+      "lines": 103,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_file_sorter.py",
+      "fns": 10,
+      "layer": "test",
+      "lines": 142,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_file_watcher.py",
+      "fns": 9,
+      "layer": "test",
+      "lines": 158,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_health_monitor.py",
+      "fns": 13,
+      "layer": "test",
+      "lines": 223,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_integration.py",
+      "fns": 15,
+      "layer": "test",
+      "lines": 151,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_learning.py",
+      "fns": 8,
+      "layer": "test",
+      "lines": 62,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_queue_manager.py",
+      "fns": 14,
+      "layer": "test",
+      "lines": 166,
+      "dependencies": []
+    },
+    {
+      "path": "Tests/test_security_fixes.py",
+      "fns": 6,
+      "layer": "test",
+      "lines": 388,
+      "dependencies": []
+    },
+    {
+      "path": "core/__init__.py",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 7,
+      "dependencies": []
+    },
+    {
+      "path": "core/config.py",
+      "fns": 6,
+      "layer": "config",
+      "lines": 222,
+      "dependencies": []
+    },
+    {
+      "path": "core/demo_data.py",
+      "fns": 6,
+      "layer": "utils",
+      "lines": 308,
+      "dependencies": []
+    },
+    {
+      "path": "core/error_recovery.py",
+      "fns": 10,
+      "layer": "utils",
+      "lines": 104,
+      "dependencies": []
+    },
+    {
+      "path": "core/health_monitor.py",
+      "fns": 6,
+      "layer": "utils",
+      "lines": 103,
+      "dependencies": []
+    },
+    {
+      "path": "core/logging_config.py",
+      "fns": 13,
+      "layer": "utils",
+      "lines": 146,
+      "dependencies": []
+    },
+    {
+      "path": "core/metrics.py",
+      "fns": 14,
+      "layer": "utils",
+      "lines": 167,
+      "dependencies": []
+    },
+    {
+      "path": "core/ollama_brain.py",
+      "fns": 9,
+      "layer": "utils",
+      "lines": 206,
+      "dependencies": []
+    },
+    {
+      "path": "core/pilot.py",
+      "fns": 19,
+      "layer": "utils",
+      "lines": 686,
+      "dependencies": []
+    },
+    {
+      "path": "core/queue_manager.py",
+      "fns": 20,
+      "layer": "utils",
+      "lines": 182,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/__init__.py",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 2,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/app.py",
+      "fns": 43,
+      "layer": "utils",
+      "lines": 977,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/auth.py",
+      "fns": 10,
+      "layer": "utils",
+      "lines": 265,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/notifications.py",
+      "fns": 16,
+      "layer": "utils",
+      "lines": 174,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/templates/assistant.html",
+      "fns": 5,
+      "layer": "ui",
+      "lines": 157,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/templates/base.html",
+      "fns": 7,
+      "layer": "ui",
+      "lines": 688,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/templates/docs.html",
+      "fns": 0,
+      "layer": "ui",
+      "lines": 269,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/templates/email.html",
+      "fns": 5,
+      "layer": "ui",
+      "lines": 193,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/templates/index.html",
+      "fns": 6,
+      "layer": "ui",
+      "lines": 331,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/templates/landing.html",
+      "fns": 1,
+      "layer": "ui",
+      "lines": 589,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/templates/learning.html",
+      "fns": 1,
+      "layer": "ui",
+      "lines": 212,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/templates/login.html",
+      "fns": 0,
+      "layer": "ui",
+      "lines": 297,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/templates/security.html",
+      "fns": 3,
+      "layer": "ui",
+      "lines": 211,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/templates/settings.html",
+      "fns": 8,
+      "layer": "ui",
+      "lines": 303,
+      "dependencies": []
+    },
+    {
+      "path": "dashboard/templates/setup.html",
+      "fns": 8,
+      "layer": "ui",
+      "lines": 450,
+      "dependencies": []
+    },
+    {
+      "path": "design-system.md",
+      "fns": 0,
+      "layer": "note",
+      "lines": 287,
+      "dependencies": []
+    },
+    {
+      "path": "docker-compose.yml",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 80,
+      "dependencies": []
+    },
+    {
+      "path": "docs/API.md",
+      "fns": 0,
+      "layer": "note",
+      "lines": 365,
+      "dependencies": []
+    },
+    {
+      "path": "docs/DEPLOYMENT.md",
+      "fns": 0,
+      "layer": "note",
+      "lines": 224,
+      "dependencies": []
+    },
+    {
+      "path": "install.sh",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 187,
+      "dependencies": []
+    },
+    {
+      "path": "learning/__init__.py",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 6,
+      "dependencies": []
+    },
+    {
+      "path": "learning/memory.py",
+      "fns": 32,
+      "layer": "utils",
+      "lines": 795,
+      "dependencies": []
+    },
+    {
+      "path": "main.py",
+      "fns": 9,
+      "layer": "utils",
+      "lines": 345,
+      "dependencies": []
+    },
+    {
+      "path": "migrations/__init__.py",
+      "fns": 14,
+      "layer": "utils",
+      "lines": 243,
+      "dependencies": []
+    },
+    {
+      "path": "modules/__init__.py",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 2,
+      "dependencies": []
+    },
+    {
+      "path": "modules/assistant/chat.py",
+      "fns": 8,
+      "layer": "utils",
+      "lines": 143,
+      "dependencies": []
+    },
+    {
+      "path": "modules/assistant/minimal_chat.py",
+      "fns": 1,
+      "layer": "utils",
+      "lines": 23,
+      "dependencies": []
+    },
+    {
+      "path": "modules/assistant/simple_assistant.py",
+      "fns": 8,
+      "layer": "utils",
+      "lines": 123,
+      "dependencies": []
+    },
+    {
+      "path": "modules/assistant/simple_chat.py",
+      "fns": 1,
+      "layer": "utils",
+      "lines": 32,
+      "dependencies": []
+    },
+    {
+      "path": "modules/calendar/__init__.py",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 5,
+      "dependencies": []
+    },
+    {
+      "path": "modules/calendar/manager.py",
+      "fns": 26,
+      "layer": "utils",
+      "lines": 398,
+      "dependencies": []
+    },
+    {
+      "path": "modules/data_engine/__init__.py",
+      "fns": 0,
+      "layer": "data",
+      "lines": 2,
+      "dependencies": []
+    },
+    {
+      "path": "modules/data_engine/extractor.py",
+      "fns": 4,
+      "layer": "data",
+      "lines": 42,
+      "dependencies": []
+    },
+    {
+      "path": "modules/data_engine/sheet_writer.py",
+      "fns": 6,
+      "layer": "data",
+      "lines": 90,
+      "dependencies": []
+    },
+    {
+      "path": "modules/email_brain/__init__.py",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 2,
+      "dependencies": []
+    },
+    {
+      "path": "modules/email_brain/reader.py",
+      "fns": 11,
+      "layer": "utils",
+      "lines": 206,
+      "dependencies": []
+    },
+    {
+      "path": "modules/email_brain/sender.py",
+      "fns": 4,
+      "layer": "utils",
+      "lines": 68,
+      "dependencies": []
+    },
+    {
+      "path": "modules/email_brain/templates.py",
+      "fns": 16,
+      "layer": "utils",
+      "lines": 194,
+      "dependencies": []
+    },
+    {
+      "path": "modules/file_commander/__init__.py",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 2,
+      "dependencies": []
+    },
+    {
+      "path": "modules/file_commander/analyzer.py",
+      "fns": 6,
+      "layer": "utils",
+      "lines": 88,
+      "dependencies": []
+    },
+    {
+      "path": "modules/file_commander/watcher.py",
+      "fns": 4,
+      "layer": "utils",
+      "lines": 72,
+      "dependencies": []
+    },
+    {
+      "path": "monitoring/grafana/dashboards/aegis.json",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 109,
+      "dependencies": []
+    },
+    {
+      "path": "monitoring/grafana/dashboards/system.json",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 108,
+      "dependencies": []
+    },
+    {
+      "path": "monitoring/grafana/provisioning/dashboards/aegis.yml",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 11,
+      "dependencies": []
+    },
+    {
+      "path": "monitoring/grafana/provisioning/datasources/prometheus.yml",
+      "fns": 0,
+      "layer": "data",
+      "lines": 10,
+      "dependencies": []
+    },
+    {
+      "path": "monitoring/prometheus.yml",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 21,
+      "dependencies": []
+    },
+    {
+      "path": "notifications/__init__.py",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 2,
+      "dependencies": []
+    },
+    {
+      "path": "notifications/notifier.py",
+      "fns": 11,
+      "layer": "utils",
+      "lines": 100,
+      "dependencies": []
+    },
+    {
+      "path": "pyproject.toml",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 108,
+      "dependencies": []
+    },
+    {
+      "path": "requirements.txt",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 49,
+      "dependencies": []
+    },
+    {
+      "path": "ruff.toml",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 21,
+      "dependencies": []
+    },
+    {
+      "path": "run_dashboard.sh",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 14,
+      "dependencies": []
+    },
+    {
+      "path": "security/__init__.py",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 25,
+      "dependencies": []
+    },
+    {
+      "path": "security/audit.py",
+      "fns": 15,
+      "layer": "utils",
+      "lines": 219,
+      "dependencies": []
+    },
+    {
+      "path": "security/auth.py",
+      "fns": 18,
+      "layer": "utils",
+      "lines": 279,
+      "dependencies": []
+    },
+    {
+      "path": "security/backup.py",
+      "fns": 8,
+      "layer": "utils",
+      "lines": 148,
+      "dependencies": []
+    },
+    {
+      "path": "security/compliance.py",
+      "fns": 6,
+      "layer": "utils",
+      "lines": 69,
+      "dependencies": []
+    },
+    {
+      "path": "security/encryption.py",
+      "fns": 18,
+      "layer": "utils",
+      "lines": 236,
+      "dependencies": []
+    },
+    {
+      "path": "security/lifecycle.py",
+      "fns": 6,
+      "layer": "utils",
+      "lines": 131,
+      "dependencies": []
+    },
+    {
+      "path": "security/rate_limit.py",
+      "fns": 12,
+      "layer": "utils",
+      "lines": 143,
+      "dependencies": []
+    },
+    {
+      "path": "security/session.py",
+      "fns": 14,
+      "layer": "utils",
+      "lines": 208,
+      "dependencies": []
+    },
+    {
+      "path": "security/threats.py",
+      "fns": 6,
+      "layer": "utils",
+      "lines": 144,
+      "dependencies": []
+    },
+    {
+      "path": "setup.py",
+      "fns": 1,
+      "layer": "utils",
+      "lines": 89,
+      "dependencies": []
+    },
+    {
+      "path": "tox.ini",
+      "fns": 0,
+      "layer": "utils",
+      "lines": 91,
+      "dependencies": []
+    }
+  ],
+  "connections": [
+    {
+      "source": "learning/memory.py",
+      "target": "ARCHITECTURE.md",
+      "fn": "MemoryEngine",
+      "count": 1,
+      "functionKey": "learning/memory.py|17|MemoryEngine"
+    },
+    {
+      "source": "security/threats.py",
+      "target": "ARCHITECTURE.md",
+      "fn": "ThreatDetector",
+      "count": 1,
+      "functionKey": "security/threats.py|12|ThreatDetector"
+    },
+    {
+      "source": "learning/memory.py",
+      "target": "Tests/conftest.py",
+      "fn": "MemoryEngine",
+      "count": 1,
+      "functionKey": "learning/memory.py|17|MemoryEngine"
+    },
+    {
+      "source": "security/audit.py",
+      "target": "Tests/test_audit.py",
+      "fn": "AuditLogger",
+      "count": 13,
+      "functionKey": "security/audit.py|15|AuditLogger"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_audit.py",
+      "fn": "mock_config",
+      "count": 13,
+      "functionKey": "Tests/conftest.py|26|mock_config"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "Tests/test_audit.py",
+      "fn": "log_email",
+      "count": 1,
+      "functionKey": "core/logging_config.py|106|log_email"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "Tests/test_audit.py",
+      "fn": "log_file",
+      "count": 1,
+      "functionKey": "core/logging_config.py|113|log_file"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "Tests/test_audit.py",
+      "fn": "log_data",
+      "count": 1,
+      "functionKey": "core/logging_config.py|120|log_data"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "Tests/test_audit.py",
+      "fn": "log_ai",
+      "count": 1,
+      "functionKey": "core/logging_config.py|127|log_ai"
+    },
+    {
+      "source": "security/compliance.py",
+      "target": "Tests/test_compliance.py",
+      "fn": "ComplianceEngine",
+      "count": 4,
+      "functionKey": "security/compliance.py|13|ComplianceEngine"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_compliance.py",
+      "fn": "mock_config",
+      "count": 16,
+      "functionKey": "Tests/conftest.py|26|mock_config"
+    },
+    {
+      "source": "security/audit.py",
+      "target": "Tests/test_compliance.py",
+      "fn": "AuditLogger",
+      "count": 3,
+      "functionKey": "security/audit.py|15|AuditLogger"
+    },
+    {
+      "source": "security/lifecycle.py",
+      "target": "Tests/test_compliance.py",
+      "fn": "DataLifecycle",
+      "count": 4,
+      "functionKey": "security/lifecycle.py|16|DataLifecycle"
+    },
+    {
+      "source": "security/encryption.py",
+      "target": "Tests/test_compliance.py",
+      "fn": "EncryptionEngine",
+      "count": 7,
+      "functionKey": "security/encryption.py|26|EncryptionEngine"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_compliance.py",
+      "fn": "mock_encryption",
+      "count": 4,
+      "functionKey": "Tests/conftest.py|208|mock_encryption"
+    },
+    {
+      "source": "modules/data_engine/extractor.py",
+      "target": "Tests/test_data_extractor.py",
+      "fn": "DataExtractor",
+      "count": 13,
+      "functionKey": "modules/data_engine/extractor.py|9|DataExtractor"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_data_extractor.py",
+      "fn": "mock_config",
+      "count": 10,
+      "functionKey": "Tests/conftest.py|26|mock_config"
+    },
+    {
+      "source": "modules/email_brain/reader.py",
+      "target": "Tests/test_email_reader.py",
+      "fn": "EmailReader",
+      "count": 8,
+      "functionKey": "modules/email_brain/reader.py|36|EmailReader"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_email_reader.py",
+      "fn": "mock_config",
+      "count": 8,
+      "functionKey": "Tests/conftest.py|26|mock_config"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_email_reader.py",
+      "fn": "sample_email",
+      "count": 1,
+      "functionKey": "Tests/conftest.py|81|sample_email"
+    },
+    {
+      "source": "modules/email_brain/sender.py",
+      "target": "Tests/test_email_sender.py",
+      "fn": "EmailSender",
+      "count": 11,
+      "functionKey": "modules/email_brain/sender.py|21|EmailSender"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_email_sender.py",
+      "fn": "mock_config",
+      "count": 11,
+      "functionKey": "Tests/conftest.py|26|mock_config"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "Tests/test_encryption.py",
+      "fn": "security",
+      "count": 1,
+      "functionKey": "dashboard/app.py|604|security"
+    },
+    {
+      "source": "security/encryption.py",
+      "target": "Tests/test_encryption.py",
+      "fn": "EncryptionEngine",
+      "count": 2,
+      "functionKey": "security/encryption.py|26|EncryptionEngine"
+    },
+    {
+      "source": "security/encryption.py",
+      "target": "Tests/test_encryption.py",
+      "fn": "EncryptionError",
+      "count": 3,
+      "functionKey": "security/encryption.py|20|EncryptionError"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "Tests/test_encryption.py",
+      "fn": "setup",
+      "count": 6,
+      "functionKey": "dashboard/app.py|199|setup"
+    },
+    {
+      "source": "modules/file_commander/analyzer.py",
+      "target": "Tests/test_file_analyzer.py",
+      "fn": "FileAnalyzer",
+      "count": 13,
+      "functionKey": "modules/file_commander/analyzer.py|10|FileAnalyzer"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_file_analyzer.py",
+      "fn": "mock_config",
+      "count": 7,
+      "functionKey": "Tests/conftest.py|26|mock_config"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_file_analyzer.py",
+      "fn": "temp_dir",
+      "count": 5,
+      "functionKey": "Tests/conftest.py|19|temp_dir"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_file_sorter.py",
+      "fn": "mock_config",
+      "count": 15,
+      "functionKey": "Tests/conftest.py|26|mock_config"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_file_sorter.py",
+      "fn": "temp_dir",
+      "count": 8,
+      "functionKey": "Tests/conftest.py|19|temp_dir"
+    },
+    {
+      "source": "modules/file_commander/watcher.py",
+      "target": "Tests/test_file_watcher.py",
+      "fn": "FileWatcher",
+      "count": 8,
+      "functionKey": "modules/file_commander/watcher.py|17|FileWatcher"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_file_watcher.py",
+      "fn": "mock_config",
+      "count": 15,
+      "functionKey": "Tests/conftest.py|26|mock_config"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_file_watcher.py",
+      "fn": "temp_dir",
+      "count": 7,
+      "functionKey": "Tests/conftest.py|19|temp_dir"
+    },
+    {
+      "source": "core/health_monitor.py",
+      "target": "Tests/test_health_monitor.py",
+      "fn": "HealthMonitor",
+      "count": 12,
+      "functionKey": "core/health_monitor.py|16|HealthMonitor"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_health_monitor.py",
+      "fn": "mock_config",
+      "count": 15,
+      "functionKey": "Tests/conftest.py|26|mock_config"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_health_monitor.py",
+      "fn": "temp_dir",
+      "count": 6,
+      "functionKey": "Tests/conftest.py|19|temp_dir"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_integration.py",
+      "fn": "mock_config",
+      "count": 5,
+      "functionKey": "Tests/conftest.py|26|mock_config"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_integration.py",
+      "fn": "memory_engine",
+      "count": 7,
+      "functionKey": "Tests/conftest.py|222|memory_engine"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "Tests/test_integration.py",
+      "fn": "temp_dir",
+      "count": 1,
+      "functionKey": "Tests/conftest.py|19|temp_dir"
+    },
+    {
+      "source": "security/audit.py",
+      "target": "Tests/test_integration.py",
+      "fn": "AuditLogger",
+      "count": 1,
+      "functionKey": "security/audit.py|15|AuditLogger"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "Tests/test_integration.py",
+      "fn": "log_email",
+      "count": 1,
+      "functionKey": "core/logging_config.py|106|log_email"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "Tests/test_integration.py",
+      "fn": "log_file",
+      "count": 1,
+      "functionKey": "core/logging_config.py|113|log_file"
+    },
+    {
+      "source": "learning/memory.py",
+      "target": "Tests/test_learning.py",
+      "fn": "MemoryEngine",
+      "count": 2,
+      "functionKey": "learning/memory.py|17|MemoryEngine"
+    },
+    {
+      "source": "core/config.py",
+      "target": "Tests/test_learning.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/queue_manager.py",
+      "target": "Tests/test_queue_manager.py",
+      "fn": "QueueManager",
+      "count": 10,
+      "functionKey": "core/queue_manager.py|69|QueueManager"
+    },
+    {
+      "source": "core/queue_manager.py",
+      "target": "Tests/test_queue_manager.py",
+      "fn": "Task",
+      "count": 5,
+      "functionKey": "core/queue_manager.py|23|Task"
+    },
+    {
+      "source": "core/queue_manager.py",
+      "target": "Tests/test_queue_manager.py",
+      "fn": "Priority",
+      "count": 1,
+      "functionKey": "core/queue_manager.py|16|Priority"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "Tests/test_security_fixes.py",
+      "fn": "dashboard",
+      "count": 1,
+      "functionKey": "dashboard/app.py|374|dashboard"
+    },
+    {
+      "source": "dashboard/auth.py",
+      "target": "Tests/test_security_fixes.py",
+      "fn": "init_auth_db",
+      "count": 5,
+      "functionKey": "dashboard/auth.py|33|init_auth_db"
+    },
+    {
+      "source": "dashboard/auth.py",
+      "target": "Tests/test_security_fixes.py",
+      "fn": "create_session_token",
+      "count": 4,
+      "functionKey": "dashboard/auth.py|99|create_session_token"
+    },
+    {
+      "source": "dashboard/auth.py",
+      "target": "Tests/test_security_fixes.py",
+      "fn": "verify_session_token",
+      "count": 3,
+      "functionKey": "dashboard/auth.py|129|verify_session_token"
+    },
+    {
+      "source": "dashboard/auth.py",
+      "target": "Tests/test_security_fixes.py",
+      "fn": "validate_password_strength",
+      "count": 3,
+      "functionKey": "dashboard/auth.py|200|validate_password_strength"
+    },
+    {
+      "source": "dashboard/auth.py",
+      "target": "Tests/test_security_fixes.py",
+      "fn": "change_password",
+      "count": 4,
+      "functionKey": "dashboard/auth.py|222|change_password"
+    },
+    {
+      "source": "dashboard/auth.py",
+      "target": "Tests/test_security_fixes.py",
+      "fn": "force_password_change_required",
+      "count": 3,
+      "functionKey": "dashboard/auth.py|255|force_password_change_required"
+    },
+    {
+      "source": "dashboard/auth.py",
+      "target": "Tests/test_security_fixes.py",
+      "fn": "get_db_connection",
+      "count": 3,
+      "functionKey": "dashboard/auth.py|17|get_db_connection"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "Tests/test_security_fixes.py",
+      "fn": "index",
+      "count": 1,
+      "functionKey": "dashboard/app.py|357|index"
+    },
+    {
+      "source": "core/config.py",
+      "target": "core/error_recovery.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/config.py",
+      "target": "core/health_monitor.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/config.py",
+      "target": "core/logging_config.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/config.py",
+      "target": "core/metrics.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/config.py",
+      "target": "core/ollama_brain.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/config.py",
+      "target": "core/pilot.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "core/pilot.py",
+      "fn": "get_logger",
+      "count": 2,
+      "functionKey": "core/logging_config.py|92|get_logger"
+    },
+    {
+      "source": "core/ollama_brain.py",
+      "target": "core/pilot.py",
+      "fn": "OllamaBrain",
+      "count": 2,
+      "functionKey": "core/ollama_brain.py|11|OllamaBrain"
+    },
+    {
+      "source": "core/queue_manager.py",
+      "target": "core/pilot.py",
+      "fn": "QueueManager",
+      "count": 2,
+      "functionKey": "core/queue_manager.py|69|QueueManager"
+    },
+    {
+      "source": "core/queue_manager.py",
+      "target": "core/pilot.py",
+      "fn": "Priority",
+      "count": 1,
+      "functionKey": "core/queue_manager.py|16|Priority"
+    },
+    {
+      "source": "core/health_monitor.py",
+      "target": "core/pilot.py",
+      "fn": "HealthMonitor",
+      "count": 2,
+      "functionKey": "core/health_monitor.py|16|HealthMonitor"
+    },
+    {
+      "source": "core/error_recovery.py",
+      "target": "core/pilot.py",
+      "fn": "RecoveryManager",
+      "count": 2,
+      "functionKey": "core/error_recovery.py|15|RecoveryManager"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "core/pilot.py",
+      "fn": "security",
+      "count": 7,
+      "functionKey": "dashboard/app.py|604|security"
+    },
+    {
+      "source": "security/encryption.py",
+      "target": "core/pilot.py",
+      "fn": "EncryptionEngine",
+      "count": 2,
+      "functionKey": "security/encryption.py|26|EncryptionEngine"
+    },
+    {
+      "source": "security/auth.py",
+      "target": "core/pilot.py",
+      "fn": "AccessControl",
+      "count": 2,
+      "functionKey": "security/auth.py|29|AccessControl"
+    },
+    {
+      "source": "security/auth.py",
+      "target": "core/pilot.py",
+      "fn": "AuthError",
+      "count": 1,
+      "functionKey": "security/auth.py|17|AuthError"
+    },
+    {
+      "source": "security/audit.py",
+      "target": "core/pilot.py",
+      "fn": "AuditLogger",
+      "count": 2,
+      "functionKey": "security/audit.py|15|AuditLogger"
+    },
+    {
+      "source": "security/threats.py",
+      "target": "core/pilot.py",
+      "fn": "ThreatDetector",
+      "count": 2,
+      "functionKey": "security/threats.py|12|ThreatDetector"
+    },
+    {
+      "source": "security/lifecycle.py",
+      "target": "core/pilot.py",
+      "fn": "DataLifecycle",
+      "count": 2,
+      "functionKey": "security/lifecycle.py|16|DataLifecycle"
+    },
+    {
+      "source": "security/compliance.py",
+      "target": "core/pilot.py",
+      "fn": "ComplianceEngine",
+      "count": 2,
+      "functionKey": "security/compliance.py|13|ComplianceEngine"
+    },
+    {
+      "source": "security/backup.py",
+      "target": "core/pilot.py",
+      "fn": "BackupManager",
+      "count": 2,
+      "functionKey": "security/backup.py|15|BackupManager"
+    },
+    {
+      "source": "learning/memory.py",
+      "target": "core/pilot.py",
+      "fn": "MemoryEngine",
+      "count": 2,
+      "functionKey": "learning/memory.py|17|MemoryEngine"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "core/pilot.py",
+      "fn": "email_brain",
+      "count": 2,
+      "functionKey": "dashboard/app.py|534|email_brain"
+    },
+    {
+      "source": "modules/email_brain/reader.py",
+      "target": "core/pilot.py",
+      "fn": "EmailReader",
+      "count": 2,
+      "functionKey": "modules/email_brain/reader.py|36|EmailReader"
+    },
+    {
+      "source": "modules/email_brain/sender.py",
+      "target": "core/pilot.py",
+      "fn": "EmailSender",
+      "count": 2,
+      "functionKey": "modules/email_brain/sender.py|21|EmailSender"
+    },
+    {
+      "source": "modules/file_commander/watcher.py",
+      "target": "core/pilot.py",
+      "fn": "FileWatcher",
+      "count": 2,
+      "functionKey": "modules/file_commander/watcher.py|17|FileWatcher"
+    },
+    {
+      "source": "modules/file_commander/analyzer.py",
+      "target": "core/pilot.py",
+      "fn": "FileAnalyzer",
+      "count": 2,
+      "functionKey": "modules/file_commander/analyzer.py|10|FileAnalyzer"
+    },
+    {
+      "source": "modules/data_engine/extractor.py",
+      "target": "core/pilot.py",
+      "fn": "DataExtractor",
+      "count": 2,
+      "functionKey": "modules/data_engine/extractor.py|9|DataExtractor"
+    },
+    {
+      "source": "modules/data_engine/sheet_writer.py",
+      "target": "core/pilot.py",
+      "fn": "SheetWriter",
+      "count": 2,
+      "functionKey": "modules/data_engine/sheet_writer.py|13|SheetWriter"
+    },
+    {
+      "source": "notifications/notifier.py",
+      "target": "core/pilot.py",
+      "fn": "Notifier",
+      "count": 2,
+      "functionKey": "notifications/notifier.py|13|Notifier"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "core/pilot.py",
+      "fn": "setup",
+      "count": 1,
+      "functionKey": "dashboard/app.py|199|setup"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "core/pilot.py",
+      "fn": "login",
+      "count": 1,
+      "functionKey": "dashboard/app.py|93|login"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "core/pilot.py",
+      "fn": "log_email",
+      "count": 1,
+      "functionKey": "core/logging_config.py|106|log_email"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "core/pilot.py",
+      "fn": "log_ai",
+      "count": 1,
+      "functionKey": "core/logging_config.py|127|log_ai"
+    },
+    {
+      "source": "core/ollama_brain.py",
+      "target": "core/pilot.py",
+      "fn": "draft_reply",
+      "count": 1,
+      "functionKey": "core/ollama_brain.py|75|draft_reply"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "core/pilot.py",
+      "fn": "log_file",
+      "count": 2,
+      "functionKey": "core/logging_config.py|113|log_file"
+    },
+    {
+      "source": "core/ollama_brain.py",
+      "target": "core/pilot.py",
+      "fn": "categorize_file",
+      "count": 1,
+      "functionKey": "core/ollama_brain.py|107|categorize_file"
+    },
+    {
+      "source": "core/ollama_brain.py",
+      "target": "core/pilot.py",
+      "fn": "generate_filename",
+      "count": 1,
+      "functionKey": "core/ollama_brain.py|125|generate_filename"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "core/pilot.py",
+      "fn": "log_data",
+      "count": 1,
+      "functionKey": "core/logging_config.py|120|log_data"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "core/pilot.py",
+      "fn": "create_backup",
+      "count": 1,
+      "functionKey": "dashboard/app.py|642|create_backup"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "core/pilot.py",
+      "fn": "logout",
+      "count": 1,
+      "functionKey": "dashboard/app.py|145|logout"
+    },
+    {
+      "source": "core/pilot.py",
+      "target": "dashboard/app.py",
+      "fn": "AegisEngine",
+      "count": 2,
+      "functionKey": "core/pilot.py|42|AegisEngine"
+    },
+    {
+      "source": "core/config.py",
+      "target": "dashboard/app.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "security/auth.py",
+      "target": "dashboard/app.py",
+      "fn": "AuthError",
+      "count": 2,
+      "functionKey": "security/auth.py|17|AuthError"
+    },
+    {
+      "source": "security/auth.py",
+      "target": "dashboard/app.py",
+      "fn": "TwoFactorError",
+      "count": 2,
+      "functionKey": "security/auth.py|23|TwoFactorError"
+    },
+    {
+      "source": "core/metrics.py",
+      "target": "dashboard/app.py",
+      "fn": "get_metrics",
+      "count": 2,
+      "functionKey": "core/metrics.py|144|get_metrics"
+    },
+    {
+      "source": "security/rate_limit.py",
+      "target": "dashboard/app.py",
+      "fn": "rate_limit_api",
+      "count": 5,
+      "functionKey": "security/rate_limit.py|135|rate_limit_api"
+    },
+    {
+      "source": "main.py",
+      "target": "dashboard/app.py",
+      "fn": "first_time_setup",
+      "count": 1,
+      "functionKey": "main.py|42|first_time_setup"
+    },
+    {
+      "source": "dashboard/auth.py",
+      "target": "dashboard/app.py",
+      "fn": "get_current_user",
+      "count": 1,
+      "functionKey": "dashboard/auth.py|185|get_current_user"
+    },
+    {
+      "source": "dashboard/auth.py",
+      "target": "dashboard/app.py",
+      "fn": "validate_password_strength",
+      "count": 1,
+      "functionKey": "dashboard/auth.py|200|validate_password_strength"
+    },
+    {
+      "source": "dashboard/auth.py",
+      "target": "dashboard/app.py",
+      "fn": "force_password_change_required",
+      "count": 1,
+      "functionKey": "dashboard/auth.py|255|force_password_change_required"
+    },
+    {
+      "source": "core/demo_data.py",
+      "target": "dashboard/app.py",
+      "fn": "get_demo_status",
+      "count": 1,
+      "functionKey": "core/demo_data.py|283|get_demo_status"
+    },
+    {
+      "source": "core/demo_data.py",
+      "target": "dashboard/app.py",
+      "fn": "get_demo_emails",
+      "count": 3,
+      "functionKey": "core/demo_data.py|13|get_demo_emails"
+    },
+    {
+      "source": "core/demo_data.py",
+      "target": "dashboard/app.py",
+      "fn": "get_demo_notifications",
+      "count": 1,
+      "functionKey": "core/demo_data.py|253|get_demo_notifications"
+    },
+    {
+      "source": "dashboard/notifications.py",
+      "target": "dashboard/app.py",
+      "fn": "get_notification_db",
+      "count": 3,
+      "functionKey": "dashboard/notifications.py|142|get_notification_db"
+    },
+    {
+      "source": "modules/assistant/simple_assistant.py",
+      "target": "dashboard/app.py",
+      "fn": "ask_simple_assistant",
+      "count": 1,
+      "functionKey": "modules/assistant/simple_assistant.py|119|ask_simple_assistant"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "dashboard/auth.py",
+      "fn": "security",
+      "count": 1,
+      "functionKey": "dashboard/app.py|604|security"
+    },
+    {
+      "source": "core/config.py",
+      "target": "dashboard/auth.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/config.py",
+      "target": "dashboard/notifications.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "dashboard/templates/email.html",
+      "fn": "index",
+      "count": 2,
+      "functionKey": "dashboard/app.py|357|index"
+    },
+    {
+      "source": "learning/memory.py",
+      "target": "learning/__init__.py",
+      "fn": "MemoryEngine",
+      "count": 1,
+      "functionKey": "learning/memory.py|17|MemoryEngine"
+    },
+    {
+      "source": "core/config.py",
+      "target": "learning/memory.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/pilot.py",
+      "target": "main.py",
+      "fn": "AegisEngine",
+      "count": 4,
+      "functionKey": "core/pilot.py|42|AegisEngine"
+    },
+    {
+      "source": "core/config.py",
+      "target": "main.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "main.py",
+      "fn": "security",
+      "count": 1,
+      "functionKey": "dashboard/app.py|604|security"
+    },
+    {
+      "source": "security/auth.py",
+      "target": "main.py",
+      "fn": "AccessControl",
+      "count": 1,
+      "functionKey": "security/auth.py|29|AccessControl"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "main.py",
+      "fn": "login",
+      "count": 3,
+      "functionKey": "dashboard/app.py|93|login"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "main.py",
+      "fn": "run_cycle",
+      "count": 2,
+      "functionKey": "dashboard/app.py|430|run_cycle"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "main.py",
+      "fn": "create_backup",
+      "count": 1,
+      "functionKey": "dashboard/app.py|642|create_backup"
+    },
+    {
+      "source": "core/config.py",
+      "target": "migrations/__init__.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/ollama_brain.py",
+      "target": "modules/assistant/chat.py",
+      "fn": "OllamaBrain",
+      "count": 2,
+      "functionKey": "core/ollama_brain.py|11|OllamaBrain"
+    },
+    {
+      "source": "core/config.py",
+      "target": "modules/assistant/chat.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "learning/memory.py",
+      "target": "modules/assistant/chat.py",
+      "fn": "MemoryEngine",
+      "count": 2,
+      "functionKey": "learning/memory.py|17|MemoryEngine"
+    },
+    {
+      "source": "core/pilot.py",
+      "target": "modules/assistant/chat.py",
+      "fn": "AegisEngine",
+      "count": 1,
+      "functionKey": "core/pilot.py|42|AegisEngine"
+    },
+    {
+      "source": "modules/file_commander/watcher.py",
+      "target": "modules/assistant/chat.py",
+      "fn": "FileWatcher",
+      "count": 1,
+      "functionKey": "modules/file_commander/watcher.py|17|FileWatcher"
+    },
+    {
+      "source": "core/ollama_brain.py",
+      "target": "modules/assistant/minimal_chat.py",
+      "fn": "OllamaBrain",
+      "count": 2,
+      "functionKey": "core/ollama_brain.py|11|OllamaBrain"
+    },
+    {
+      "source": "core/config.py",
+      "target": "modules/assistant/simple_assistant.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/pilot.py",
+      "target": "modules/assistant/simple_assistant.py",
+      "fn": "AegisEngine",
+      "count": 1,
+      "functionKey": "core/pilot.py|42|AegisEngine"
+    },
+    {
+      "source": "modules/file_commander/watcher.py",
+      "target": "modules/assistant/simple_assistant.py",
+      "fn": "FileWatcher",
+      "count": 1,
+      "functionKey": "modules/file_commander/watcher.py|17|FileWatcher"
+    },
+    {
+      "source": "core/ollama_brain.py",
+      "target": "modules/assistant/simple_chat.py",
+      "fn": "OllamaBrain",
+      "count": 2,
+      "functionKey": "core/ollama_brain.py|11|OllamaBrain"
+    },
+    {
+      "source": "modules/calendar/manager.py",
+      "target": "modules/calendar/__init__.py",
+      "fn": "CalendarManager",
+      "count": 1,
+      "functionKey": "modules/calendar/manager.py|42|CalendarManager"
+    },
+    {
+      "source": "modules/calendar/manager.py",
+      "target": "modules/calendar/__init__.py",
+      "fn": "CalendarEvent",
+      "count": 2,
+      "functionKey": "modules/calendar/manager.py|20|CalendarEvent"
+    },
+    {
+      "source": "modules/calendar/manager.py",
+      "target": "modules/calendar/__init__.py",
+      "fn": "ICSParseError",
+      "count": 1,
+      "functionKey": "modules/calendar/manager.py|37|ICSParseError"
+    },
+    {
+      "source": "core/config.py",
+      "target": "modules/calendar/manager.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/ollama_brain.py",
+      "target": "modules/data_engine/extractor.py",
+      "fn": "OllamaBrain",
+      "count": 2,
+      "functionKey": "core/ollama_brain.py|11|OllamaBrain"
+    },
+    {
+      "source": "core/ollama_brain.py",
+      "target": "modules/data_engine/extractor.py",
+      "fn": "extract_invoice_data",
+      "count": 1,
+      "functionKey": "core/ollama_brain.py|147|extract_invoice_data"
+    },
+    {
+      "source": "core/config.py",
+      "target": "modules/data_engine/sheet_writer.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/config.py",
+      "target": "modules/email_brain/reader.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "modules/email_brain/reader.py",
+      "fn": "login",
+      "count": 1,
+      "functionKey": "dashboard/app.py|93|login"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "modules/email_brain/reader.py",
+      "fn": "logout",
+      "count": 1,
+      "functionKey": "dashboard/app.py|145|logout"
+    },
+    {
+      "source": "core/config.py",
+      "target": "modules/email_brain/sender.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "modules/email_brain/sender.py",
+      "fn": "login",
+      "count": 1,
+      "functionKey": "dashboard/app.py|93|login"
+    },
+    {
+      "source": "core/config.py",
+      "target": "modules/email_brain/templates.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/config.py",
+      "target": "modules/file_commander/watcher.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/config.py",
+      "target": "notifications/notifier.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "dashboard/notifications.py",
+      "target": "notifications/notifier.py",
+      "fn": "notify",
+      "count": 5,
+      "functionKey": "dashboard/notifications.py|150|notify"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "security/__init__.py",
+      "fn": "security",
+      "count": 7,
+      "functionKey": "dashboard/app.py|604|security"
+    },
+    {
+      "source": "security/encryption.py",
+      "target": "security/__init__.py",
+      "fn": "EncryptionEngine",
+      "count": 1,
+      "functionKey": "security/encryption.py|26|EncryptionEngine"
+    },
+    {
+      "source": "security/encryption.py",
+      "target": "security/__init__.py",
+      "fn": "EncryptionError",
+      "count": 1,
+      "functionKey": "security/encryption.py|20|EncryptionError"
+    },
+    {
+      "source": "security/auth.py",
+      "target": "security/__init__.py",
+      "fn": "AccessControl",
+      "count": 1,
+      "functionKey": "security/auth.py|29|AccessControl"
+    },
+    {
+      "source": "security/auth.py",
+      "target": "security/__init__.py",
+      "fn": "AuthError",
+      "count": 1,
+      "functionKey": "security/auth.py|17|AuthError"
+    },
+    {
+      "source": "security/audit.py",
+      "target": "security/__init__.py",
+      "fn": "AuditLogger",
+      "count": 1,
+      "functionKey": "security/audit.py|15|AuditLogger"
+    },
+    {
+      "source": "security/threats.py",
+      "target": "security/__init__.py",
+      "fn": "ThreatDetector",
+      "count": 1,
+      "functionKey": "security/threats.py|12|ThreatDetector"
+    },
+    {
+      "source": "security/lifecycle.py",
+      "target": "security/__init__.py",
+      "fn": "DataLifecycle",
+      "count": 1,
+      "functionKey": "security/lifecycle.py|16|DataLifecycle"
+    },
+    {
+      "source": "security/compliance.py",
+      "target": "security/__init__.py",
+      "fn": "ComplianceEngine",
+      "count": 1,
+      "functionKey": "security/compliance.py|13|ComplianceEngine"
+    },
+    {
+      "source": "security/backup.py",
+      "target": "security/__init__.py",
+      "fn": "BackupManager",
+      "count": 1,
+      "functionKey": "security/backup.py|15|BackupManager"
+    },
+    {
+      "source": "core/config.py",
+      "target": "security/audit.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "security/audit.py",
+      "fn": "log_file",
+      "count": 1,
+      "functionKey": "core/logging_config.py|113|log_file"
+    },
+    {
+      "source": "core/config.py",
+      "target": "security/auth.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "security/auth.py",
+      "fn": "security",
+      "count": 1,
+      "functionKey": "dashboard/app.py|604|security"
+    },
+    {
+      "source": "security/encryption.py",
+      "target": "security/auth.py",
+      "fn": "EncryptionEngine",
+      "count": 2,
+      "functionKey": "security/encryption.py|26|EncryptionEngine"
+    },
+    {
+      "source": "security/encryption.py",
+      "target": "security/auth.py",
+      "fn": "EncryptionError",
+      "count": 1,
+      "functionKey": "security/encryption.py|20|EncryptionError"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "security/auth.py",
+      "fn": "logout",
+      "count": 1,
+      "functionKey": "dashboard/app.py|145|logout"
+    },
+    {
+      "source": "core/config.py",
+      "target": "security/backup.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "security/backup.py",
+      "fn": "security",
+      "count": 1,
+      "functionKey": "dashboard/app.py|604|security"
+    },
+    {
+      "source": "security/encryption.py",
+      "target": "security/backup.py",
+      "fn": "EncryptionEngine",
+      "count": 2,
+      "functionKey": "security/encryption.py|26|EncryptionEngine"
+    },
+    {
+      "source": "Tests/conftest.py",
+      "target": "security/backup.py",
+      "fn": "temp_dir",
+      "count": 2,
+      "functionKey": "Tests/conftest.py|19|temp_dir"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "security/compliance.py",
+      "fn": "security",
+      "count": 3,
+      "functionKey": "dashboard/app.py|604|security"
+    },
+    {
+      "source": "security/audit.py",
+      "target": "security/compliance.py",
+      "fn": "AuditLogger",
+      "count": 2,
+      "functionKey": "security/audit.py|15|AuditLogger"
+    },
+    {
+      "source": "security/lifecycle.py",
+      "target": "security/compliance.py",
+      "fn": "DataLifecycle",
+      "count": 2,
+      "functionKey": "security/lifecycle.py|16|DataLifecycle"
+    },
+    {
+      "source": "security/encryption.py",
+      "target": "security/compliance.py",
+      "fn": "EncryptionEngine",
+      "count": 2,
+      "functionKey": "security/encryption.py|26|EncryptionEngine"
+    },
+    {
+      "source": "core/config.py",
+      "target": "security/compliance.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/config.py",
+      "target": "security/encryption.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "core/config.py",
+      "target": "security/lifecycle.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "security/lifecycle.py",
+      "fn": "security",
+      "count": 1,
+      "functionKey": "dashboard/app.py|604|security"
+    },
+    {
+      "source": "security/encryption.py",
+      "target": "security/lifecycle.py",
+      "fn": "EncryptionEngine",
+      "count": 2,
+      "functionKey": "security/encryption.py|26|EncryptionEngine"
+    },
+    {
+      "source": "core/config.py",
+      "target": "security/session.py",
+      "fn": "Config",
+      "count": 1,
+      "functionKey": "core/config.py|16|Config"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "security/threats.py",
+      "fn": "security",
+      "count": 1,
+      "functionKey": "dashboard/app.py|604|security"
+    },
+    {
+      "source": "security/audit.py",
+      "target": "security/threats.py",
+      "fn": "AuditLogger",
+      "count": 2,
+      "functionKey": "security/audit.py|15|AuditLogger"
+    },
+    {
+      "source": "core/logging_config.py",
+      "target": "security/threats.py",
+      "fn": "log_security",
+      "count": 1,
+      "functionKey": "core/logging_config.py|99|log_security"
+    },
+    {
+      "source": "dashboard/app.py",
+      "target": "tox.ini",
+      "fn": "security",
+      "count": 1,
+      "functionKey": "dashboard/app.py|604|security"
+    },
+    {
+      "source": "README.md",
+      "target": "LICENSE",
+      "fn": "[![License](https://img.shields.io/badge/license-MIT-0d1117?style=for-the-badge&labelColor=6e40c9&color=0d1117)](LICENSE)",
+      "count": 1,
+      "kind": "mdlink"
+    },
+    {
+      "source": "README.md",
+      "target": "ARCHITECTURE.md",
+      "fn": "[ARCHITECTURE.md](ARCHITECTURE.md)",
+      "count": 1,
+      "kind": "mdlink"
+    },
+    {
+      "source": "README.md",
+      "target": "docs/DEPLOYMENT.md",
+      "fn": "[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)",
+      "count": 1,
+      "kind": "mdlink"
+    },
+    {
+      "source": "README.md",
+      "target": "docs/API.md",
+      "fn": "[docs/API.md](docs/API.md)",
+      "count": 1,
+      "kind": "mdlink"
+    },
+    {
+      "source": "README.md",
+      "target": "LICENSE",
+      "fn": "[LICENSE](LICENSE)",
+      "count": 1,
+      "kind": "mdlink"
+    },
+    {
+      "source": "README.md",
+      "target": "LICENSE",
+      "fn": "[MIT License](LICENSE)",
+      "count": 1,
+      "kind": "mdlink"
+    }
+  ],
+  "issues": [
+    {
+      "type": "warning",
+      "title": "19 Unused Functions",
+      "desc": "Functions not called from other files",
+      "items": [
+        {
+          "name": "get_demo_files",
+          "file": "core/demo_data.py",
+          "line": 194,
+          "code": "def get_demo_files():\n    \"\"\"20 sample file operations\"\"\"\n    \n    base_time = datetime.now()\n    \n    return [\n        {\"operation\": \"sorted\", \"filename\": \"Q1_Report_2026.pdf\", \"category\": \"Reports\", \"size_mb\": 2.4, \"timestamp\": (base_time - timedelta(hours=1)).isoformat()},\n        {\"operation\": \"sorted\", \"filename\": \"Invoice_March_2026.xlsx\", \"category\": \"Finance/Invoices\", \"size_mb\": 0.3, \"timestamp\": (base_time - timedelta(hours=2)).isoformat()},\n        {\"operation\": \"sorted\", \"filename\": \"Employment_Contract_Smith.pdf\", \"category\": \"Legal/Contracts\", \"size_mb\": 1.1, \"timestamp\": (base_time - timedelta(hours=3)).isoformat()},\n        {\"operation\": \"sorted\", \"filename\": \"Presentation_Deck_v2.pptx\", \"category\": \"Presentations\", \"size_mb\": 15.7, \"timestamp\": (base_time - timedelta(hours=4)).isoformat()},\n        {\"operation\": \"sorted\", \"filename\": \"receipt_amazon_0320.pdf\", \"category\": \"Finance/Receipts\", \"size_mb\": 0.1, \"timestamp\": (base_time - timedelta(hours=5)).isoformat()},\n        {\"operation\": \"sorted\", \"filename\": \"team_photo.jpg\", \"category\": \"Images\", \"size_mb\": 4.2, \"timestamp\": (base_time - timedelta(hours=6)).isoformat()},\n        {\"operation\": \"sorted\", \"filename\": \"Budget_Tracker_2026.xlsx\", \"category\": \"Spreadsheets\", \"size_mb\": 0.8, \"timestamp\": (base_time - timedelta(hours=8)).isoformat()},\n        {\"operation\": \"sorted\", \"filename\": \"Meeting_Notes_0315.txt\", \"category\": \"Correspondence\", \"size_mb\": 0.02, \"timestamp\": (base_time - timedelta(hours=10)).isoformat()},\n        {\"operation\": \"sorted\", \"filename\": \"Tax_Form_W9_2026.pdf\", \"category\": \"Finance/Tax\", \"size_mb\": 0.5, \"timestamp\": (base_time - timedelta(days=1)).isoformat()},\n  // ..."
+        },
+        {
+          "name": "get_demo_stats",
+          "file": "core/demo_data.py",
+          "line": 267,
+          "code": "def get_demo_stats():\n    \"\"\"Dashboard statistics\"\"\"\n    \n    return {\n        \"total_emails\": 47,\n        \"urgent_count\": 8,\n        \"routine_count\": 31,\n        \"spam_count\": 6,\n        \"meeting_count\": 2,\n        \"files_processed\": 156,\n        \"duplicates_found\": 12,\n        \"data_entries\": 89,\n        \"cycles_completed\": 23,\n    }\n\n  // ..."
+        },
+        {
+          "name": "log_learning",
+          "file": "core/logging_config.py",
+          "line": 134,
+          "code": "def log_learning(action: str, detail: str, level: str = \"DEBUG\") -> None:\n    \"\"\"Log learning events\"\"\"\n    logger = get_logger(\"learning\")\n    log_func = getattr(logger, level.lower(), logger.info)\n    log_func(f\"[LEARNING] {action}: {detail}\")\n\n"
+        },
+        {
+          "name": "log_system",
+          "file": "core/logging_config.py",
+          "line": 141,
+          "code": "def log_system(action: str, detail: str, level: str = \"INFO\") -> None:\n    \"\"\"Log system events\"\"\"\n    logger = get_logger(\"system\")\n    log_func = getattr(logger, level.lower(), logger.info)\n    log_func(f\"[SYSTEM] {action}: {detail}\")"
+        },
+        {
+          "name": "record_email_processed",
+          "file": "core/metrics.py",
+          "line": 149,
+          "code": "def record_email_processed() -> None:\n    \"\"\"Record an email was processed\"\"\"\n    get_metrics().inc(\"pilot_emails_processed_total\")\n\n"
+        },
+        {
+          "name": "record_file_organized",
+          "file": "core/metrics.py",
+          "line": 154,
+          "code": "def record_file_organized() -> None:\n    \"\"\"Record a file was organized\"\"\"\n    get_metrics().inc(\"pilot_files_organized_total\")\n\n"
+        },
+        {
+          "name": "record_error",
+          "file": "core/metrics.py",
+          "line": 159,
+          "code": "def record_error() -> None:\n    \"\"\"Record an error occurred\"\"\"\n    get_metrics().inc(\"pilot_errors_total\")\n\n"
+        },
+        {
+          "name": "record_cycle",
+          "file": "core/metrics.py",
+          "line": 164,
+          "code": "def record_cycle(emails: int, files: int, duration: float, errors: int = 0) -> None:\n    \"\"\"Record cycle completion\"\"\"\n    get_metrics().cycle_completed(duration, emails, files, errors)"
+        },
+        {
+          "name": "login_required",
+          "file": "dashboard/auth.py",
+          "line": 158,
+          "code": "def login_required(f):\n    \"\"\"Decorator to require authentication\"\"\"\n\n    @wraps(f)\n    def decorated_function(*args, **kwargs):\n        token = request.cookies.get(\"session_token\") or session.get(\"session_token\")\n\n        if not token:\n            if request.accept_mimetypes.accept_json:\n                return jsonify({\"error\": \"Authentication required\"}), 401\n            else:\n                return redirect(url_for(\"login\"))\n\n        payload = verify_session_token(token)\n        if not payload:\n  // ..."
+        },
+        {
+          "name": "notify_error",
+          "file": "dashboard/notifications.py",
+          "line": 156,
+          "code": "def notify_error(title: str, message: str, metadata: Optional[dict] = None):\n    \"\"\"Add an error notification\"\"\"\n    notify(\"error\", title, message, metadata)\n\n"
+        },
+        {
+          "name": "notify_success",
+          "file": "dashboard/notifications.py",
+          "line": 161,
+          "code": "def notify_success(title: str, message: str, metadata: Optional[dict] = None):\n    \"\"\"Add a success notification\"\"\"\n    notify(\"success\", title, message, metadata)\n\n"
+        },
+        {
+          "name": "notify_security",
+          "file": "dashboard/notifications.py",
+          "line": 166,
+          "code": "def notify_security(title: str, message: str, metadata: Optional[dict] = None):\n    \"\"\"Add a security notification\"\"\"\n    notify(\"security\", title, message, metadata)\n\n"
+        },
+        {
+          "name": "notify_task",
+          "file": "dashboard/notifications.py",
+          "line": 171,
+          "code": "def notify_task(title: str, message: str, metadata: Optional[dict] = None):\n    \"\"\"Add a task notification\"\"\"\n    notify(\"task\", title, message, metadata)"
+        },
+        {
+          "name": "run_migrations",
+          "file": "migrations/__init__.py",
+          "line": 233,
+          "code": "def run_migrations(db_path: Optional[Path] = None) -> list[str]:\n    \"\"\"Run all pending migrations\"\"\"\n    manager = MigrationManager(db_path)\n    return manager.upgrade()\n\n"
+        },
+        {
+          "name": "get_schema_version",
+          "file": "migrations/__init__.py",
+          "line": 239,
+          "code": "def get_schema_version(db_path: Optional[Path] = None) -> int:\n    \"\"\"Get current schema version\"\"\"\n    manager = MigrationManager(db_path)\n    return manager.current_version()"
+        },
+        {
+          "name": "ask_assistant",
+          "file": "modules/assistant/chat.py",
+          "line": 139,
+          "code": "def ask_assistant(question: str) -> str:\n    \"\"\"Convenience function to ask the assistant a question\"\"\"\n    assistant = OfficeAssistant()\n    return assistant.answer_question(question)"
+        },
+        {
+          "name": "rate_limit_auth",
+          "file": "security/rate_limit.py",
+          "line": 130,
+          "code": "def rate_limit_auth():\n    \"\"\"Rate limit for authentication endpoints\"\"\"\n    return rate_limit(limiter=_auth_limiter)\n\n"
+        },
+        {
+          "name": "rate_limit_status",
+          "file": "security/rate_limit.py",
+          "line": 140,
+          "code": "def rate_limit_status():\n    \"\"\"Rate limit for status/metrics endpoints\"\"\"\n    return rate_limit(limiter=_status_limiter)"
+        },
+        {
+          "name": "get_session_manager",
+          "file": "security/session.py",
+          "line": 203,
+          "code": "def get_session_manager() -> SessionManager:\n    \"\"\"Get the global session manager instance\"\"\"\n    global _session_manager\n    if _session_manager is None:\n        _session_manager = SessionManager()\n    return _session_manager"
+        }
+      ]
+    },
+    {
+      "type": "critical",
+      "title": "9 Large Files",
+      "desc": "Files with 15+ functions",
+      "items": [
+        {
+          "name": "pilot.py (19 fns)",
+          "file": "core/pilot.py",
+          "fns": 19,
+          "lines": 686
+        },
+        {
+          "name": "queue_manager.py (20 fns)",
+          "file": "core/queue_manager.py",
+          "fns": 20,
+          "lines": 182
+        },
+        {
+          "name": "app.py (43 fns)",
+          "file": "dashboard/app.py",
+          "fns": 43,
+          "lines": 977
+        },
+        {
+          "name": "notifications.py (16 fns)",
+          "file": "dashboard/notifications.py",
+          "fns": 16,
+          "lines": 174
+        },
+        {
+          "name": "memory.py (32 fns)",
+          "file": "learning/memory.py",
+          "fns": 32,
+          "lines": 795
+        },
+        {
+          "name": "manager.py (26 fns)",
+          "file": "modules/calendar/manager.py",
+          "fns": 26,
+          "lines": 398
+        },
+        {
+          "name": "templates.py (16 fns)",
+          "file": "modules/email_brain/templates.py",
+          "fns": 16,
+          "lines": 194
+        },
+        {
+          "name": "auth.py (18 fns)",
+          "file": "security/auth.py",
+          "fns": 18,
+          "lines": 279
+        },
+        {
+          "name": "encryption.py (18 fns)",
+          "file": "security/encryption.py",
+          "fns": 18,
+          "lines": 236
+        }
+      ]
+    },
+    {
+      "type": "warning",
+      "title": "4 Highly Coupled",
+      "desc": "Files imported by 8+ others",
+      "items": [
+        {
+          "name": "pilot.py (36 imports)",
+          "file": "core/pilot.py",
+          "imports": 36
+        },
+        {
+          "name": "app.py (15 imports)",
+          "file": "dashboard/app.py",
+          "imports": 15
+        },
+        {
+          "name": "__init__.py (10 imports)",
+          "file": "security/__init__.py",
+          "imports": 10
+        },
+        {
+          "name": "test_security_fixes.py (9 imports)",
+          "file": "Tests/test_security_fixes.py",
+          "imports": 9
+        }
+      ]
+    },
+    {
+      "type": "critical",
+      "title": "4 Circular Dependencies",
+      "desc": "Files that import each other",
+      "items": [
+        {
+          "name": "pilot.py ↔ app.py",
+          "files": [
+            "core/pilot.py",
+            "dashboard/app.py"
+          ]
+        },
+        {
+          "name": "app.py ↔ auth.py",
+          "files": [
+            "dashboard/app.py",
+            "security/auth.py"
+          ]
+        },
+        {
+          "name": "app.py ↔ main.py",
+          "files": [
+            "dashboard/app.py",
+            "main.py"
+          ]
+        },
+        {
+          "name": "app.py ↔ auth.py",
+          "files": [
+            "dashboard/app.py",
+            "dashboard/auth.py"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "critical",
+      "title": "3 Architecture Violations",
+      "desc": "Lower layers importing from higher layers",
+      "items": [
+        {
+          "name": "utils → ui",
+          "file": "dashboard/app.py",
+          "toFile": "dashboard/templates/email.html",
+          "fn": "index",
+          "suggestion": "utils should not import from ui. Consider inverting the dependency or using dependency injection."
+        },
+        {
+          "name": "config → data",
+          "file": "core/config.py",
+          "toFile": "modules/data_engine/sheet_writer.py",
+          "fn": "Config",
+          "suggestion": "config should not import from data. Consider inverting the dependency or using dependency injection."
+        },
+        {
+          "name": "test → utils",
+          "file": "Tests/conftest.py",
+          "toFile": "security/backup.py",
+          "fn": "temp_dir",
+          "suggestion": "test should not import from utils. Consider inverting the dependency or using dependency injection."
+        }
+      ]
+    },
+    {
+      "type": "warning",
+      "title": "11 High Complexity Files",
+      "desc": "Files with complexity score >30",
+      "items": [
+        {
+          "name": "app.py (139)",
+          "file": "dashboard/app.py",
+          "score": 139,
+          "lines": 977
+        },
+        {
+          "name": "memory.py (115)",
+          "file": "learning/memory.py",
+          "score": 115,
+          "lines": 795
+        },
+        {
+          "name": "pilot.py (84)",
+          "file": "core/pilot.py",
+          "score": 84,
+          "lines": 686
+        },
+        {
+          "name": "manager.py (84)",
+          "file": "modules/calendar/manager.py",
+          "score": 84,
+          "lines": 398
+        },
+        {
+          "name": "main.py (64)",
+          "file": "main.py",
+          "score": 64,
+          "lines": 345
+        },
+        {
+          "name": "test_security_fixes.py (60)",
+          "file": "Tests/test_security_fixes.py",
+          "score": 60,
+          "lines": 388
+        },
+        {
+          "name": "auth.py (48)",
+          "file": "dashboard/auth.py",
+          "score": 48,
+          "lines": 265
+        },
+        {
+          "name": "auth.py (47)",
+          "file": "security/auth.py",
+          "score": 47,
+          "lines": 279
+        },
+        {
+          "name": "simple_assistant.py (34)",
+          "file": "modules/assistant/simple_assistant.py",
+          "score": 34,
+          "lines": 123
+        },
+        {
+          "name": "ollama_brain.py (32)",
+          "file": "core/ollama_brain.py",
+          "score": 32,
+          "lines": 206
+        },
+        {
+          "name": "encryption.py (31)",
+          "file": "security/encryption.py",
+          "score": 31,
+          "lines": 236
+        }
+      ]
+    }
+  ],
+  "patterns": [
+    {
+      "name": "Factory",
+      "icon": "factory",
+      "desc": "Creates objects without specifying exact class. Enables loose coupling and extensibility.",
+      "severity": "info",
+      "files": [
+        {
+          "name": "assistant.html",
+          "path": "dashboard/templates/assistant.html"
+        },
+        {
+          "name": "base.html",
+          "path": "dashboard/templates/base.html"
+        },
+        {
+          "name": "security.html",
+          "path": "dashboard/templates/security.html"
+        },
+        {
+          "name": "settings.html",
+          "path": "dashboard/templates/settings.html"
+        },
+        {
+          "name": "watcher.py",
+          "path": "modules/file_commander/watcher.py"
+        },
+        {
+          "name": "session.py",
+          "path": "security/session.py"
+        }
+      ],
+      "metrics": {
+        "factories": 6
+      }
+    },
+    {
+      "name": "Observer/Event",
+      "icon": "eye",
+      "desc": "Defines a subscription mechanism for event-driven architecture. Great for decoupling.",
+      "severity": "info",
+      "files": [
+        {
+          "name": "assistant.html",
+          "path": "dashboard/templates/assistant.html"
+        },
+        {
+          "name": "base.html",
+          "path": "dashboard/templates/base.html"
+        },
+        {
+          "name": "email.html",
+          "path": "dashboard/templates/email.html"
+        },
+        {
+          "name": "landing.html",
+          "path": "dashboard/templates/landing.html"
+        },
+        {
+          "name": "learning.html",
+          "path": "dashboard/templates/learning.html"
+        },
+        {
+          "name": "login.html",
+          "path": "dashboard/templates/login.html"
+        },
+        {
+          "name": "security.html",
+          "path": "dashboard/templates/security.html"
+        },
+        {
+          "name": "settings.html",
+          "path": "dashboard/templates/settings.html"
+        },
+        {
+          "name": "setup.html",
+          "path": "dashboard/templates/setup.html"
+        }
+      ],
+      "metrics": {
+        "emitters": 9
+      }
+    },
+    {
+      "name": "Route Decorators",
+      "icon": "route",
+      "desc": "Flask/FastAPI/Django route decorators for URL routing. Common in Python web frameworks.",
+      "severity": "info",
+      "files": [
+        {
+          "name": "test_email_reader.py",
+          "path": "Tests/test_email_reader.py"
+        },
+        {
+          "name": "test_email_sender.py",
+          "path": "Tests/test_email_sender.py"
+        },
+        {
+          "name": "test_health_monitor.py",
+          "path": "Tests/test_health_monitor.py"
+        },
+        {
+          "name": "app.py",
+          "path": "dashboard/app.py"
+        }
+      ],
+      "metrics": {
+        "routes": 4
+      }
+    },
+    {
+      "name": "Dataclasses",
+      "icon": "database",
+      "desc": "Python dataclasses for structured data. Reduces boilerplate for data-holding classes.",
+      "severity": "info",
+      "files": [
+        {
+          "name": "notifications.py",
+          "path": "dashboard/notifications.py"
+        },
+        {
+          "name": "manager.py",
+          "path": "modules/calendar/manager.py"
+        },
+        {
+          "name": "reader.py",
+          "path": "modules/email_brain/reader.py"
+        },
+        {
+          "name": "session.py",
+          "path": "security/session.py"
+        }
+      ],
+      "metrics": {
+        "dataclasses": 4
+      }
+    },
+    {
+      "name": "Django Signals",
+      "icon": "radio",
+      "desc": "Django signals for decoupled event-driven communication between components.",
+      "severity": "info",
+      "files": [
+        {
+          "name": "test_email_reader.py",
+          "path": "Tests/test_email_reader.py"
+        },
+        {
+          "name": "test_security_fixes.py",
+          "path": "Tests/test_security_fixes.py"
+        },
+        {
+          "name": "auth.py",
+          "path": "dashboard/auth.py"
+        },
+        {
+          "name": "notifications.py",
+          "path": "dashboard/notifications.py"
+        },
+        {
+          "name": "memory.py",
+          "path": "learning/memory.py"
+        },
+        {
+          "name": "__init__.py",
+          "path": "migrations/__init__.py"
+        },
+        {
+          "name": "reader.py",
+          "path": "modules/email_brain/reader.py"
+        },
+        {
+          "name": "lifecycle.py",
+          "path": "security/lifecycle.py"
+        }
+      ],
+      "metrics": {
+        "signals": 8
+      }
+    },
+    {
+      "name": "God Object",
+      "icon": "warning",
+      "desc": "Files with too many responsibilities (15+ functions). Consider splitting into smaller modules.",
+      "severity": "warning",
+      "isAnti": true,
+      "files": [
+        {
+          "name": "pilot.py",
+          "path": "core/pilot.py",
+          "fns": 19
+        },
+        {
+          "name": "queue_manager.py",
+          "path": "core/queue_manager.py",
+          "fns": 20
+        },
+        {
+          "name": "app.py",
+          "path": "dashboard/app.py",
+          "fns": 43
+        },
+        {
+          "name": "notifications.py",
+          "path": "dashboard/notifications.py",
+          "fns": 16
+        },
+        {
+          "name": "memory.py",
+          "path": "learning/memory.py",
+          "fns": 32
+        },
+        {
+          "name": "manager.py",
+          "path": "modules/calendar/manager.py",
+          "fns": 26
+        },
+        {
+          "name": "templates.py",
+          "path": "modules/email_brain/templates.py",
+          "fns": 16
+        },
+        {
+          "name": "auth.py",
+          "path": "security/auth.py",
+          "fns": 18
+        },
+        {
+          "name": "encryption.py",
+          "path": "security/encryption.py",
+          "fns": 18
+        }
+      ],
+      "metrics": {
+        "files": 9,
+        "avgFns": 23
+      }
+    },
+    {
+      "name": "Long File",
+      "icon": "scroll",
+      "desc": "Files over 500 lines are harder to maintain. Consider breaking into smaller modules.",
+      "severity": "warning",
+      "isAnti": true,
+      "files": [
+        {
+          "name": "pilot.py",
+          "path": "core/pilot.py",
+          "lines": 686
+        },
+        {
+          "name": "app.py",
+          "path": "dashboard/app.py",
+          "lines": 977
+        },
+        {
+          "name": "base.html",
+          "path": "dashboard/templates/base.html",
+          "lines": 688
+        },
+        {
+          "name": "landing.html",
+          "path": "dashboard/templates/landing.html",
+          "lines": 589
+        },
+        {
+          "name": "memory.py",
+          "path": "learning/memory.py",
+          "lines": 795
+        }
+      ],
+      "metrics": {
+        "files": 5,
+        "avgLines": 747
+      }
+    },
+    {
+      "name": "VBA God Module",
+      "icon": "warning",
+      "desc": "VBA modules with 20+ procedures. Consider splitting into smaller modules.",
+      "severity": "warning",
+      "isAnti": true,
+      "files": [
+        {
+          "name": "app.py",
+          "path": "dashboard/app.py",
+          "fns": 43,
+          "lines": 977
+        },
+        {
+          "name": "memory.py",
+          "path": "learning/memory.py",
+          "fns": 32,
+          "lines": 795
+        },
+        {
+          "name": "manager.py",
+          "path": "modules/calendar/manager.py",
+          "fns": 26,
+          "lines": 398
+        }
+      ],
+      "metrics": {
+        "files": 3,
+        "avgFns": 34
+      }
+    }
+  ],
+  "security": [
+    {
+      "severity": "high",
+      "title": "XSS Vulnerability",
+      "file": "assistant.html",
+      "path": "dashboard/templates/assistant.html",
+      "desc": "Direct HTML injection can lead to XSS attacks. Sanitize user input.",
+      "code": ""
+    },
+    {
+      "severity": "high",
+      "title": "XSS Vulnerability",
+      "file": "base.html",
+      "path": "dashboard/templates/base.html",
+      "desc": "Direct HTML injection can lead to XSS attacks. Sanitize user input.",
+      "code": ""
+    },
+    {
+      "severity": "high",
+      "title": "XSS Vulnerability",
+      "file": "email.html",
+      "path": "dashboard/templates/email.html",
+      "desc": "Direct HTML injection can lead to XSS attacks. Sanitize user input.",
+      "code": ""
+    },
+    {
+      "severity": "high",
+      "title": "XSS Vulnerability",
+      "file": "security.html",
+      "path": "dashboard/templates/security.html",
+      "desc": "Direct HTML injection can lead to XSS attacks. Sanitize user input.",
+      "code": ""
+    },
+    {
+      "severity": "high",
+      "title": "XSS Vulnerability",
+      "file": "settings.html",
+      "path": "dashboard/templates/settings.html",
+      "desc": "Direct HTML injection can lead to XSS attacks. Sanitize user input.",
+      "code": ""
+    },
+    {
+      "severity": "high",
+      "title": "Hardcoded Secret",
+      "file": "DEPLOYMENT.md",
+      "path": "docs/DEPLOYMENT.md",
+      "line": 158,
+      "desc": "Credentials should never be hardcoded. Use environment variables or a secrets manager.",
+      "code": "export EMAIL_1_PASSWORD=\"secure_password\""
+    },
+    {
+      "severity": "high",
+      "title": "OS Command Execution",
+      "file": "notifier.py",
+      "path": "notifications/notifier.py",
+      "line": 69,
+      "desc": "os.system()/os.popen() are vulnerable to command injection. Use subprocess with shell=False.",
+      "code": "os.system(\"afplay /System/Library/Sounds/Glass.aiff\")"
+    },
+    {
+      "severity": "medium",
+      "title": "Bare Except Clauses",
+      "file": "simple_assistant.py",
+      "path": "modules/assistant/simple_assistant.py",
+      "desc": "3 bare except: clauses found. These catch all exceptions including SystemExit and KeyboardInterrupt.",
+      "code": ""
+    }
+  ],
+  "architectureDiagram": {
+    "framework": "Browser App",
+    "profile": "web-app",
+    "type": "block-diagram",
+    "options": {
+      "includeTests": false,
+      "includeBuildOutput": false
+    },
+    "mermaid": "%%{init: {\"flowchart\": {\"nodeSpacing\": 45, \"rankSpacing\": 80}} }%%\nflowchart TB\n  classDef browser fill:#102033,stroke:#4d9fff,color:#f0f0f2;\n  classDef action fill:#1f2433,stroke:#7c8cff,color:#f0f0f2;\n  classDef analysis fill:#102033,stroke:#4d9fff,color:#f0f0f2;\n  classDef collection fill:#251b33,stroke:#a78bfa,color:#f0f0f2;\n  classDef rendering fill:#2b2414,stroke:#ff9f43,color:#f0f0f2;\n  classDef testing fill:#252529,stroke:#8b8b95,color:#f0f0f2;\n  classDef fixtures fill:#1f2b1f,stroke:#22c55e,color:#f0f0f2;\n  classDef storage fill:#2b2414,stroke:#ff9f43,color:#f0f0f2;\n  classDef application fill:#252529,stroke:#8b8b95,color:#f0f0f2;\n  classDef appentry fill:#102033,stroke:#4d9fff,color:#f0f0f2;\n  classDef frontend fill:#102033,stroke:#4d9fff,color:#f0f0f2;\n  classDef fecomponents fill:#152238,stroke:#6eb6ff,color:#f0f0f2;\n  classDef backend fill:#251b33,stroke:#a78bfa,color:#f0f0f2;\n  classDef config fill:#2b2414,stroke:#ff9f43,color:#f0f0f2;\n  classDef content fill:#1f2b1f,stroke:#22c55e,color:#f0f0f2;\n  classDef buildoutput fill:#252529,stroke:#666,color:#aaa;\n  subgraph Shared___Utilities_Group[\"Shared / Utilities\"]\n    direction TB\n    agg_shared_utilities[\"Utilities<br/>dashboard/templates/assistant.html\"]\n  end\n  class agg_shared_utilities shared;",
+    "blocks": [
+      {
+        "id": "agg_shared_utilities",
+        "title": "Utilities",
+        "kind": "page",
+        "role": "shared-module",
+        "group": "Shared / Utilities",
+        "layer": "Frontend",
+        "route": "/dashboard/templates/assistant",
+        "files": [
+          "dashboard/templates/assistant.html",
+          "dashboard/templates/base.html",
+          "dashboard/templates/docs.html",
+          "dashboard/templates/email.html",
+          "dashboard/templates/index.html",
+          "dashboard/templates/landing.html",
+          "dashboard/templates/learning.html",
+          "dashboard/templates/login.html",
+          "dashboard/templates/security.html",
+          "dashboard/templates/settings.html",
+          "dashboard/templates/setup.html",
+          "modules/data_engine/__init__.py",
+          "modules/data_engine/extractor.py",
+          "modules/data_engine/sheet_writer.py",
+          "core/demo_data.py",
+          "core/error_recovery.py",
+          "core/health_monitor.py",
+          "core/logging_config.py",
+          "core/metrics.py",
+          "core/ollama_brain.py",
+          "core/pilot.py",
+          "core/queue_manager.py",
+          "dashboard/app.py",
+          "dashboard/auth.py",
+          "dashboard/notifications.py",
+          "learning/memory.py",
+          "main.py",
+          "migrations/__init__.py",
+          "modules/assistant/chat.py",
+          "modules/assistant/minimal_chat.py",
+          "modules/assistant/simple_assistant.py",
+          "modules/assistant/simple_chat.py",
+          "modules/calendar/manager.py",
+          "modules/email_brain/reader.py",
+          "modules/email_brain/sender.py",
+          "modules/email_brain/templates.py",
+          "modules/file_commander/analyzer.py",
+          "modules/file_commander/watcher.py",
+          "notifications/notifier.py",
+          "security/audit.py",
+          "security/auth.py",
+          "security/backup.py",
+          "security/compliance.py",
+          "security/encryption.py",
+          "security/lifecycle.py",
+          "security/rate_limit.py",
+          "security/session.py",
+          "security/threats.py",
+          "setup.py",
+          "core/__init__.py",
+          "core/config.py",
+          "dashboard/__init__.py",
+          "install.sh",
+          "learning/__init__.py",
+          "modules/__init__.py",
+          "modules/calendar/__init__.py",
+          "modules/email_brain/__init__.py",
+          "modules/file_commander/__init__.py",
+          "notifications/__init__.py",
+          "run_dashboard.sh",
+          "security/__init__.py"
+        ],
+        "profile": "web-app",
+        "isTest": false,
+        "isFixture": false,
+        "isBuildOutput": false,
+        "loc": 12124
+      },
+      {
+        "id": "Tests___init___py",
+        "title": "__init__",
+        "kind": "test",
+        "role": "test",
+        "group": "Testing",
+        "layer": "Shared",
+        "route": null,
+        "files": [
+          "Tests/__init__.py"
+        ],
+        "profile": "web-app",
+        "isTest": true,
+        "isFixture": false,
+        "isBuildOutput": false,
+        "loc": 2
+      },
+      {
+        "id": "Tests_conftest_py",
+        "title": "conftest",
+        "kind": "test",
+        "role": "test",
+        "group": "Testing",
+        "layer": "Shared",
+        "route": null,
+        "files": [
+          "Tests/conftest.py"
+        ],
+        "profile": "web-app",
+        "isTest": true,
+        "isFixture": false,
+        "isBuildOutput": false,
+        "loc": 236
+      },
+      {
+        "id": "Tests_test_audit_py",
+        "title": "test_audit",
+        "kind": "test",
+        "role": "test",
+        "group": "Testing",
+        "layer": "Shared",
+        "route": null,
+        "files": [
+          "Tests/test_audit.py"
+        ],
+        "profile": "web-app",
+        "isTest": true,
+        "isFixture": false,
+        "isBuildOutput": false,
+        "loc": 173
+      }
+    ],
+    "dependencies": [],
+    "groups": {
+      "Shared / Utilities": [
+        "agg_shared_utilities"
+      ]
+    },
+    "stats": {
+      "blocks": 1,
+      "dependencies": 0,
+      "routes": 1,
+      "apiRoutes": 0,
+      "databaseTouchpoints": 0,
+      "warnings": 2
+    },
+    "hiddenSummary": {
+      "build": 0,
+      "tests": 16,
+      "fixtures": 0,
+      "lowSignal": 0,
+      "total": 16
+    },
+    "warnings": [
+      "Diagram capped at 64 blocks; 13 directly related items were omitted for readability.",
+      "Aggregated 64 architecture files into 4 diagram blocks for readability."
+    ]
+  }
+}

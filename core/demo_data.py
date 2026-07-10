@@ -191,33 +191,6 @@ def get_demo_emails():
     ]
 
 
-def get_demo_files():
-    """20 sample file operations"""
-    
-    base_time = datetime.now()
-    
-    return [
-        {"operation": "sorted", "filename": "Q1_Report_2026.pdf", "category": "Reports", "size_mb": 2.4, "timestamp": (base_time - timedelta(hours=1)).isoformat()},
-        {"operation": "sorted", "filename": "Invoice_March_2026.xlsx", "category": "Finance/Invoices", "size_mb": 0.3, "timestamp": (base_time - timedelta(hours=2)).isoformat()},
-        {"operation": "sorted", "filename": "Employment_Contract_Smith.pdf", "category": "Legal/Contracts", "size_mb": 1.1, "timestamp": (base_time - timedelta(hours=3)).isoformat()},
-        {"operation": "sorted", "filename": "Presentation_Deck_v2.pptx", "category": "Presentations", "size_mb": 15.7, "timestamp": (base_time - timedelta(hours=4)).isoformat()},
-        {"operation": "sorted", "filename": "receipt_amazon_0320.pdf", "category": "Finance/Receipts", "size_mb": 0.1, "timestamp": (base_time - timedelta(hours=5)).isoformat()},
-        {"operation": "sorted", "filename": "team_photo.jpg", "category": "Images", "size_mb": 4.2, "timestamp": (base_time - timedelta(hours=6)).isoformat()},
-        {"operation": "sorted", "filename": "Budget_Tracker_2026.xlsx", "category": "Spreadsheets", "size_mb": 0.8, "timestamp": (base_time - timedelta(hours=8)).isoformat()},
-        {"operation": "sorted", "filename": "Meeting_Notes_0315.txt", "category": "Correspondence", "size_mb": 0.02, "timestamp": (base_time - timedelta(hours=10)).isoformat()},
-        {"operation": "sorted", "filename": "Tax_Form_W9_2026.pdf", "category": "Finance/Tax", "size_mb": 0.5, "timestamp": (base_time - timedelta(days=1)).isoformat()},
-        {"operation": "sorted", "filename": "Insurance_Policy_2026.pdf", "category": "Insurance", "size_mb": 1.8, "timestamp": (base_time - timedelta(days=1, hours=2)).isoformat()},
-        {"operation": "duplicate", "filename": "Report_Final_v2.pdf", "category": "Reports", "size_mb": 2.4, "original": "Report_Final_v1.pdf", "timestamp": (base_time - timedelta(days=1, hours=4)).isoformat()},
-        {"operation": "duplicate", "filename": "Presentation_backup.pptx", "category": "Presentations", "size_mb": 15.7, "original": "Presentation_Deck.pptx", "timestamp": (base_time - timedelta(days=2)).isoformat()},
-        {"operation": "duplicate", "filename": "invoice_march_copy.xlsx", "category": "Finance/Invoices", "size_mb": 0.3, "original": "Invoice_March_2026.xlsx", "timestamp": (base_time - timedelta(days=2, hours=3)).isoformat()},
-        {"operation": "analyzed", "filename": "Contract_Draft_2026.pdf", "category": "Legal/Contracts", "size_mb": 2.1, "entities": "14 signers, 3 dates, $45000 amount", "timestamp": (base_time - timedelta(days=3)).isoformat()},
-        {"operation": "analyzed", "filename": "Invoice_Bulk_March.pdf", "category": "Finance/Invoices", "size_mb": 0.9, "entities": "12 line items, $12450 total", "timestamp": (base_time - timedelta(days=3, hours=2)).isoformat()},
-        {"operation": "analyzed", "filename": "Resume_Johnson.pdf", "category": "HR/Resumes", "size_mb": 0.6, "entities": "5 skills extracted, 2 prior employers", "timestamp": (base_time - timedelta(days=4)).isoformat()},
-        {"operation": "analyzed", "filename": "Medical_Statement_0226.pdf", "category": "Medical", "size_mb": 0.4, "entities": "3 providers, $850 patient responsibility", "timestamp": (base_time - timedelta(days=5)).isoformat()},
-        {"operation": "sorted", "filename": "Quarterly_Results.xlsx", "category": "Reports", "size_mb": 3.2, "timestamp": (base_time - timedelta(days=6)).isoformat()},
-        {"operation": "sorted", "filename": "Client_Proposal_v3.pdf", "category": "Correspondence", "size_mb": 4.5, "timestamp": (base_time - timedelta(days=7)).isoformat()},
-    ]
-
 
 def get_demo_learning():
     """Sample learning data"""
@@ -263,21 +236,6 @@ def get_demo_notifications():
         {"category": "success", "title": "Data Extracted", "message": "Invoice data saved to expenses.xlsx", "created_at": (base_time - timedelta(hours=3)).isoformat()},
     ]
 
-
-def get_demo_stats():
-    """Dashboard statistics"""
-    
-    return {
-        "total_emails": 47,
-        "urgent_count": 8,
-        "routine_count": 31,
-        "spam_count": 6,
-        "meeting_count": 2,
-        "files_processed": 156,
-        "duplicates_found": 12,
-        "data_entries": 89,
-        "cycles_completed": 23,
-    }
 
 
 def get_demo_status():

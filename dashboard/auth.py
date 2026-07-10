@@ -4,7 +4,6 @@ Dashboard Authentication Module
 
 import jwt
 import datetime
-from functools import wraps
 from flask import request, jsonify, session, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
@@ -153,33 +152,6 @@ def verify_session_token(token: str) -> dict:
             return None
     except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
         return None
-
-
-def login_required(f):
-    """Decorator to require authentication"""
-
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        token = request.cookies.get("session_token") or session.get("session_token")
-
-        if not token:
-            if request.accept_mimetypes.accept_json:
-                return jsonify({"error": "Authentication required"}), 401
-            else:
-                return redirect(url_for("login"))
-
-        payload = verify_session_token(token)
-        if not payload:
-            if request.accept_mimetypes.accept_json:
-                return jsonify({"error": "Invalid or expired session"}), 401
-            else:
-                return redirect(url_for("login"))
-
-        # Add user info to request context
-        request.user_id = payload["user_id"]
-        return f(*args, **kwargs)
-
-    return decorated_function
 
 
 def get_current_user():

@@ -40,7 +40,7 @@ class SimpleAssistant:
                 f"Ollama Status: {status['health']['ollama']['status']}\n"
                 f"Cycles Completed: {status['cycles_completed']}"
             )
-        except:
+        except Exception:
             return "System status temporarily unavailable"
 
     def get_file_status(self) -> str:
@@ -58,7 +58,7 @@ class SimpleAssistant:
                 return f"{len(new_files)} files waiting: {file_list}"
             else:
                 return "No files waiting for processing"
-        except:
+        except Exception:
             return "File status temporarily unavailable"
 
     def get_email_status(self) -> str:
@@ -70,7 +70,7 @@ class SimpleAssistant:
                 return f"{len(Config.EMAIL_ACCOUNTS)} email accounts: {accounts}"
             else:
                 return "No email accounts configured"
-        except:
+        except Exception:
             return "Email status temporarily unavailable"
 
     def answer_question(self, question: str) -> str:

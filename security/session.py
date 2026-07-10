@@ -194,15 +194,3 @@ class SessionManager:
             "active_users": len(set(s.user_id for s in self._sessions.values() 
                 if datetime.now() <= s.expires_at))
         }
-
-
-# Global session manager instance
-_session_manager: Optional[SessionManager] = None
-
-
-def get_session_manager() -> SessionManager:
-    """Get the global session manager instance"""
-    global _session_manager
-    if _session_manager is None:
-        _session_manager = SessionManager()
-    return _session_manager

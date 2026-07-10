@@ -152,11 +152,15 @@ Always use HTTPS in production:
 
 ### Environment Variables
 
-Never commit `.env` files. Use:
+Never commit `.env` files. Use environment variables in production:
 ```bash
-# Set variables in production
-export EMAIL_1_PASSWORD="secure_password"
+# Set variables in production (use a secrets manager or .env file)
+export EMAIL_1_PASSWORD="your_actual_secure_password_here"
+export FLASK_SECRET_KEY="your_random_secret_here"
+export JWT_SECRET="your_random_jwt_secret_here"
 ```
+⚠️ **SECURITY**: Never hardcode real credentials in scripts or documentation.
+Always use a secrets manager, `.env` files (added to `.gitignore`), or CI/CD secrets.
 
 ---
 

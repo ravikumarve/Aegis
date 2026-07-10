@@ -146,21 +146,4 @@ def get_metrics() -> Metrics:
     return Metrics()
 
 
-def record_email_processed() -> None:
-    """Record an email was processed"""
-    get_metrics().inc("pilot_emails_processed_total")
 
-
-def record_file_organized() -> None:
-    """Record a file was organized"""
-    get_metrics().inc("pilot_files_organized_total")
-
-
-def record_error() -> None:
-    """Record an error occurred"""
-    get_metrics().inc("pilot_errors_total")
-
-
-def record_cycle(emails: int, files: int, duration: float, errors: int = 0) -> None:
-    """Record cycle completion"""
-    get_metrics().cycle_completed(duration, emails, files, errors)

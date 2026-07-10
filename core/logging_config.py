@@ -131,15 +131,4 @@ def log_ai(action: str, detail: str, level: str = "INFO") -> None:
     log_func(f"[AI] {action}: {detail}")
 
 
-def log_learning(action: str, detail: str, level: str = "DEBUG") -> None:
-    """Log learning events"""
-    logger = get_logger("learning")
-    log_func = getattr(logger, level.lower(), logger.info)
-    log_func(f"[LEARNING] {action}: {detail}")
 
-
-def log_system(action: str, detail: str, level: str = "INFO") -> None:
-    """Log system events"""
-    logger = get_logger("system")
-    log_func = getattr(logger, level.lower(), logger.info)
-    log_func(f"[SYSTEM] {action}: {detail}")

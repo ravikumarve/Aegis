@@ -153,21 +153,4 @@ def notify(category: str, title: str, message: str, metadata: Optional[dict] = N
     db.add(category, title, message, metadata)
 
 
-def notify_error(title: str, message: str, metadata: Optional[dict] = None):
-    """Add an error notification"""
-    notify("error", title, message, metadata)
 
-
-def notify_success(title: str, message: str, metadata: Optional[dict] = None):
-    """Add a success notification"""
-    notify("success", title, message, metadata)
-
-
-def notify_security(title: str, message: str, metadata: Optional[dict] = None):
-    """Add a security notification"""
-    notify("security", title, message, metadata)
-
-
-def notify_task(title: str, message: str, metadata: Optional[dict] = None):
-    """Add a task notification"""
-    notify("task", title, message, metadata)

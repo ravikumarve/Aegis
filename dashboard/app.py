@@ -22,14 +22,7 @@ from core.config import Config
 from security.auth import AuthError, TwoFactorError
 
 try:
-    from core.metrics import get_metrics
-
-    METRICS_AVAILABLE = True
-except ImportError:
-    METRICS_AVAILABLE = False
-
-try:
-    from security.rate_limit import rate_limit_api, rate_limit_auth
+    from security.rate_limit import rate_limit_api
     from security.network import check_ip_allowlist, get_allowlist
 
     SECURITY_MODULES = True
@@ -40,6 +33,12 @@ app = Flask(__name__)
 
 # Enable CORS for React dev server (localhost:5173)
 CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://127.0.0.1:5173"])
+
+# Register Blueprints (split from app.py to reduce complexity)
+from dashboard.security_routes import security_bp
+from dashboard.settings_routes import settings_bp
+app.register_blueprint(security_bp)
+app.register_blueprint(settings_bp)
 
 # Configure CSRF protection
 csrf = CSRFProtect(app)
@@ -585,267 +584,7 @@ def assistant_page():
     return render_template("assistant.html")
 
 
-@app.route("/api/security")
-@login_required
-def api_security():
-    p = get_pilot()
-    return jsonify(
-        {
-            "security": p.threats.get_status(),
-            "compliance": p.compliance.check_compliance(),
-            "encryption": p.crypto.get_status(),
-            "audit_integrity": p.audit.verify_integrity(),
-        }
-    )
 
-
-@app.route("/security")
-@login_required
-def security():
-    """Security page"""
-    return render_template("security.html")
-
-
-# ═══════════════════════════════════════
-# METRICS ROUTES
-# ═══════════════════════════════════════
-
-
-@app.route("/api/metrics")
-def api_metrics():
-    """Prometheus-compatible metrics endpoint"""
-    if not METRICS_AVAILABLE:
-        return jsonify({"error": "Metrics not available"}), 503
-
-    metrics = get_metrics()
-    return metrics.get_prometheus_output(), 200, {"Content-Type": "text/plain; charset=utf-8"}
-
-
-@app.route("/api/metrics/json")
-@login_required
-def api_metrics_json():
-    """Metrics as JSON"""
-    if not METRICS_AVAILABLE:
-        return jsonify({"error": "Metrics not available"}), 503
-
-    metrics = get_metrics()
-    return jsonify(metrics.to_dict())
-
-
-# ═══════════════════════════════════════
-# BACKUP & DATA ROUTES
-# ═══════════════════════════════════════
-
-
-@app.route("/backup", methods=["POST"])
-@login_required
-def create_backup():
-    p = get_pilot()
-    try:
-        path = p.backup.create_backup()
-        return jsonify({"status": "success", "path": path})
-    except Exception as e:
-        return jsonify({"status": "error", "message": str(e)})
-
-
-@app.route("/export-data", methods=["POST"])
-@login_required
-def export_data():
-    p = get_pilot()
-    try:
-        path = Config.REPORT_DIR / "my_data_export.json"
-        p.lifecycle.export_all_data(path)
-        return jsonify({"status": "success", "path": str(path)})
-    except Exception as e:
-        return jsonify({"status": "error", "message": str(e)})
-
-
-@app.route("/compliance-report", methods=["POST"])
-@login_required
-def compliance_report():
-    p = get_pilot()
-    try:
-        result = p.compliance.generate_report()
-        return jsonify({"status": "success", "report": result})
-    except Exception as e:
-        return jsonify({"status": "error", "message": str(e)})
-
-
-# ═══════════════════════════════════════
-# SETTINGS
-# ═══════════════════════════════════════
-
-
-@app.route("/settings")
-@login_required
-def settings():
-    p = get_pilot()
-    backups = p.backup.list_backups()
-
-    # Get available models from Ollama
-    available_models = []
-    current_model = Config.OLLAMA_MODEL
-    try:
-        import requests
-
-        r = requests.get(f"{Config.OLLAMA_HOST}/api/tags", timeout=5)
-        if r.status_code == 200:
-            data = r.json()
-            available_models = [m.get("name", "") for m in data.get("models", [])]
-    except Exception:
-        pass
-
-    # Get watch folders from .env
-    watch_folders = []
-    env_path = Config.BASE_DIR / ".env"
-    if env_path.exists():
-        with open(env_path, "r") as f:
-            for line in f:
-                if line.strip().startswith("WATCH_FOLDERS="):
-                    value = line.split("=", 1)[1].strip()
-                    if value:
-                        watch_folders = [f.strip() for f in value.split(",") if f.strip()]
-                    break
-
-    return render_template(
-        "settings.html",
-        backups=backups,
-        available_models=available_models,
-        current_model=current_model,
-        watch_folders=watch_folders,
-    )
-
-
-@app.route("/settings/add-watch-folder", methods=["POST"])
-@login_required
-def add_watch_folder():
-    import os
-    from pathlib import Path
-
-    data = request.get_json()
-    folder_path = data.get("path", "").strip()
-
-    if not folder_path:
-        return jsonify({"status": "error", "message": "Path cannot be empty"})
-
-    # Expand user path (e.g., ~/Downloads)
-    folder_path = os.path.expanduser(folder_path)
-
-    # Validate path exists
-    if not os.path.exists(folder_path):
-        return jsonify({"status": "error", "message": "Folder does not exist"})
-
-    if not os.path.isdir(folder_path):
-        return jsonify({"status": "error", "message": "Path is not a directory"})
-
-    # Read .env file
-    env_path = Config.BASE_DIR / ".env"
-    if not env_path.exists():
-        return jsonify({"status": "error", "message": ".env file not found"})
-
-    with open(env_path, "r") as f:
-        lines = f.readlines()
-
-    # Find or create WATCH_FOLDERS line
-    found = False
-    new_lines = []
-    for line in lines:
-        if line.strip().startswith("WATCH_FOLDERS="):
-            existing = line.split("=", 1)[1].strip()
-            if existing:
-                folders = [f.strip() for f in existing.split(",")]
-                # Normalize path for comparison
-                normalized = str(Path(folder_path).resolve())
-                if normalized not in [str(Path(f).resolve()) for f in folders]:
-                    folders.append(folder_path)
-                    line = "WATCH_FOLDERS=" + ",".join(folders) + "\n"
-                else:
-                    return jsonify({"status": "error", "message": "Folder already in watch list"})
-            else:
-                line = f"WATCH_FOLDERS={folder_path}\n"
-            found = True
-        new_lines.append(line)
-
-    if not found:
-        new_lines.append(f"WATCH_FOLDERS={folder_path}\n")
-
-    # Write back
-    with open(env_path, "w") as f:
-        f.writelines(new_lines)
-
-    return jsonify({"status": "success", "message": "Folder added to watch list"})
-
-
-@app.route("/api/models", methods=["GET"])
-@login_required
-def api_get_models():
-    """Get available Ollama models"""
-    import requests
-
-    try:
-        r = requests.get(f"{Config.OLLAMA_HOST}/api/tags", timeout=10)
-        if r.status_code == 200:
-            data = r.json()
-            models = [
-                {"name": m.get("name", ""), "size": m.get("size", 0)}
-                for m in data.get("models", [])
-            ]
-            return jsonify({"status": "success", "models": models, "current": Config.OLLAMA_MODEL})
-        return jsonify({"status": "error", "message": "Failed to fetch models"})
-    except Exception as e:
-        return jsonify({"status": "error", "message": str(e)})
-
-
-@app.route("/api/models/pull", methods=["POST"])
-@login_required
-def api_pull_model():
-    """Pull a new Ollama model"""
-    import requests
-
-    data = request.json
-    model_name = data.get("model", "").strip()
-
-    if not model_name:
-        return jsonify({"status": "error", "message": "Model name required"})
-
-    try:
-        r = requests.post(f"{Config.OLLAMA_HOST}/api/pull", json={"name": model_name}, timeout=300)
-        if r.status_code == 200:
-            return jsonify(
-                {"status": "success", "message": f"Model '{model_name}' pulled successfully"}
-            )
-        return jsonify({"status": "error", "message": "Failed to pull model"})
-    except requests.exceptions.Timeout:
-        return jsonify({"status": "error", "message": "Model pull timed out"})
-    except Exception as e:
-        return jsonify({"status": "error", "message": str(e)})
-
-
-@app.route("/api/models/set", methods=["POST"])
-@login_required
-def api_set_model():
-    """Set the active Ollama model"""
-    data = request.json
-    model_name = data.get("model", "").strip()
-
-    if not model_name:
-        return jsonify({"status": "error", "message": "Model name required"})
-
-    # Update .env file
-    env_path = Config.BASE_DIR / ".env"
-    env_content = env_path.read_text() if env_path.exists() else ""
-
-    # Update or add OLLAMA_MODEL
-    if "OLLAMA_MODEL=" in env_content:
-        import re
-
-        env_content = re.sub(r"OLLAMA_MODEL=.*", f"OLLAMA_MODEL={model_name}", env_content)
-    else:
-        env_content += f"\nOLLAMA_MODEL={model_name}\n"
-
-    env_path.write_text(env_content)
-
-    return jsonify({"status": "success", "message": f"Model set to '{model_name}'"})
 
 
 # ═══════════════════════════════════════
@@ -871,61 +610,6 @@ def submit_feedback():
     )
 
     return jsonify({"status": "recorded"})
-
-
-# ═══════════════════════════════════════
-# 2FA SETUP ROUTES
-# ═══════════════════════════════════════
-
-
-@app.route("/api/2fa/setup", methods=["POST"])
-@login_required
-def setup_2fa():
-    """Generate 2FA secret for setup"""
-    try:
-        from security.auth import TwoFactorError
-
-        p = get_pilot()
-        secret, qr_url = p.auth.generate_2fa_secret()
-        return jsonify({"secret": secret, "qr_url": qr_url})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 400
-
-
-@app.route("/api/2fa/enable", methods=["POST"])
-@login_required
-def enable_2fa():
-    """Complete 2FA setup"""
-    try:
-        from security.auth import TwoFactorError
-
-        p = get_pilot()
-        data = request.json
-        secret = data.get("secret", "")
-        token = data.get("token", "")
-
-        p.auth.setup_2fa(secret, token)
-        return jsonify({"status": "2FA enabled"})
-    except TwoFactorError as e:
-        return jsonify({"error": str(e)}), 400
-
-
-@app.route("/api/2fa/disable", methods=["POST"])
-@login_required
-def disable_2fa():
-    """Disable 2FA"""
-    try:
-        from security.auth import TwoFactorError
-
-        p = get_pilot()
-        data = request.json
-        password = data.get("password", "")
-        token = data.get("token", "")
-
-        p.auth.disable_2fa(password, token)
-        return jsonify({"status": "2FA disabled"})
-    except (AuthError, TwoFactorError) as e:
-        return jsonify({"error": str(e)}), 400
 
 
 # ═══════════════════════════════════════

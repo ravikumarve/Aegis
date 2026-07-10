@@ -170,7 +170,7 @@ function viewDraft(index) {
 
     document.getElementById('draftTo').textContent = email.sender_name || email.sender;
     document.getElementById('draftSubject').textContent = 'Re: ' + email.subject;
-    document.getElementById('draftContent').innerHTML = email.draft || '<em>No draft available</em>';
+    document.getElementById('draftContent').textContent = email.draft || 'No draft available';
     document.getElementById('draftModal').classList.add('open');
 }
 

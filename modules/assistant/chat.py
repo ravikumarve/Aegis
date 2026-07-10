@@ -136,7 +136,3 @@ Answer concisely as Aegis Assistant:
         ]
 
 
-def ask_assistant(question: str) -> str:
-    """Convenience function to ask the assistant a question"""
-    assistant = OfficeAssistant()
-    return assistant.answer_question(question)

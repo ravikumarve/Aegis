@@ -62,11 +62,14 @@ class Notifier:
         """Play notification sound (platform-dependent)"""
         try:
             import sys
+            import subprocess
 
             if sys.platform == "darwin":
-                import os
-
-                os.system("afplay /System/Library/Sounds/Glass.aiff")
+                subprocess.run(
+                    ["afplay", "/System/Library/Sounds/Glass.aiff"],
+                    check=False,
+                    capture_output=True,
+                )
             elif sys.platform == "win32":
                 import winsound
 

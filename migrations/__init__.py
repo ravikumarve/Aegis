@@ -230,13 +230,4 @@ class MigrationManager:
                 conn.commit()
 
 
-def run_migrations(db_path: Optional[Path] = None) -> list[str]:
-    """Run all pending migrations"""
-    manager = MigrationManager(db_path)
-    return manager.upgrade()
 
-
-def get_schema_version(db_path: Optional[Path] = None) -> int:
-    """Get current schema version"""
-    manager = MigrationManager(db_path)
-    return manager.current_version()

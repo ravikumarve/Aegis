@@ -164,14 +164,21 @@ async function loadSecurityData() {
         const checks = compliance.checks || [];
         const complianceList = document.getElementById('complianceList');
         if (checks.length > 0) {
-            complianceList.innerHTML = '<div class="space-y-2">' + checks.map(c => `
-                <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-[#1a1a1e]">
-                    <span class="text-sm text-gray-300">${c.name || c.check || 'Unknown'}</span>
-                    <span class="badge ${(c.status === 'PASS' || c.passed) ? 'bg-green-500/15 text-green-400 border-green-500/30' : 'bg-red-500/15 text-red-400 border-red-500/30'}">
-                        ${c.status || (c.passed ? 'PASS' : 'FAIL')}
-                    </span>
-                </div>
-            `).join('') + '</div>';
+            const items = checks.map(c => {
+                const name = document.createElement('span');
+                name.className = 'text-sm text-gray-300';
+                name.textContent = c.name || c.check || 'Unknown';
+                const status = document.createElement('span');
+                const passed = c.status === 'PASS' || c.passed;
+                status.className = `badge ${passed ? 'bg-green-500/15 text-green-400 border-green-500/30' : 'bg-red-500/15 text-red-400 border-red-500/30'}`;
+                status.textContent = c.status || (c.passed ? 'PASS' : 'FAIL');
+                const item = document.createElement('div');
+                item.className = 'flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-[#1a1a1e]';
+                item.appendChild(name);
+                item.appendChild(status);
+                return item.outerHTML;
+            });
+            complianceList.innerHTML = '<div class="space-y-2">' + items.join('') + '</div>';
         } else {
             complianceList.innerHTML = '<p class="text-gray-600 text-sm text-center py-4 font-mono">No compliance checks available</p>';
         }
