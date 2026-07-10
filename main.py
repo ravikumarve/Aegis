@@ -75,100 +75,49 @@ def first_time_setup(pilot):
     return password
 
 
-def main():
-    args = parse_args()
-
-    # Handle dry-run mode
-    if args.dry_run:
-        Config.DRY_RUN = True
-        print("\n🔍 DRY RUN MODE - No emails will be sent or changes made\n")
-
-    print_banner()
-
-    # Validate configuration
-    errors = Config.validate()
-    if errors:
-        print("⚠️ Configuration warnings:")
-        for error in errors:
-            print(f"   • {error}")
-        print()
-
-    # Handle --status flag
-    if args.status:
-        pilot = AegisEngine()
-        if pilot.crypto.is_setup:
-            password = getpass.getpass("Master password: ")
-            try:
-                pilot.login(password)
-                status = pilot.get_status()
-                print_status(status)
-            except Exception as e:
-                print(f"Error: {e}")
-                sys.exit(1)
-        else:
-            print("System not initialized. Run without --status to set up.")
-        sys.exit(0)
-
-    # Handle test modes
-    if args.test_email or args.test_files:
-        pilot = AegisEngine()
-        if pilot.crypto.is_setup:
-            password = getpass.getpass("Master password: ")
-            pilot.login(password)
-        else:
-            print("System not initialized.")
-            sys.exit(1)
-
-        if args.test_email:
-            print("\n📧 Testing email processing...")
-            result = pilot.run_cycle()
-            print(f"\n   Processed: {result.get('emails_processed', 0)} emails")
-
-        if args.test_files:
-            print("\n📁 Testing file processing...")
-            new_files = pilot.file_watcher.scan_new()
-            print(f"\n   Found: {len(new_files)} new files")
-
-        pilot.shutdown()
-        sys.exit(0)
-
-    # Create pilot
+def _handle_status_flag():
+    """Handle --status flag: show system status and exit"""
     pilot = AegisEngine()
-
-    # Check if first time
-    if not pilot.crypto.is_setup:
-        password = first_time_setup(pilot)
+    if pilot.crypto.is_setup:
+        password = getpass.getpass("Master password: ")
+        try:
+            pilot.login(password)
+            status = pilot.get_status()
+            print_status(status)
+        except Exception as e:
+            print(f"Error: {e}")
+            sys.exit(1)
     else:
-        password = getpass.getpass("🔒 Master password: ")
+        print("System not initialized. Run without --status to set up.")
+    sys.exit(0)
 
-    # Login
-    try:
+
+def _handle_test_modes(args):
+    """Handle --test-email and --test-files flags"""
+    pilot = AegisEngine()
+    if pilot.crypto.is_setup:
+        password = getpass.getpass("Master password: ")
         pilot.login(password)
-    except Exception as e:
-        print(f"\n❌ {e}")
+    else:
+        print("System not initialized.")
         sys.exit(1)
 
-    print("🔓 Authenticated successfully!\n")
+    if args.test_email:
+        print("\n📧 Testing email processing...")
+        result = pilot.run_cycle()
+        print(f"\n   Processed: {result.get('emails_processed', 0)} emails")
 
-    # Show status
-    status = pilot.get_status()
-    health = status["health"]
-    security = status["security"]
+    if args.test_files:
+        print("\n📁 Testing file processing...")
+        new_files = pilot.file_watcher.scan_new()
+        print(f"\n   Found: {len(new_files)} new files")
 
-    print(f"   System:     {health['overall']}")
-    print(f"   RAM:        {health['ram']['status']} {health['ram']['percent']}%")
-    print(f"   Disk:       {health['disk']['status']} {health['disk']['free_gb']}GB free")
-    print(f"   Ollama:     {health['ollama']['status']}")
-    print(f"   Security:   {security['overall']}")
-    print(f"   Encryption: 🟢 AES-256 Active")
+    pilot.shutdown()
+    sys.exit(0)
 
-    if pilot.memory:
-        learning = status["learning"]
-        print(f"   Learning:   Score {learning['learning_score']}/100")
 
-    print()
-
-    # Menu
+def _run_menu_loop(pilot):
+    """Display and handle the interactive menu"""
     while True:
         dry_run_note = " [DRY RUN]" if Config.DRY_RUN else ""
         print(f"\n📋 MENU{dry_run_note}:")
@@ -247,6 +196,66 @@ def main():
 
         else:
             print("   Invalid choice")
+
+
+def _show_initial_status(pilot):
+    """Display system status after login"""
+    status = pilot.get_status()
+    health = status["health"]
+    security = status["security"]
+
+    print(f"   System:     {health['overall']}")
+    print(f"   RAM:        {health['ram']['status']} {health['ram']['percent']}%")
+    print(f"   Disk:       {health['disk']['status']} {health['disk']['free_gb']}GB free")
+    print(f"   Ollama:     {health['ollama']['status']}")
+    print(f"   Security:   {security['overall']}")
+    print(f"   Encryption: 🟢 AES-256 Active")
+
+    if pilot.memory:
+        learning = status["learning"]
+        print(f"   Learning:   Score {learning['learning_score']}/100")
+    print()
+
+
+def main():
+    args = parse_args()
+
+    if args.dry_run:
+        Config.DRY_RUN = True
+        print("\n🔍 DRY RUN MODE - No emails will be sent or changes made\n")
+
+    print_banner()
+
+    errors = Config.validate()
+    if errors:
+        print("⚠️ Configuration warnings:")
+        for error in errors:
+            print(f"   • {error}")
+        print()
+
+    if args.status:
+        _handle_status_flag()
+
+    if args.test_email or args.test_files:
+        _handle_test_modes(args)
+
+    pilot = AegisEngine()
+
+    if not pilot.crypto.is_setup:
+        password = first_time_setup(pilot)
+    else:
+        password = getpass.getpass("🔒 Master password: ")
+
+    try:
+        pilot.login(password)
+    except Exception as e:
+        print(f"\n❌ {e}")
+        sys.exit(1)
+
+    print("🔓 Authenticated successfully!\n")
+
+    _show_initial_status(pilot)
+    _run_menu_loop(pilot)
 
 
 def _print_status(status):

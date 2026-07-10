@@ -93,10 +93,4 @@ class Notifier:
         """Send warning notification"""
         self.notify(title, message, "urgent", "⚠️")
 
-    def email_sent(self, recipient: str) -> None:
-        """Notify about sent email"""
-        self.success("Email Sent", f"To: {recipient}")
 
-    def email_received(self, sender: str, subject: str) -> None:
-        """Notify about received email"""
-        self.info("New Email", f"From: {sender}\n{subject[:50]}")

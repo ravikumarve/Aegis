@@ -216,10 +216,6 @@ class IPAllowlist:
 
         return False
 
-    def block_ip(self, ip: str, duration_minutes: int = 60) -> None:
-        """Block an IP address temporarily"""
-        self._blocked_ips[ip] = datetime.now() + timedelta(minutes=duration_minutes)
-
     def get_client_ip(self, request) -> str:
         """Extract client IP from request (handles proxies)"""
         # Check X-Forwarded-For header first (for proxies)

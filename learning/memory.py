@@ -33,110 +33,76 @@ class MemoryEngine:
         Config.DATA_DIR.mkdir(parents=True, exist_ok=True)
         conn = sqlite3.connect(self.db_path)
         c = conn.cursor()
-
-        # Feedback
-        c.execute("""CREATE TABLE IF NOT EXISTS feedback (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            timestamp TEXT NOT NULL,
-            action_type TEXT NOT NULL,
-            action_detail TEXT NOT NULL,
-            ai_output TEXT NOT NULL,
-            user_feedback TEXT NOT NULL,
-            user_correction TEXT,
-            context TEXT
-        )""")
-
-        # Preferences
-        c.execute("""CREATE TABLE IF NOT EXISTS preferences (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            category TEXT NOT NULL,
-            key TEXT NOT NULL,
-            value TEXT NOT NULL,
-            confidence REAL DEFAULT 0.5,
-            times_confirmed INTEGER DEFAULT 1,
-            last_updated TEXT NOT NULL,
-            UNIQUE(category, key)
-        )""")
-
-        # Writing Samples
-        c.execute("""CREATE TABLE IF NOT EXISTS writing_samples (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            timestamp TEXT NOT NULL,
-            content TEXT NOT NULL,
-            recipient TEXT,
-            word_count INTEGER
-        )""")
-
-        # Style DNA
-        c.execute("""CREATE TABLE IF NOT EXISTS style_dna (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            trait TEXT UNIQUE NOT NULL,
-            value TEXT NOT NULL,
-            confidence REAL DEFAULT 0.5,
-            sample_count INTEGER DEFAULT 0,
-            last_updated TEXT NOT NULL
-        )""")
-
-        # Action Log
-        c.execute("""CREATE TABLE IF NOT EXISTS action_log (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            timestamp TEXT NOT NULL,
-            day_of_week TEXT NOT NULL,
-            hour INTEGER NOT NULL,
-            action_type TEXT NOT NULL,
-            action_detail TEXT NOT NULL,
-            context TEXT,
-            sequence_id TEXT
-        )""")
-
-        # Score History for Chart
-        c.execute("""CREATE TABLE IF NOT EXISTS score_history (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            timestamp TEXT NOT NULL,
-            score REAL NOT NULL
-        )""")
-
-        # Discovered Patterns
-        c.execute("""CREATE TABLE IF NOT EXISTS patterns (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            pattern_type TEXT NOT NULL,
-            description TEXT NOT NULL,
-            trigger_cond TEXT NOT NULL,
-            expected_actions TEXT NOT NULL,
-            confidence REAL DEFAULT 0.5,
-            times_observed INTEGER DEFAULT 1,
-            last_seen TEXT NOT NULL,
-            active INTEGER DEFAULT 1
-        )""")
-
-        # Contact Memory
-        c.execute("""CREATE TABLE IF NOT EXISTS contacts (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email TEXT UNIQUE NOT NULL,
-            name TEXT,
-            greeting TEXT,
-            tone TEXT,
-            priority TEXT DEFAULT 'normal',
-            forward_to TEXT,
-            always_cc TEXT,
-            trusted INTEGER DEFAULT 0,
-            interaction_count INTEGER DEFAULT 0,
-            last_interaction TEXT
-        )""")
-
-        # Category Rules
-        c.execute("""CREATE TABLE IF NOT EXISTS categories (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            vendor TEXT NOT NULL,
-            category TEXT NOT NULL,
-            confidence REAL DEFAULT 0.5,
-            times_used INTEGER DEFAULT 1,
-            last_used TEXT NOT NULL,
-            UNIQUE(vendor, category)
-        )""")
-
+        self._create_feedback_table(c)
+        self._create_preferences_table(c)
+        self._create_writing_samples_table(c)
+        self._create_style_dna_table(c)
+        self._create_action_log_table(c)
+        self._create_score_history_table(c)
+        self._create_patterns_table(c)
+        self._create_contacts_table(c)
+        self._create_categories_table(c)
         conn.commit()
         conn.close()
+
+    def _create_feedback_table(self, c):
+        c.execute("""CREATE TABLE IF NOT EXISTS feedback (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, timestamp TEXT NOT NULL,
+            action_type TEXT NOT NULL, action_detail TEXT NOT NULL,
+            ai_output TEXT NOT NULL, user_feedback TEXT NOT NULL,
+            user_correction TEXT, context TEXT)""")
+
+    def _create_preferences_table(self, c):
+        c.execute("""CREATE TABLE IF NOT EXISTS preferences (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, category TEXT NOT NULL,
+            key TEXT NOT NULL, value TEXT NOT NULL, confidence REAL DEFAULT 0.5,
+            times_confirmed INTEGER DEFAULT 1, last_updated TEXT NOT NULL,
+            UNIQUE(category, key))""")
+
+    def _create_writing_samples_table(self, c):
+        c.execute("""CREATE TABLE IF NOT EXISTS writing_samples (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, timestamp TEXT NOT NULL,
+            content TEXT NOT NULL, recipient TEXT, word_count INTEGER)""")
+
+    def _create_style_dna_table(self, c):
+        c.execute("""CREATE TABLE IF NOT EXISTS style_dna (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, trait TEXT UNIQUE NOT NULL,
+            value TEXT NOT NULL, confidence REAL DEFAULT 0.5,
+            sample_count INTEGER DEFAULT 0, last_updated TEXT NOT NULL)""")
+
+    def _create_action_log_table(self, c):
+        c.execute("""CREATE TABLE IF NOT EXISTS action_log (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, timestamp TEXT NOT NULL,
+            day_of_week TEXT NOT NULL, hour INTEGER NOT NULL,
+            action_type TEXT NOT NULL, action_detail TEXT NOT NULL,
+            context TEXT, sequence_id TEXT)""")
+
+    def _create_score_history_table(self, c):
+        c.execute("""CREATE TABLE IF NOT EXISTS score_history (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp TEXT NOT NULL, score REAL NOT NULL)""")
+
+    def _create_patterns_table(self, c):
+        c.execute("""CREATE TABLE IF NOT EXISTS patterns (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, pattern_type TEXT NOT NULL,
+            description TEXT NOT NULL, trigger_cond TEXT NOT NULL,
+            expected_actions TEXT NOT NULL, confidence REAL DEFAULT 0.5,
+            times_observed INTEGER DEFAULT 1, last_seen TEXT NOT NULL,
+            active INTEGER DEFAULT 1)""")
+
+    def _create_contacts_table(self, c):
+        c.execute("""CREATE TABLE IF NOT EXISTS contacts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT UNIQUE NOT NULL,
+            name TEXT, greeting TEXT, tone TEXT, priority TEXT DEFAULT 'normal',
+            forward_to TEXT, always_cc TEXT, trusted INTEGER DEFAULT 0,
+            interaction_count INTEGER DEFAULT 0, last_interaction TEXT)""")
+
+    def _create_categories_table(self, c):
+        c.execute("""CREATE TABLE IF NOT EXISTS categories (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, vendor TEXT NOT NULL,
+            category TEXT NOT NULL, confidence REAL DEFAULT 0.5,
+            times_used INTEGER DEFAULT 1, last_used TEXT NOT NULL,
+            UNIQUE(vendor, category))""")
 
     # ═══ LAYER 1: FEEDBACK ═══
 
